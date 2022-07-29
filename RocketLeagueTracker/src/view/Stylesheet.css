@@ -1,0 +1,13 @@
+
+
+/*ganze Klasse Stylen*/
+.root {
+	-fx-background-color: #111111;
+}
+
+/* eine Gruppe stylen zb. Alle Lable's */
+.label {
+
+	-fx-text-fill: grey;
+
+}
