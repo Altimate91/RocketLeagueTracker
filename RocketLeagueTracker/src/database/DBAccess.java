@@ -8,6 +8,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
+import org.hibernate.query.Query;
 
 public class DBAccess {
 
@@ -54,6 +55,8 @@ public class DBAccess {
 		
 		return data;
 	}
+	
+	
 	
 	//*Object updaten
 	public static <T> void update(Object o, Class<T> objectClass) {

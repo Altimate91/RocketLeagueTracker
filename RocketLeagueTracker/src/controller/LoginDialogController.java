@@ -5,8 +5,10 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import classes.User;
+import database.ManageUser;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
@@ -23,9 +25,8 @@ public class LoginDialogController implements Initializable{
 	
 // ----------- INSTANZVARIABLEN -----------
 	
-	private Stage dialogStage;
 	private String css = this.getClass().getResource("/view/Stylesheet.css").toExternalForm();
-
+	private Parent root;
 	
 
 
@@ -43,29 +44,29 @@ private Label lbl_pwCheck;
 @FXML
 public void login (ActionEvent event) throws IOException, InterruptedException {
 	
-	
-
-	
-	
 			
-	if(MainFX.getUser() != null && MainFX.getUser().getPlayer_ID().equals(txf_playerID_login.getText())) {
-		
-		if(MainFX.getUser().getPassword().equals(pwf_password_login.getText())) {
-			new PlayerLoungeController().openPlayerLounge(event);
-			System.out.println("*** Login successfull ***");
-			
-		} else {
-			lbl_pwCheck.setText("incorrect Password");
-			lbl_pwCheck.setTextFill(Color.RED);
-			System.out.println("*** ! incorrect Passwort ! ***");
-		}
-			
-	} else {
-		new Alert(Alert.AlertType.ERROR, "User nicht vorhanden!").showAndWait();
-		System.out.println("Userdata is not availaible in database.");
+	User user = ManageUser.getUserByPlayerID(txf_playerID_login.getText());
+	
+	
+	if(user == null) {
+		new Alert(Alert.AlertType.ERROR, "No User registered under this Player ID!").showAndWait();
+		System.out.println("*** Userdata is not availaible in database ***");
 	}
-}
 	
+	if(user.getPassword().equals(pwf_password_login.getText())) {
+		MainFX.setMainUser(user);
+		new PlayerLoungeController().openPlayerLounge(event);
+		//new StartController().loginLabel("valid");
+		
+		System.out.println("*** Login successfull ***");
+	}
+	else if(user.getPassword() != pwf_password_login.getText()) {
+		new Alert(Alert.AlertType.ERROR, "Wrong Password!").showAndWait();
+		//new StartController().loginLabel("invalid");
+		System.out.println("*** ERROR: incorrect Passwort! ***");
+	}
+
+}
 	
 
 	@Override

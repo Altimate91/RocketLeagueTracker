@@ -9,6 +9,7 @@ import java.util.ResourceBundle;
 import classes.League;
 import classes.User;
 import database.DBAccess;
+import database.ManageUser;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -106,7 +107,6 @@ public class NewUserDialogController implements Initializable{
 		
 		user =	new User(txf_playerID.getText(), txf_name.getText(), txf_clan.getText(), cb_league.getValue().toString(), pwf_password.getText());	
 		
-		
 		//trägt Dateipfad aus Imageview in das User-Objekt ein wenn ein Bild gewählt wurde -> ansonsten lt. Konstruktor StandardProfilepic
 		if(profilepicture != null) {
 		user.setProfilepicture(profilepicture);
@@ -119,11 +119,10 @@ public class NewUserDialogController implements Initializable{
 		
 		
 		//neuer User wird an Datebank übergeben
-		MainFX.setUser(user);
 		DBAccess.save(user);
 	
-		System.out.println("*** neuer User: " + MainFX.getUser().getName() + " wurde angelegt ***");
-		System.out.println(MainFX.getUser().toString());
+		System.out.println("*** neuer User: " +user.getName() + " wurde angelegt ***");
+		System.out.println(user.toString());
 	}
 
 }

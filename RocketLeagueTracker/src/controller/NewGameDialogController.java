@@ -60,7 +60,7 @@ public class NewGameDialogController implements Initializable {
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		
 		//Spielernamen eintragen
-		lbl_player1.setText(MainFX.getUser().getName());
+		lbl_player1.setText(MainFX.getMainUser().getName());
 		
 		//Auswahlmöglichkeiten für Stats in ChoiceBoxes eintragen
 		cb_goals_player1.getItems().addAll(numbers);
@@ -157,9 +157,9 @@ public class NewGameDialogController implements Initializable {
 		game.setPlayer1Statistic(new PlayerStatistic(lbl_player2.getText(),goals_p2,saves_p2,assists_p2));
 		
 		//Stats dem MainUser Profil übergeben
-		MainFX.getUser().setGoals(MainFX.getUser().getGoals() + goals_p1);
-		MainFX.getUser().setSaves(MainFX.getUser().getSaves() + saves_p1);
-		MainFX.getUser().setAssists(MainFX.getUser().getAssists() + assists_p1);
+		MainFX.getMainUser().setGoals(MainFX.getMainUser().getGoals() + goals_p1);
+		MainFX.getMainUser().setSaves(MainFX.getMainUser().getSaves() + saves_p1);
+		MainFX.getMainUser().setAssists(MainFX.getMainUser().getAssists() + assists_p1);
 		
 		
 		System.out.println("* Player 1 Stats: " + cb_goals_player1.getValue().toString() + " Goals, " + cb_assists_player1.getValue().toString() + " Assists, " + cb_saves_player1.getValue().toString() + " Saves.");

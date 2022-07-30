@@ -28,7 +28,6 @@ public class EditUserProfileDialogController implements Initializable {
 	
 // ----------- INSTANZVARIABLEN -----------	
 	
-	private Stage dialogStage;
 	private String profilepicture;
 	
 	@FXML
@@ -56,7 +55,7 @@ public class EditUserProfileDialogController implements Initializable {
 		
 		//Profilbild einspielen
 		try {
-			img_profilepic.setImage(new Image(new FileInputStream(new File(MainFX.getUser().getProfilepicture()))));
+			img_profilepic.setImage(new Image(new FileInputStream(new File(MainFX.getMainUser().getProfilepicture()))));
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
@@ -68,10 +67,10 @@ public class EditUserProfileDialogController implements Initializable {
 		 
 		 
 		 //Userdaten als PromptText in TextFields setzen
-		 txf_name.setPromptText(MainFX.getUser().getName());
-		 lbl_playerID.setText(MainFX.getUser().getPlayer_ID());
-		 txf_clan.setPromptText(MainFX.getUser().getClan());
-		 pwf_password.setPromptText(MainFX.getUser().getPassword());
+		 txf_name.setPromptText(MainFX.getMainUser().getName());
+		 lbl_playerID.setText(MainFX.getMainUser().getPlayer_ID());
+		 txf_clan.setPromptText(MainFX.getMainUser().getClan());
+		 pwf_password.setPromptText(MainFX.getMainUser().getPassword());
 		
 	}
 	
@@ -113,22 +112,22 @@ public class EditUserProfileDialogController implements Initializable {
 	public void submitEditedPlayer(ActionEvent event) {
 		
 		if(txf_name.getText() != null) {
-		MainFX.getUser().setName(txf_name.getText());
+		MainFX.getMainUser().setName(txf_name.getText());
 		}
 		if(txf_clan.getText() != null) {
-		MainFX.getUser().setClan(txf_clan.getText());
+		MainFX.getMainUser().setClan(txf_clan.getText());
 		}
 		if(cb_league.getValue() != null) {
-		MainFX.getUser().setLeague(cb_league.getValue().toString());
+		MainFX.getMainUser().setLeague(cb_league.getValue().toString());
 		}
 		if(pwf_password.getText() != null) {
-		MainFX.getUser().setPassword(pwf_password.getText());
+		MainFX.getMainUser().setPassword(pwf_password.getText());
 		}
 		
 		//trägt Dateipfad aus Imageview in das User-Objekt ein
-		MainFX.getUser().setProfilepicture(profilepicture);
-		System.out.println("*** neuer User: " + MainFX.getUser().getName() + " wurde angelegt ***");
-		System.out.println(MainFX.getUser().toString());
+		MainFX.getMainUser().setProfilepicture(profilepicture);
+		System.out.println("*** neuer User: " + MainFX.getMainUser().getName() + " wurde angelegt ***");
+		System.out.println(MainFX.getMainUser().toString());
 
 		
 		

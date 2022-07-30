@@ -8,6 +8,8 @@ import java.util.ResourceBundle;
 import classes.Session;
 import classes.User;
 import database.DBAccess;
+import database.ManageSession;
+import database.ManageUser;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
@@ -17,6 +19,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import main.MainFX;
@@ -27,6 +30,8 @@ public class NewSessionDialogController implements Initializable {
 
 	@FXML
 	private TextField txf_playerID;
+	@FXML
+	private Label lbl_player2;
 	@FXML
 	private CheckBox cb_checkGameLimit;
 	@FXML
@@ -73,20 +78,25 @@ public class NewSessionDialogController implements Initializable {
 	
 	@FXML
 	public void addPlayer(ActionEvent event) {
+		//Datenbank mit playerID abgleichen
+		player2 = ManageUser.getUserByPlayerID(txf_playerID.getText());
 		
-		//abgleich mit txf_playerID in Datenbank ob Player vorhanden und wenn ja dann in Session PlayerList eintragen
-		
-		
-		
-		
+		if(player2 != null) {
+			lbl_player2.setText(player2.getPlayer_ID());
+		}
 	}
 	
 	@FXML
 	public void registerPlayer(ActionEvent event) {
-		
-	FXMLLoader loader = new FXMLLoader();
-		
+			
 	new StartController().openNewUserDialog(event);
+	
+	}
+	
+	public void delete_player2(ActionEvent event) {
+		player2 = null;
+		lbl_player2.setText("");
+		
 	}
 	
 	
@@ -110,18 +120,13 @@ public class NewSessionDialogController implements Initializable {
 			}
 			System.out.println("*** GameLimit set to " + gameLimit + " Games. ***");
 		}
+		session.setPlayer1(MainFX.getMainUser());
+		session.setPlayer2(player2);
 		
 		session.setGameLimit(gameLimit);
 		
-		if(MainFX.getSessionList() != null) {
-		MainFX.getSessionList().add(session);
-		} else {
-			MainFX.setSessionList(new ArrayList<Session> ());
-			MainFX.getSessionList().add(session);
-		}
-		//GameLimit an PlayerLounge übergeben
-		
-		// DBAccess.save(session); 
+		//Session Objekt an DB übergeben
+		ManageSession.saveSession(session);
 		
 		
 		

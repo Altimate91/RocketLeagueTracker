@@ -4,18 +4,19 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+//@Entity -> sobald ich Entity eingebe funktioniert es nicht mehr
 public class Session {
 	
 // ------------ INSTANZVARIABLEN -----------
 	
 	@Column
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int session_ID;
+	@GeneratedValue
+	private int idSession;
 	@Column(name = "date")
 	private LocalDateTime date;
 	@Column(name = "record")
@@ -32,7 +33,7 @@ public class Session {
 	private int gamesPlayed;
 	@Column(name = "wins")
 	private int wins;
-	@Column(name = "Defeats")
+	@Column(name = "defeats")
 	private int defeats;
 	@Column(name = "topScorer")
 	private String topScorer;
@@ -57,7 +58,7 @@ public class Session {
 		
 
 	public int getSession_ID() {
-		return session_ID;
+		return idSession;
 	}
 
 	public LocalDateTime getDate() {
@@ -121,7 +122,7 @@ public class Session {
 	}
 
 	public void setSession_ID(int session_ID) {
-		this.session_ID = session_ID;
+		this.idSession = session_ID;
 	}
 
 	public void setDate(LocalDateTime date) {

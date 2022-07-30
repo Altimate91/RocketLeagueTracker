@@ -15,8 +15,10 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonBar.ButtonData;
+import javafx.scene.paint.Color;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Dialog;
+import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import main.MainFX;
 
@@ -27,18 +29,18 @@ public class StartController implements Initializable {
 	private Parent root;
 	private String css = this.getClass().getResource("/view/Stylesheet.css").toExternalForm();
 	
-	private User user;
-	
+	@FXML
+	private Label lbl_loginStatus;
 	
 //----------- METHODEN -----------
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		// TODO Auto-generated method stub
 		
 	}
 	
-	
+
+
 	@FXML
 	public void openLoginDialog (ActionEvent event) {
 		
@@ -107,7 +109,16 @@ public class StartController implements Initializable {
 		}		
 	}
 
-
+	@FXML
+	public void loginLabel(String status) {
+		
+		switch(status) {
+			case "valid" : lbl_loginStatus.setText("Login successful!");  lbl_loginStatus.setTextFill(Color.GREEN); lbl_loginStatus.setVisible(true);
+		break;
+			case "invalid" : lbl_loginStatus.setText("Password invalid!");  lbl_loginStatus.setTextFill(Color.RED); lbl_loginStatus.setVisible(true);
+		break;
+		}
+	}
 
 
 

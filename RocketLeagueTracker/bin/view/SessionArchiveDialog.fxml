@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="700.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.SessionArchiveDialogController">
+   <children>
+      <Label alignment="CENTER" layoutX="56.0" layoutY="22.0" text="Session Archive">
+         <font>
+            <Font size="42.0" />
+         </font>
+      </Label>
+      <ListView fx:id="lv_sessionArchive" layoutX="56.0" layoutY="90.0" prefHeight="219.0" prefWidth="288.0" />
+      <Label alignment="CENTER" layoutX="150.0" layoutY="318.0" text="Statistics">
+         <font>
+            <Font size="26.0" />
+         </font>
+      </Label>
+      <Separator layoutX="56.0" layoutY="350.0" prefHeight="15.0" prefWidth="288.0" />
+      <Label alignment="CENTER" layoutX="60.0" layoutY="408.0" text="Goals">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="140.0" layoutY="408.0" text="Saves">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="218.0" layoutY="408.0" text="Assists">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="291.0" layoutY="408.0" text="Received">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="56.0" layoutY="358.0" text="Games">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="138.0" layoutY="358.0" text="Wins">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="210.0" layoutY="358.0" text="Defeats">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="294.0" layoutY="358.0" text="Record">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Separator layoutX="56.0" layoutY="575.0" prefHeight="15.0" prefWidth="288.0" />
+      <Label fx:id="lbl_goals" alignment="CENTER" layoutX="78.0" layoutY="433.0" text="1">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Label fx:id="lbl_saves" alignment="CENTER" layoutX="156.0" layoutY="433.0" text="1">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Label fx:id="lbl_assists" alignment="CENTER" layoutX="237.0" layoutY="433.0" text="1">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Label fx:id="lbl_received" alignment="CENTER" layoutX="319.0" layoutY="433.0" prefHeight="25.0" prefWidth="0.0" text="1">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Label fx:id="lbl_record" alignment="CENTER" layoutX="315.0" layoutY="383.0" prefHeight="25.0" prefWidth="0.0" text="1">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Label fx:id="lbl_gamesPlayed" alignment="CENTER" layoutX="78.0" layoutY="383.0" text="1">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Label fx:id="lbl_wins" alignment="CENTER" layoutX="154.0" layoutY="383.0" text="1">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Label fx:id="lbl_defeats" alignment="CENTER" layoutX="235.0" layoutY="383.0" text="1">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <TableView fx:id="tbl_table" layoutX="56.0" layoutY="467.0" prefHeight="102.0" prefWidth="288.0">
+        <columns>
+          <TableColumn fx:id="col_player" prefWidth="108.0" text="Player" />
+            <TableColumn fx:id="col_goal" prefWidth="53.0" text="Goals" />
+            <TableColumn fx:id="col_saves" prefWidth="64.0" text="Saves" />
+          <TableColumn fx:id="col_assists" prefWidth="62.0" text="Assists" />
+        </columns>
+      </TableView>
+      <Label layoutX="129.0" layoutY="582.0" text="Session MVP">
+         <font>
+            <Font size="26.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="86.0" fitWidth="101.0" layoutX="150.0" layoutY="644.0">
+         <image>
+            <Image url="@../../resources/star.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="136.0" layoutY="609.0" prefHeight="46.0" prefWidth="134.0" text="Player Name" textFill="#cdd31a">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

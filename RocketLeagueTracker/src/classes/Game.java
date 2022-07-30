@@ -16,6 +16,8 @@ public class Game {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int gameID;
+	@Column(name="sessionID")
+	private int sessionID;
 	@Column(name = "gameNo")
 	private int gameNo;
 	@Column(name = "result")

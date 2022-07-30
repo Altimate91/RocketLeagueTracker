@@ -13,6 +13,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 public class MainFX extends Application {
@@ -20,7 +21,8 @@ public class MainFX extends Application {
 	// ----------- INSTANZVARIABLEN -----------
 	
 	private static Stage stage;
-	private static User user;
+	private static Image icon = new Image("C:\\Users\\andre\\OneDrive\\Dokumente\\GitHub\\GitHubRpositories\\RocketLeagueTracker\\resources\\icon.png");
+	private static User mainUser;
 	private static ArrayList<Session> sessionList;
 	private static ObservableList<Game> olGames = FXCollections.observableArrayList();
 
@@ -32,13 +34,22 @@ public class MainFX extends Application {
 	public static Stage getStage() {
 		return stage;
 	}
-
-	public static User getUser() {
-		return user;
+	
+	public static Image getIcon() {
+		return icon;
 	}
 
-	public static void setUser(User user) {
-		MainFX.user = user;
+	public static void setIcon(Image icon) {
+		MainFX.icon = icon;
+	}
+
+
+	public static User getMainUser() {
+		return mainUser;
+	}
+
+	public static void setMainUser(User user) {
+		MainFX.mainUser = user;
 	}
 	
 	public String getCss() {
@@ -60,6 +71,9 @@ public class MainFX extends Application {
 	public static void setOlGames(ObservableList<Game> olGames) {
 		MainFX.olGames = olGames;
 	}
+	
+	
+	
 	// ----------- METHODEN -----------
 
 
@@ -76,6 +90,7 @@ public class MainFX extends Application {
 			Scene scene = new Scene(root);
 			scene.getStylesheets().add(css); // noch leer!
 			primaryStage.setScene(scene);
+			primaryStage.getIcons().add(icon);
 			primaryStage.setTitle("Rocket League Tracker");
 			primaryStage.show();
 			

@@ -119,7 +119,7 @@ public class PlayerLoungeController implements Initializable{
 
 		//Userdaten in Label laden
 		try {
-		User user = MainFX.getUser();	
+		User user = MainFX.getMainUser();	
 		this.imv_profilepic.setImage(new Image(new FileInputStream(new File(user.getProfilepicture()))));
 		this.lbl_PlayerID.setText(user.getPlayer_ID());
 		this.lbl_League.setText(user.getLeague().toString());
@@ -200,6 +200,7 @@ public void openPlayerLounge(ActionEvent event) throws FileNotFoundException {
 		Scene scene = new Scene(root);
 		scene.getStylesheets().add(css);
 		primaryStage.setScene(scene);
+		primaryStage.getIcons().add(MainFX.getIcon());
 		primaryStage.setTitle("PlayerLounge");
 		primaryStage.show();
 		
@@ -207,7 +208,7 @@ public void openPlayerLounge(ActionEvent event) throws FileNotFoundException {
 		e.printStackTrace();
 	}
 	
-	System.out.println("--- User " + MainFX.getUser().getPlayer_ID() + " entered PlayerLounge ---");	
+	System.out.println("--- User " + MainFX.getMainUser().getPlayer_ID() + " entered PlayerLounge ---");	
 
 }
 
@@ -446,10 +447,26 @@ public void openSessionStatsDialog (ActionEvent event) {
 
 @FXML
 public void logout (ActionEvent event) {
+		
+		primaryStage = MainFX.getStage();
+			
+		try {
+			root = FXMLLoader.load(getClass().getResource("/view/Start.fxml"));
+			Scene scene = new Scene(root);
+			scene.getStylesheets().add(css);
+			primaryStage.setScene(scene);
+			primaryStage.setTitle("RocketLeagueTracker");
+			primaryStage.show();
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		System.out.println("--- User " + MainFX.getMainUser().getPlayer_ID() + " entered PlayerLounge ---");	
+
 	
-		primaryStage = (Stage) ((Node)event.getSource()).getScene().getWindow();
-		primaryStage.close();
-		System.out.println("--- Successfully Loged out! ---");
+
+		
 			
 }
 

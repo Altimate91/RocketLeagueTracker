@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Point3D?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="773.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.PlayerLoungeController">
+   <children>
+      <Label layoutX="178.0" layoutY="32.0" text="Player Lounge">
+         <font>
+            <Font size="55.0" />
+         </font>
+      </Label>
+      <ImageView fx:id="imv_profilepic" fitHeight="173.0" fitWidth="188.0" layoutX="29.0" layoutY="138.0" pickOnBounds="true" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" height="544.0" layoutX="234.0" layoutY="229.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="15.0">
+         <fill>
+            <LinearGradient endX="0.976303317535545" endY="0.9715639810426541" startX="0.7061611374407581" startY="0.7488151658767773">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="0.7490196228027344" green="0.7490196228027344" blue="0.7490196228027344" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </fill>
+         <rotationAxis>
+            <Point3D />
+         </rotationAxis>
+      </Rectangle>
+      <Label fx:id="lbl_PlayerName" alignment="CENTER" layoutX="29.0" layoutY="315.0" prefHeight="17.0" prefWidth="173.0" text="Spieler Name">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label fx:id="lbl_PlayerID" layoutX="235.0" layoutY="140.0" prefHeight="58.0" prefWidth="313.0" text="Player_Id">
+         <font>
+            <Font size="40.0" />
+         </font>
+      </Label>
+      <Line endX="361.0" layoutX="339.0" layoutY="230.0" startX="-103.0" strokeWidth="2.0">
+         <fill>
+            <LinearGradient endX="0.8578199052132701" endY="0.8862559241706162" startX="0.6208530805687205" startY="0.6587677725118484">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="0.7490196228027344" green="0.7490196228027344" blue="0.7490196228027344" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </fill>
+         <stroke>
+            <LinearGradient endX="0.985781990521327" endY="0.995260663507109" startX="0.8246445497630333" startY="0.8578199052132701">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="0.7490196228027344" green="0.7490196228027344" blue="0.7490196228027344" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </stroke></Line>
+      <Label fx:id="lbl_League" alignment="CENTER" layoutX="544.0" layoutY="198.0" prefHeight="30.0" prefWidth="145.0" text="League">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Button layoutX="51.0" layoutY="371.0" mnemonicParsing="false" onAction="#openMyStatsDialog" prefHeight="39.0" prefWidth="129.0" text="My Stats">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
+      <Button layoutX="51.0" layoutY="427.0" mnemonicParsing="false" onAction="#openArchiveDialog" prefHeight="39.0" prefWidth="129.0" text="Archive">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
+      <Button layoutX="51.0" layoutY="477.0" mnemonicParsing="false" onAction="#openEditProfileDialog" prefHeight="39.0" prefWidth="129.0" text="Edit Profile">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
+      <Button layoutX="51.0" layoutY="717.0" mnemonicParsing="false" onAction="#logout" prefHeight="39.0" prefWidth="129.0" text="Logout" textFill="RED">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
+      <Label alignment="CENTER" layoutX="600.0" layoutY="-57.0" prefHeight="18.0" prefWidth="373.0" text="Current Session" textFill="#c67e7e">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label layoutX="275.0" layoutY="277.0" prefHeight="30.0" prefWidth="81.0" text="Games">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="275.0" layoutY="304.0" prefHeight="30.0" prefWidth="81.0" text="Wins">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="275.0" layoutY="333.0" prefHeight="30.0" prefWidth="81.0" text="Defeats">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="275.0" layoutY="363.0" prefHeight="30.0" prefWidth="81.0" text="Goals">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="275.0" layoutY="391.0" prefHeight="30.0" prefWidth="81.0" text="Received">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="525.0" layoutY="291.0" prefHeight="30.0" prefWidth="81.0" text="Record">
+         <font>
+            <Font size="26.0" />
+         </font>
+      </Label>
+      <Separator layoutX="275.0" layoutY="306.0" prefHeight="3.0" prefWidth="173.0" />
+      <Separator layoutX="275.0" layoutY="333.0" prefHeight="3.0" prefWidth="173.0" />
+      <Separator layoutX="275.0" layoutY="362.0" prefHeight="3.0" prefWidth="173.0" />
+      <Separator layoutX="275.0" layoutY="392.0" prefHeight="2.0" prefWidth="173.0" />
+      <Label fx:id="lbl_record" alignment="CENTER" contentDisplay="CENTER" layoutX="516.0" layoutY="321.0" prefHeight="54.0" prefWidth="100.0" text="even" textFill="#bda900">
+         <font>
+            <Font size="37.0" />
+         </font>
+      </Label>
+      <ProgressBar fx:id="bar_gamesLimit" layoutX="274.0" layoutY="440.0" prefHeight="14.0" prefWidth="407.0" progress="0.0" visible="false" />
+      <Label fx:id="lbl_gamesLimit_game" layoutX="403.0" layoutY="453.0" text="Game" visible="false">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="lbl_BarGamesPlayed" layoutX="454.0" layoutY="453.0" prefHeight="27.0" prefWidth="22.0" visible="false">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="lbl_gamesLimit_outOf" layoutX="477.0" layoutY="453.0" text="out of" visible="false">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="lbl_gamesMax" layoutX="531.0" layoutY="453.0" prefHeight="27.0" prefWidth="22.0" visible="false">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="lbl_gamesPlayed" alignment="CENTER" layoutX="386.0" layoutY="279.0" prefHeight="17.0" prefWidth="62.0" text="0">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="lbl_wins" alignment="CENTER" layoutX="386.0" layoutY="306.0" prefHeight="17.0" prefWidth="62.0" text="0">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="lbl_defeats" alignment="CENTER" layoutX="386.0" layoutY="335.0" prefHeight="17.0" prefWidth="62.0" text="0">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="lbl_goals" alignment="CENTER" layoutX="386.0" layoutY="365.0" prefHeight="17.0" prefWidth="62.0" text="0">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="lbl_received" alignment="CENTER" layoutX="386.0" layoutY="393.0" prefHeight="17.0" prefWidth="62.0" text="0">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Separator layoutX="275.0" layoutY="422.0" prefHeight="2.0" prefWidth="173.0" />
+      <Button fx:id="btn_newSession" layoutX="51.0" layoutY="545.0" mnemonicParsing="false" onAction="#openNewSessionDialog" prefHeight="39.0" prefWidth="129.0" text="New Session">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
+      <Button fx:id="btn_closeSession" disable="true" layoutX="51.0" layoutY="639.0" mnemonicParsing="false" onAction="#closeSession" prefHeight="39.0" prefWidth="129.0" text="Close Session">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
+      <Button fx:id="btn_newGame" disable="true" layoutX="51.0" layoutY="593.0" mnemonicParsing="false" onAction="#openNewGameDialog" prefHeight="39.0" prefWidth="129.0" text="New Game">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
+      <Button layoutX="443.0" layoutY="697.0" mnemonicParsing="false" onAction="#openSessionStatsDialog" prefHeight="58.0" prefWidth="72.0">
+         <graphic>
+            <ImageView fitHeight="68.0" fitWidth="54.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../resources/statisticIcon.png" />
+               </image>
+            </ImageView>
+         </graphic></Button>
+      <Label layoutX="420.0" layoutY="230.0" text="Session Board">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Label>
+      <TableView fx:id="tbl_gamesTable" layoutX="275.0" layoutY="488.0" prefHeight="193.0" prefWidth="407.0">
+        <columns>
+          <TableColumn fx:id="col_game" prefWidth="47.0" text="Game" />
+          <TableColumn fx:id="col_result" prefWidth="74.0" text="Result" />
+            <TableColumn fx:id="col_score" prefWidth="102.0" text="Score" />
+            <TableColumn fx:id="col_mvp" prefWidth="183.0" text="MVP" />
+        </columns>
+      </TableView>
+      <ImageView fx:id="imv_leagueLogo" fitHeight="93.0" fitWidth="100.0" layoutX="566.0" layoutY="105.0" pickOnBounds="true" preserveRatio="true" />
+      <Label fx:id="lbl_clan" layoutX="234.0" layoutY="198.0" prefHeight="30.0" prefWidth="313.0">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

@@ -1,7 +1,6 @@
 package classes;
 
 import java.io.FileNotFoundException;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -18,7 +17,7 @@ public class User {
 // ------------ INSTANZVARIABLEN -----------
 	
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column (name = "idUser")
 	private int idUser;
 	@Column (name = "player_ID")
@@ -66,45 +65,45 @@ public class User {
 		
 		//richtiges LeagueLogo in Image eintragen
 		switch(league.toString()) {
-		case "UNRANKED" : setLeagueLogo(new Image("C:\\Users\\andre\\OneDrive\\Dokumente\\Java\\Eclipse_Workspaces\\Workspace_RL-Tracker\\RocketLeagueTracker\\resources\\unranked.PNG"));
+		case "UNRANKED" : setLeagueLogo(new Image("C:\\Users\\andre\\OneDrive\\Dokumente\\GitHub\\GitHubRpositories\\RocketLeagueTracker\\resources\\unranked.PNG"));
 			break;
-		case "BRONZE_I" : setLeagueLogo(new Image("C:\\Users\\andre\\OneDrive\\Dokumente\\Java\\Eclipse_Workspaces\\Workspace_RL-Tracker\\RocketLeagueTracker\\resources\\BronzeI.PNG"));
+		case "BRONZE_I" : setLeagueLogo(new Image("C:\\Users\\andre\\OneDrive\\Dokumente\\GitHub\\GitHubRpositories\\RocketLeagueTracker\\resources\\BronzeI.PNG"));
 			break;
-		case "BRONZE_II" : setLeagueLogo(new Image("C:\\Users\\andre\\OneDrive\\Dokumente\\Java\\Eclipse_Workspaces\\Workspace_RL-Tracker\\RocketLeagueTracker\\resources\\BronzeII.PNG"));
+		case "BRONZE_II" : setLeagueLogo(new Image("C:\\Users\\andre\\OneDrive\\Dokumente\\GitHub\\GitHubRpositories\\RocketLeagueTracker\\resources\\BronzeII.PNG"));
 			break;
-		case "BRONZE_III" : setLeagueLogo(new Image("C:\\Users\\andre\\OneDrive\\Dokumente\\Java\\Eclipse_Workspaces\\Workspace_RL-Tracker\\RocketLeagueTracker\\resources\\BronzeIII.PNG"));
+		case "BRONZE_III" : setLeagueLogo(new Image("C:\\Users\\andre\\OneDrive\\Dokumente\\GitHub\\GitHubRpositories\\RocketLeagueTracker\\resources\\BronzeIII.PNG"));
 			break;
-		case "SILVER_I" : setLeagueLogo(new Image("C:\\Users\\andre\\OneDrive\\Dokumente\\Java\\Eclipse_Workspaces\\Workspace_RL-Tracker\\RocketLeagueTracker\\resources\\SilverI.PNG"));
+		case "SILVER_I" : setLeagueLogo(new Image("C:\\Users\\andre\\OneDrive\\Dokumente\\GitHub\\GitHubRpositories\\RocketLeagueTracker\\resources\\SilverI.PNG"));
 			break;
-		case "SILVER_II" : setLeagueLogo(new Image("C:\\Users\\andre\\OneDrive\\Dokumente\\Java\\Eclipse_Workspaces\\Workspace_RL-Tracker\\RocketLeagueTracker\\resources\\SilverII.PNG"));
+		case "SILVER_II" : setLeagueLogo(new Image("C:\\Users\\andre\\OneDrive\\Dokumente\\GitHub\\GitHubRpositories\\RocketLeagueTracker\\resources\\SilverII.PNG"));
 			break;
-		case "SILVER_III" : setLeagueLogo(new Image("C:\\Users\\andre\\OneDrive\\Dokumente\\Java\\Eclipse_Workspaces\\Workspace_RL-Tracker\\RocketLeagueTracker\\resources\\SilverIII.PNG"));
+		case "SILVER_III" : setLeagueLogo(new Image("C:\\Users\\andre\\OneDrive\\Dokumente\\GitHub\\GitHubRpositories\\RocketLeagueTracker\\resources\\SilverIII.PNG"));
 			break;
-		case "GOLD_I" : setLeagueLogo(new Image("C:\\Users\\andre\\OneDrive\\Dokumente\\Java\\Eclipse_Workspaces\\Workspace_RL-Tracker\\RocketLeagueTracker\\resources\\GoldI.PNG"));
+		case "GOLD_I" : setLeagueLogo(new Image("C:\\Users\\andre\\OneDrive\\Dokumente\\GitHub\\GitHubRpositories\\RocketLeagueTracker\\resources\\GoldI.PNG"));
 			break;
-		case "GOLD_II" : setLeagueLogo(new Image("C:\\Users\\andre\\OneDrive\\Dokumente\\Java\\Eclipse_Workspaces\\Workspace_RL-Tracker\\RocketLeagueTracker\\resources\\GoldII.PNG"));
+		case "GOLD_II" : setLeagueLogo(new Image("C:\\Users\\andre\\OneDrive\\Dokumente\\GitHub\\GitHubRpositories\\RocketLeagueTracker\\resources\\GoldII.PNG"));
 			break;
-		case "GOLD_III" : setLeagueLogo(new Image("C:\\Users\\andre\\OneDrive\\Dokumente\\Java\\Eclipse_Workspaces\\Workspace_RL-Tracker\\RocketLeagueTracker\\resources\\GoldIII.PNG"));
+		case "GOLD_III" : setLeagueLogo(new Image("C:\\Users\\andre\\OneDrive\\Dokumente\\GitHub\\GitHubRpositories\\RocketLeagueTracker\\resources\\GoldIII.PNG"));
 			break;
-		case "PLATIN_I" : setLeagueLogo(new Image("C:\\Users\\andre\\OneDrive\\Dokumente\\Java\\Eclipse_Workspaces\\Workspace_RL-Tracker\\RocketLeagueTracker\\resources\\PlatinI.PNG"));
+		case "PLATIN_I" : setLeagueLogo(new Image("C:\\Users\\andre\\OneDrive\\Dokumente\\GitHub\\GitHubRpositories\\RocketLeagueTracker\\resources\\PlatinI.PNG"));
 			break;
-		case "PLATIN_II" : setLeagueLogo(new Image("C:\\Users\\andre\\OneDrive\\Dokumente\\Java\\Eclipse_Workspaces\\Workspace_RL-Tracker\\RocketLeagueTracker\\resources\\PlatinII.PNG"));
+		case "PLATIN_II" : setLeagueLogo(new Image("C:\\Users\\andre\\OneDrive\\Dokumente\\GitHub\\GitHubRpositories\\RocketLeagueTracker\\resources\\PlatinII.PNG"));
 			break;
-		case "PLATIN_III" : setLeagueLogo(new Image("C:\\Users\\andre\\OneDrive\\Dokumente\\Java\\Eclipse_Workspaces\\Workspace_RL-Tracker\\RocketLeagueTracker\\resources\\PlatinIII.PNG"));
+		case "PLATIN_III" : setLeagueLogo(new Image("C:\\Users\\andre\\OneDrive\\Dokumente\\GitHub\\GitHubRpositories\\RocketLeagueTracker\\resources\\PlatinIII.PNG"));
 			break;
-		case "DIAMOND_I" : setLeagueLogo(new Image("C:\\Users\\andre\\OneDrive\\Dokumente\\Java\\Eclipse_Workspaces\\Workspace_RL-Tracker\\RocketLeagueTracker\\resources\\DiamondI.PNG"));
+		case "DIAMOND_I" : setLeagueLogo(new Image("C:\\Users\\andre\\OneDrive\\Dokumente\\GitHub\\GitHubRpositories\\RocketLeagueTracker\\resources\\DiamondI.PNG"));
 			break;
-		case "DIAMOND_II" : setLeagueLogo(new Image("C:\\Users\\andre\\OneDrive\\Dokumente\\Java\\Eclipse_Workspaces\\Workspace_RL-Tracker\\RocketLeagueTracker\\resources\\DiamondII.PNG"));
+		case "DIAMOND_II" : setLeagueLogo(new Image("C:\\Users\\andre\\OneDrive\\Dokumente\\GitHub\\GitHubRpositories\\RocketLeagueTracker\\resources\\DiamondII.PNG"));
 			break;
-		case "DIAMOND_III" : setLeagueLogo(new Image("C:\\Users\\andre\\OneDrive\\Dokumente\\Java\\Eclipse_Workspaces\\Workspace_RL-Tracker\\RocketLeagueTracker\\resources\\DiamondIII.PNG"));
+		case "DIAMOND_III" : setLeagueLogo(new Image("C:\\Users\\andre\\OneDrive\\Dokumente\\GitHub\\GitHubRpositories\\RocketLeagueTracker\\resources\\DiamondIII.PNG"));
 			break;
-		case "CHAMMPION_I" : setLeagueLogo(new Image("C:\\Users\\andre\\OneDrive\\Dokumente\\Java\\Eclipse_Workspaces\\Workspace_RL-Tracker\\RocketLeagueTracker\\resources\\ChampionI.PNG"));
+		case "CHAMMPION_I" : setLeagueLogo(new Image("C:\\Users\\andre\\OneDrive\\Dokumente\\GitHub\\GitHubRpositories\\RocketLeagueTracker\\resources\\ChampionI.PNG"));
 			break;
-		case "CHAMPION_II" : setLeagueLogo(new Image("C:\\Users\\andre\\OneDrive\\Dokumente\\Java\\Eclipse_Workspaces\\Workspace_RL-Tracker\\RocketLeagueTracker\\resources\\ChampionII.PNG"));
+		case "CHAMPION_II" : setLeagueLogo(new Image("C:\\Users\\andre\\OneDrive\\Dokumente\\GitHub\\GitHubRpositories\\RocketLeagueTracker\\resources\\ChampionII.PNG"));
 			break;
-		case "CHAMPION_III" : setLeagueLogo(new Image("C:\\Users\\andre\\OneDrive\\Dokumente\\Java\\Eclipse_Workspaces\\Workspace_RL-Tracker\\RocketLeagueTracker\\resources\\ChampionIII.PNG"));
+		case "CHAMPION_III" : setLeagueLogo(new Image("C:\\Users\\andre\\OneDrive\\Dokumente\\GitHub\\GitHubRpositories\\RocketLeagueTracker\\resources\\ChampionIII.PNG"));
 			break;
-		case "GRANDCHAMPION_I" : setLeagueLogo(new Image("C:\\Users\\andre\\OneDrive\\Dokumente\\Java\\Eclipse_Workspaces\\Workspace_RL-Tracker\\RocketLeagueTracker\\resources\\GrandChampion.PNG"));
+		case "GRANDCHAMPION" : setLeagueLogo(new Image("C:\\Users\\andre\\OneDrive\\Dokumente\\GitHub\\GitHubRpositories\\RocketLeagueTracker\\resources\\GrandChampion.PNG"));
 			break;	
 		
 		}

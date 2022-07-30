@@ -23,7 +23,7 @@ public class UserStatsDialogController implements Initializable {
 	// ----------- INSTANZVARIABLEN -----------	
 	
 	private Stage dialogStage;
-	private User user = MainFX.getUser();
+	private User user = MainFX.getMainUser();
 	
 	@FXML
 	private ImageView img_profilepic;
@@ -51,7 +51,7 @@ public class UserStatsDialogController implements Initializable {
 
 		try {
 			img_profilepic.setImage(new Image(new FileInputStream(new File(user.getProfilepicture()))));
-			lbl_userName.setText(MainFX.getUser().getName());
+			lbl_userName.setText(MainFX.getMainUser().getName());
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
