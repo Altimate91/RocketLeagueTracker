@@ -1,20 +1,30 @@
 package classes;
 
 import java.io.FileNotFoundException;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.persistence.JoinColumn;
 
 import javafx.scene.image.Image;
 
-@Entity
+@Entity 
 @Table(name = "user")
 public class User {
 	
 // ------------ INSTANZVARIABLEN -----------
+	
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
@@ -47,11 +57,11 @@ public class User {
 	@Column(name = "mvp")
 	private int mvp;
 	
+	@Transient	//wird nicht gemapped
+	private List<Session> sessionList = new ArrayList<>();
+	@Transient //wird nicht gemapped
 	private static Image leagueLogo;
 	
-	
-//	@Column(name = "statistic")
-//	private UserStatistic statistic;
 	
 // ------------ KONSTRUKTOREN -----------
 		
@@ -62,8 +72,8 @@ public class User {
 		this.clan = clan;
 		this.league = league;
 		this.password = password;
-		
-		//richtiges LeagueLogo in Image eintragen
+	
+				
 		switch(league.toString()) {
 		case "UNRANKED" : setLeagueLogo(new Image("C:\\Users\\andre\\OneDrive\\Dokumente\\GitHub\\GitHubRpositories\\RocketLeagueTracker\\resources\\unranked.PNG"));
 			break;
@@ -234,11 +244,21 @@ public class User {
 	public void setLeagueLogo(Image leagueLogo) {
 		this.leagueLogo = leagueLogo;
 	}
+	
+	public List<Session> getSessionList() {
+		return sessionList;
+	}
+	
+	public void setSessionList(List<Session> sessionList) {
+		this.sessionList = sessionList;
+	}
+	
 
 
 		
 // ------------ METHODEN -----------
 	
+
 	@Override
 	public String toString() {
 		return "User [player_ID: " + player_ID + ", Name: " + name + ", Clan: " + clan + ", League:" + league.toString()

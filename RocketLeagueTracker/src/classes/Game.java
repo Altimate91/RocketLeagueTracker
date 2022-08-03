@@ -1,14 +1,22 @@
 package classes;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 
-
+@Entity
+@Table(name = "game")
 public class Game {
 	
 // ----------- INSTANZVARIABLEN -----------
@@ -16,8 +24,6 @@ public class Game {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int gameID;
-	@Column(name="sessionID")
-	private int sessionID;
 	@Column(name = "gameNo")
 	private int gameNo;
 	@Column(name = "result")
@@ -28,17 +34,28 @@ public class Game {
 	private int goalsScored;
 	@Column(name = "goalsReceived")
 	private int goalsReceived;
-	@Column(name = "gameMVP")
-	private String gameMVP;
-	
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "gameMVP", referencedColumnName = "idUser")
+	private User gameMVP;
+	@ManyToOne
+	@JoinColumn(name = "sessionID", nullable = false)
+	private Session sessionID;
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "player1Statistic", referencedColumnName = "idPlayerStatistic")
 	private PlayerStatistic player1Statistic;
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "player2Statistic", referencedColumnName = "idPlayerStatistic")
 	private PlayerStatistic player2Statistic;
+	
+	
+	private String mvpName; //für TableView
+
 	
 
 // ----------- KONSTRUKTOREN -----------
 	
-	public Game(int gameNo, String result, String score, int goalsScored,
-			int goalsReceived, String gameMVP) {
+	public Game(Session sessionID, int gameNo, String result, String score, int goalsScored,
+			int goalsReceived, User gameMVP) {
 		super();
 		this.gameNo = gameNo;
 		this.result = result;
@@ -46,6 +63,10 @@ public class Game {
 		this.goalsScored = goalsScored;
 		this.goalsReceived = goalsReceived;
 		this.gameMVP = gameMVP;
+		this.sessionID = sessionID;
+		
+		//für TableView
+		setMvpName(gameMVP.getName());
 	}
 
 	
@@ -87,7 +108,7 @@ public class Game {
 	}
 	
 	
-	public String getGameMVP() {
+	public User getGameMVP() {
 		return gameMVP;
 	}
 	
@@ -122,7 +143,7 @@ public class Game {
 	}
 	
 	
-	public void setGameMVP(String gameMVP) {
+	public void setGameMVP(User gameMVP) {
 		this.gameMVP = gameMVP;
 	}
 
@@ -144,6 +165,26 @@ public class Game {
 
 	public void setPlayer2Statistic(PlayerStatistic player2) {
 		this.player2Statistic = player2;
+	}
+
+
+	public Session getSessionID() {
+		return sessionID;
+	}
+
+
+	public void setSessionID(Session sessionID) {
+		this.sessionID = sessionID;
+	}
+
+
+	public String getMvpName() {
+		return mvpName;
+	}
+
+
+	public void setMvpName(String mvpName) {
+		this.mvpName = mvpName;
 	}
 
 

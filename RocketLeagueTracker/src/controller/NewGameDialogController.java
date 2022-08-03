@@ -2,12 +2,18 @@ package controller;
 
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.ResourceBundle;
+import java.util.Set;
 
 import classes.Game;
 import classes.PlayerStatistic;
 import classes.Session;
 import classes.User;
+import database.ManageGame;
+import database.ManagePlayerStatistic;
+import database.ManageSession;
+import database.ManageUser;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -50,6 +56,8 @@ public class NewGameDialogController implements Initializable {
 	@FXML
 	private ChoiceBox<String> cb_saves_player2;
 	
+	private Session currentSession;
+	
 	private int gameNo;
 	
 	private String[] numbers = {"0","1","2","3","4","5","6","7","8","9","10"};
@@ -59,8 +67,11 @@ public class NewGameDialogController implements Initializable {
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		
+		currentSession = ManageSession.getCurrentSession();
+		
 		//Spielernamen eintragen
-		lbl_player1.setText(MainFX.getMainUser().getName());
+		lbl_player1.setText(currentSession.getPlayer1().getName());
+		lbl_player2.setText(currentSession.getPlayer2().getName());
 		
 		//Auswahlmöglichkeiten für Stats in ChoiceBoxes eintragen
 		cb_goals_player1.getItems().addAll(numbers);
@@ -71,31 +82,25 @@ public class NewGameDialogController implements Initializable {
 		cb_saves_player2.getItems().addAll(numbers);
 		
 		
-		//Label mit aktueller Game No. initialisieren
-		if(MainFX.getSessionList() != null) {		
-			Session session = MainFX.getSessionList().get(MainFX.getSessionList().size() -1); //letzte Session ausheben
-			if(session.getGamelist() != null) {
-				gameNo = session.getGamelist().size() + 1;
+		//Label mit aktueller Game No. initialisieren	
+			if(currentSession.getGamelist() != null) {
+				gameNo = currentSession.getGamelist().size() + 1;
 			}
 			else {
 				gameNo = 1;	
 			}
-		} else {
-			new Alert(Alert.AlertType.ERROR, "Es wurde noch keine Session erstellt!").showAndWait();
-			System.out.println("No active Session.");
-		}
-
+			
 		lbl_gameNo.setText(Integer.toString(gameNo));
+		
 	}
 	
 	//Game speichern und Stats übergeben
 	@FXML
 	public void submitStats(ActionEvent event) {
 		
-		Session currentSession = MainFX.getSessionList().get(MainFX.getSessionList().size() -1);
 		String result;
 		String score;
-		String mvp = null;
+		User mvp = null;
 		
 		int goalsscored = Integer.parseInt(cb_goals_player1.getValue()) + Integer.parseInt(cb_goals_player2.getValue());
 		int goalsreceived = Integer.parseInt(txf_score2.getText());
@@ -119,21 +124,21 @@ public class NewGameDialogController implements Initializable {
 		
 		//MVP auslesen
 		if(cb_MVP_player1.isSelected()) {
-			mvp = lbl_player1.getText();
+			mvp = currentSession.getPlayer1();
 		}
 		if(cb_MVP_player2.isSelected()) {
-			mvp = lbl_player2.getText();
+			mvp = currentSession.getPlayer2();
 		}
 		
 		
 		//neues Game-Objekt erstellen
-		game = new Game(gameNo, result, sb.toString(), goalsscored, goalsreceived, mvp);
+		game = new Game(currentSession, gameNo, result, sb.toString(), goalsscored, goalsreceived, mvp);
 		
 		//Game in Session/GameList eintragen
 		if(currentSession.getGamelist()!= null) {
 		currentSession.getGamelist().add(game);
 		} else {
-		currentSession.setGamelist(new ArrayList<Game> ());
+		currentSession.setGamelist(new HashSet<Game> ());
 		currentSession.getGamelist().add(game);
 		}
 		//Game in ObservableList für TableView eintragen
@@ -147,14 +152,14 @@ public class NewGameDialogController implements Initializable {
 		int saves_p1 = Integer.parseInt(cb_saves_player1.getValue());;
 		int assists_p1 = Integer.parseInt(cb_assists_player1.getValue());;
 		
-		game.setPlayer1Statistic(new PlayerStatistic(lbl_player1.getText(),goals_p1,saves_p1,assists_p1));
+		game.setPlayer1Statistic(new PlayerStatistic(currentSession.getPlayer1(),goals_p1,saves_p1,assists_p1));
 		
 		//User1
 		int goals_p2 = Integer.parseInt(cb_goals_player2.getValue());
 		int saves_p2 = Integer.parseInt(cb_saves_player2.getValue());;
 		int assists_p2 = Integer.parseInt(cb_assists_player2.getValue());;
 				
-		game.setPlayer1Statistic(new PlayerStatistic(lbl_player2.getText(),goals_p2,saves_p2,assists_p2));
+		game.setPlayer2Statistic(new PlayerStatistic(currentSession.getPlayer2(),goals_p2,saves_p2,assists_p2));
 		
 		//Stats dem MainUser Profil übergeben
 		MainFX.getMainUser().setGoals(MainFX.getMainUser().getGoals() + goals_p1);
@@ -164,6 +169,18 @@ public class NewGameDialogController implements Initializable {
 		
 		System.out.println("* Player 1 Stats: " + cb_goals_player1.getValue().toString() + " Goals, " + cb_assists_player1.getValue().toString() + " Assists, " + cb_saves_player1.getValue().toString() + " Saves.");
 		System.out.println("* Player 2 Stats: " + cb_goals_player2.getValue().toString() + " Goals, " + cb_assists_player2.getValue().toString() + " Assists, " + cb_saves_player2.getValue().toString() + " Saves.");
+		
+		//Statistic in DB Tabelle PlayerStatistic eintragen
+		//Player 1 Statistic
+		ManagePlayerStatistic.saveStatistic(game.getPlayer1Statistic());
+		//Player 2 Statistic
+		ManagePlayerStatistic.saveStatistic(game.getPlayer2Statistic());
+	
+		
+		//Game in DB eintragen
+		ManageGame.saveGame(game);
+	
+	
 	}
 		
 

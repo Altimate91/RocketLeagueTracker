@@ -123,7 +123,7 @@
             <Image url="@../../resources/star.png" />
          </image>
       </ImageView>
-      <Label layoutX="136.0" layoutY="609.0" prefHeight="46.0" prefWidth="134.0" text="Player Name" textFill="#cdd31a">
+      <Label fx:id="lbl_sessionMVP" layoutX="136.0" layoutY="609.0" prefHeight="46.0" prefWidth="134.0" text="Player Name" textFill="#cdd31a">
          <font>
             <Font size="24.0" />
          </font>

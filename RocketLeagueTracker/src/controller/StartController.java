@@ -30,7 +30,7 @@ public class StartController implements Initializable {
 	private String css = this.getClass().getResource("/view/Stylesheet.css").toExternalForm();
 	
 	@FXML
-	private Label lbl_loginStatus;
+	private static Label lbl_loginStatus;
 	
 //----------- METHODEN -----------
 
@@ -65,7 +65,6 @@ public class StartController implements Initializable {
 				
 				LoginDialogController loginController = loader.getController();
 				try {
-					event.consume();
 					loginController.login(event);
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
@@ -110,7 +109,9 @@ public class StartController implements Initializable {
 	}
 
 	@FXML
-	public void loginLabel(String status) {
+	public static void loginLabel(String status) {
+		
+		System.out.println("login Methode called");
 		
 		switch(status) {
 			case "valid" : lbl_loginStatus.setText("Login successful!");  lbl_loginStatus.setTextFill(Color.GREEN); lbl_loginStatus.setVisible(true);

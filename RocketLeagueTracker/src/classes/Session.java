@@ -1,36 +1,57 @@
 package classes;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+import javax.persistence.Transient;
 
-//@Entity -> sobald ich Entity eingebe funktioniert es nicht mehr
+
+
+@Entity
+@Table(name = "session")
 public class Session {
 	
 // ------------ INSTANZVARIABLEN -----------
 	
-	@Column
+	@Column (name = "idSession")
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int idSession;
 	@Column(name = "date")
-	private LocalDateTime date;
+	private LocalDateTime date = LocalDateTime.now();
 	@Column(name = "record")
 	private String record;
-	@Column(name = "player1")
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "player1", referencedColumnName = "idUser")
 	private User player1;
-	@Column(name = "player2")
-	private User Player2;
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "player2", referencedColumnName = "idUser")
+	private User player2;
+	@Column(name = "gamesPlayed")
+	private int gamesPlayed;
 	@Column(name = "goalsScored")
 	private int goalsScored;
 	@Column(name = "gaolsReceived")
 	private int goalsReceived;
-	@Column(name = "gamesPlayed")
-	private int gamesPlayed;
+	@Column(name = "saves")
+	private int saves;
+	@Column(name = "assists")
+	private int assists;
 	@Column(name = "wins")
 	private int wins;
 	@Column(name = "defeats")
@@ -41,26 +62,27 @@ public class Session {
 	private String topDefender;
 	@Column(name = "topWingman")
 	private String topWingman;
-	@Column(name = "sessionMVP")
-	private User sessionMVP;
-	
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "sessionMVP", referencedColumnName = "idUser")
+	private User sessionMVP; //kann ich ein User Objekt überhaupt mappen?!
+	@OneToMany(mappedBy="sessionID", fetch = FetchType.EAGER)
+	private Set<Game> gamelist;
+
+	@Transient
 	private int gameLimit; //Limit welches sich User in "NewSessionDialog" setzt
-	private ArrayList<Game> gamelist;
+
 	
 	
 // ------------ KONSTRUKTOREN -----------
 	
-	public Session() {}
-	
+	public Session() {
+		date.format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm"));
+	}
 
-	
 // ------------ GETTER & SETTER -----------
 		
 
-	public int getSession_ID() {
-		return idSession;
-	}
-
+	
 	public LocalDateTime getDate() {
 		return date;
 	}
@@ -74,7 +96,7 @@ public class Session {
 	}
 
 	public User getPlayer2() {
-		return Player2;
+		return player2;
 	}
 
 	public int getGoalsScored() {
@@ -105,7 +127,7 @@ public class Session {
 		return gameLimit;
 	}
 
-	public ArrayList<Game> getGamelist() {
+	public Set<Game> getGamelist() {
 		return gamelist;
 	}
 
@@ -121,10 +143,6 @@ public class Session {
 		return topWingman;
 	}
 
-	public void setSession_ID(int session_ID) {
-		this.idSession = session_ID;
-	}
-
 	public void setDate(LocalDateTime date) {
 		this.date = date;
 	}
@@ -138,7 +156,7 @@ public class Session {
 	}
 
 	public void setPlayer2(User player2) {
-		Player2 = player2;
+		this.player2 = player2;
 	}
 
 	public void setGoalsScored(int goalsScored) {
@@ -169,7 +187,7 @@ public class Session {
 		this.gameLimit = gameLimit;
 	}
 
-	public void setGamelist(ArrayList<Game> gamelist) {
+	public void setGamelist(Set<Game> gamelist) {
 		this.gamelist = gamelist;
 	}
 	
@@ -185,9 +203,33 @@ public class Session {
 		this.topWingman = topWingman;
 	}
 	
+	public int getIdSession() {
+		return idSession;
+	}
 
+	public void setIdSession(int idSession) {
+		this.idSession = idSession;
+	}
+
+	public int getSaves() {
+		return saves;
+	}
+	
+	public int getAssists() {
+		return assists;
+	}
+	
+	public void setSaves(int saves) {
+		this.saves = saves;
+	}
+	
+	public void setAssists(int assists) {
+		this.assists = assists;
+	}
 
 // ------------ METHODEN -----------
+
+
 
 	public int gamesPlayed() {
 		for(Game aGame : gamelist) {
@@ -234,7 +276,7 @@ public class Session {
 	}
 	
 	public String topScorer() {
-		String topScorer = null;
+		User topScorer = null;
 		for(Game aGame : gamelist) {
 			if(aGame.getPlayer1Statistic().getGoals() > aGame.getPlayer2Statistic().getGoals()) {
 				topScorer = aGame.getPlayer1Statistic().getPlayer();
@@ -243,14 +285,14 @@ public class Session {
 				topScorer = aGame.getPlayer2Statistic().getPlayer();
 			}
 			else if(aGame.getPlayer1Statistic().getGoals() == aGame.getPlayer2Statistic().getGoals()) {
-				topScorer = "even";
+				return "even";
 			}
 		}
-	return topScorer;	
+	return topScorer.getName();	
 	}
 	
 	public String topDefender() {
-		String topDefender = null;
+		User topDefender = null;
 		for(Game aGame : gamelist) {
 			if(aGame.getPlayer1Statistic().getSaves() > aGame.getPlayer2Statistic().getSaves()) {
 				topDefender = aGame.getPlayer1Statistic().getPlayer();
@@ -259,14 +301,14 @@ public class Session {
 				topDefender = aGame.getPlayer2Statistic().getPlayer();
 			}
 			else if(aGame.getPlayer1Statistic().getSaves() == aGame.getPlayer2Statistic().getSaves()) {
-				topDefender = "even";
+				return "even";
 			}
 		}
-	return topDefender;	
+	return topDefender.toString();	
 	}
 	
 	public String topWingman() {
-		String topWingman = null;
+		User topWingman = null;
 		for(Game aGame : gamelist) {
 			if(aGame.getPlayer1Statistic().getSaves() > aGame.getPlayer2Statistic().getSaves()) {
 				topWingman = aGame.getPlayer1Statistic().getPlayer();
@@ -275,19 +317,110 @@ public class Session {
 				topWingman = aGame.getPlayer2Statistic().getPlayer();
 			}
 			else if(aGame.getPlayer1Statistic().getSaves() == aGame.getPlayer2Statistic().getSaves()) {
-				topWingman = "even";
+				return "even";
 			}
 		}
-	return topWingman;	
+	return topWingman.toString();	
+	}
+	
+	
+	public int goalsByPlayer1() {
+		int goals = 0;
+		
+		for(Game aGame : gamelist) {
+			goals += aGame.getPlayer1Statistic().getGoals();
+		}
+		
+		return goals;
+	}
+	
+	public int goalsByPlayer2() {
+		int goals = 0;
+		
+		for(Game aGame : gamelist) {
+			goals += aGame.getPlayer2Statistic().getGoals();
+		}
+		
+		return goals;
+	}
+	
+	public int savesByPlayer1() {
+		int saves = 0;
+		
+		for(Game aGame : gamelist) {
+			saves += aGame.getPlayer1Statistic().getSaves();
+		}
+		
+		return saves;
+	}
+	
+
+	public int savesByPlayer2() {
+		int saves = 0;
+		
+		for(Game aGame : gamelist) {
+			saves += aGame.getPlayer2Statistic().getSaves();
+		}
+		
+		return saves;
+	}
+	
+
+	public int assistsByPlayer1() {
+		int assists = 0;
+		
+		for(Game aGame : gamelist) {
+			assists += aGame.getPlayer1Statistic().getAssists();
+		}
+		
+		return assists;
+	}
+	
+
+	public int assistsByPlayer2() {
+		int assists = 0;
+		
+		for(Game aGame : gamelist) {
+			assists += aGame.getPlayer2Statistic().getAssists();
+		}
+		
+		return assists;
+	}
+	
+	public User SessionMVP() {
+		int mvpP1 = 0;
+		int mvpP2 = 0;
+		
+		User mvp = null;
+		
+		for(Game aGame : gamelist) {
+			if(aGame.getPlayer1Statistic().isGameMVP() == true) mvpP2 += 1;
+			if(aGame.getPlayer2Statistic().isGameMVP() == true) mvpP2 += 1;
+		}
+		
+		if(mvpP1 > mvpP2) return player1;
+		if(mvpP2 < mvpP2) return player2;
+		else return null;
+	}
+	
+	public List<PlayerStatistic> getPlayerStatisticList() {
+		
+		ArrayList<PlayerStatistic> sessionStatisticList = new ArrayList<>();
+		
+		sessionStatisticList.add(new PlayerStatistic(player1, this.goalsByPlayer1(), this.savesByPlayer1(), this.assistsByPlayer1()));
+		sessionStatisticList.add(new PlayerStatistic(player2, this.goalsByPlayer2(), this.savesByPlayer2(), this.assistsByPlayer2()));
+
+		return sessionStatisticList;
 	}
 
 	@Override
 	public String toString() {
-		return "Session [date=" + date + ", record=" + record + ", player1=" + player1
-				+ ", Player2=" + Player2 + ", goalsScored=" + goalsScored + ", goalsReceived=" + goalsReceived
-				+ ", gamesPlayed=" + gamesPlayed + ", wins=" + wins + ", defeats=" + defeats + ", sessionMVP="
-				+ sessionMVP + ", gameLimit=" + gameLimit + "]";
+		return date + " Record: " + record ;
 	}
+	
+	
+	
+	
 	
 	
 } // END OF SESSION-CLASS

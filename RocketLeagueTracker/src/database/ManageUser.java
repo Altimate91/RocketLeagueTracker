@@ -43,7 +43,6 @@ public class ManageUser {
 		public static User getUserByPlayerID(String player_ID) {
 			Session session = factory.openSession();
 			
-			String hql = "FROM User WHERE User.player_ID = " + player_ID;
 			User user = null;
 			List<User> userList= null;
 			

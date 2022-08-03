@@ -7,6 +7,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import classes.League;
+import classes.Session;
 import classes.User;
 import database.DBAccess;
 import database.ManageUser;

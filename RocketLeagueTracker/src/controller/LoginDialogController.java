@@ -25,10 +25,6 @@ public class LoginDialogController implements Initializable{
 	
 // ----------- INSTANZVARIABLEN -----------
 	
-	private String css = this.getClass().getResource("/view/Stylesheet.css").toExternalForm();
-	private Parent root;
-	
-
 
 //----------- METHODEN -----------
 	
@@ -55,15 +51,15 @@ public void login (ActionEvent event) throws IOException, InterruptedException {
 	
 	if(user.getPassword().equals(pwf_password_login.getText())) {
 		MainFX.setMainUser(user);
-		new PlayerLoungeController().openPlayerLounge(event);
-		//new StartController().loginLabel("valid");
-		
 		System.out.println("*** Login successfull ***");
+		new PlayerLoungeController().openPlayerLounge(event);
+		//StartController.loginLabel("valid");
+		
 	}
 	else if(user.getPassword() != pwf_password_login.getText()) {
-		new Alert(Alert.AlertType.ERROR, "Wrong Password!").showAndWait();
-		//new StartController().loginLabel("invalid");
 		System.out.println("*** ERROR: incorrect Passwort! ***");
+		new Alert(Alert.AlertType.ERROR, "Wrong Password!").showAndWait();
+		//StartController.loginLabel("invalid");
 	}
 
 }

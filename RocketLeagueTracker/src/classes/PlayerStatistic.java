@@ -1,32 +1,64 @@
 package classes;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+
+@Entity
+@Table(name = "playerstatistic")
 public class PlayerStatistic {
 	
 // ----------- INSTANZVARIABLEN -----------
 	
-	private String player;
+	@Column (name = "idPlayerStatistic")
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	private int idPlayerStatistic;
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "player", referencedColumnName = "idUser")
+	private User player;
+	@Column(name = "goals")
 	private int goals;
+	@Column(name = "saves")
 	private int saves;
+	@Column(name = "assists")
 	private int assists;
+	@Column(name = "gameMVP")
+	private boolean gameMVP;
+	
+	
+	private String playerName; //
 	
 // ----------- KONSTRUKTOREN -----------	
 	
-	public PlayerStatistic(String player, int goals, int saves, int assists) {
+	public PlayerStatistic(User player, int goals, int saves, int assists) {
 		super();
 		this.player = player;
 		this.goals = goals;
 		this.saves = saves;
 		this.assists = assists;
+		
+		//für Table View
+		setPlayerName(player.getName());
 	}
+	
+	public PlayerStatistic() {}
 
 // ----------- GETTER & SETTER -----------
 	
 	
-	public String getPlayer() {
+	public User getPlayer() {
 		return player;
 	}
 	
-	public void setPlayer(String player) {
+	public void setPlayer(User player) {
 		this.player = player;
 	}
 
@@ -53,6 +85,22 @@ public class PlayerStatistic {
 
 	public void setAssists(int assists) {
 		this.assists = assists;
+	}
+
+	public boolean isGameMVP() {
+		return gameMVP;
+	}
+
+	public void setGameMVP(boolean gameMVP) {
+		this.gameMVP = gameMVP;
+	}
+
+	public String getPlayerName() {
+		return playerName;
+	}
+
+	public void setPlayerName(String playerName) {
+		this.playerName = playerName;
 	}
 
 }

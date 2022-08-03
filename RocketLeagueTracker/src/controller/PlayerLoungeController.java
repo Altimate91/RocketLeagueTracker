@@ -11,13 +11,11 @@ import java.util.ResourceBundle;
 import classes.Game;
 import classes.Session;
 import classes.User;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+import database.ManageSession;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -33,7 +31,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import main.MainFX;
@@ -45,6 +42,8 @@ public class PlayerLoungeController implements Initializable{
 	private Stage primaryStage;
 	private Parent root;
 	private String css = this.getClass().getResource("/view/Stylesheet.css").toExternalForm();
+	
+	private Session currentSession;
 	
 	//--- User Daten ---
 	@FXML
@@ -114,6 +113,10 @@ public class PlayerLoungeController implements Initializable{
 	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
+		
+		//Schaut ob in dieser Sitzung bereits eine Session erstellt worden ist (Sonst lädt die Methode wärte von der letzten Sitzung aus Datenbank)
+		if(MainFX.getCurrentSession() !=null) currentSession = ManageSession.getCurrentSession();
+		
 	
 		System.out.println("Initialize Method is called");
 
@@ -131,9 +134,7 @@ public class PlayerLoungeController implements Initializable{
 		}
 		
 		//Stats in Session Board aktualisieren
-		if(MainFX.getSessionList() != null) {
-			//aktuelle Session wird ausgelesen		
-			Session currentSession = MainFX.getSessionList().get(MainFX.getSessionList().size() -1);
+		if(currentSession != null) {
 			//Übersicht wird mit werten aktualisiert
 			if(currentSession.getGamelist() != null) {
 				this.lbl_gamesPlayed.setVisible(true);
@@ -147,7 +148,7 @@ public class PlayerLoungeController implements Initializable{
 				this.lbl_received.setVisible(true);
 				this.lbl_received.setText(Integer.toString(currentSession.received()));
 				this.lbl_record.setVisible(true);
-				this.lbl_record.setText(getRecord());
+				this.lbl_record.setText(showRecord());
 				//nach dem hinzufügen eines Games wird der Balken aktualisiert und verlängert
 				this.bar_gamesLimit.setProgress(currentSession.gamesPlayed() / Double.valueOf(currentSession.getGameLimit()));
 			}
@@ -155,8 +156,7 @@ public class PlayerLoungeController implements Initializable{
 		
 		//GAMELIMIT BAR
 		//wenn ein Game Limit eingegeben wurde wird BarLeiste angezeigt & aktualisiert	
-		if(MainFX.getSessionList() != null) {
-			Session currentSession = MainFX.getSessionList().get(MainFX.getSessionList().size() -1);
+		if(currentSession != null) {
 			//Bar & Labels werden sichtbar
 			this.bar_gamesLimit.setVisible(true);
 			this.lbl_gamesLimit_game.setVisible(true);
@@ -169,15 +169,13 @@ public class PlayerLoungeController implements Initializable{
 		}
 		
 		//TableView befüllen
-		if(MainFX.getSessionList() != null) {
-			//aktuelle Session wird ausgelesen		
-			Session currentSession = MainFX.getSessionList().get(MainFX.getSessionList().size() -1);
+		if(currentSession != null) {
 			//Übersicht wird mit werten aktualisiert
 			if(currentSession.getGamelist() != null) {
 				col_game.setCellValueFactory(new PropertyValueFactory<Game, Integer>("gameNo"));
 				col_result.setCellValueFactory(new PropertyValueFactory<Game, String>("result"));
 				col_score.setCellValueFactory(new PropertyValueFactory<Game, String>("score"));
-				col_mvp.setCellValueFactory(new PropertyValueFactory<Game, String>("gameMVP"));
+				col_mvp.setCellValueFactory(new PropertyValueFactory<Game, String>("mvpName"));
 				tbl_gamesTable.setItems(MainFX.getOlGames());
 			}
 			
@@ -220,11 +218,12 @@ public void openMyStatsDialog (ActionEvent event) {
 	try {
 		
 		root = FXMLLoader.load(getClass().getResource("/view/UserStatsDialog.fxml"));
+		
 		Dialog<ButtonType> dialog = new Dialog<>();
 		dialog.getDialogPane().setContent(root);
 		dialog.getDialogPane().getStylesheets().add(css);
-		
 		dialog.showAndWait();
+		
 		System.out.println("--- Opened User Stats Dialog ---");
 		
 		ButtonType btnClose = new ButtonType("Close", ButtonData.CANCEL_CLOSE);
@@ -322,6 +321,8 @@ public void openNewSessionDialog (ActionEvent event) {
 			
 			NewSessionDialogController sessionController = loader.getController();
 			sessionController.submit(event);
+			System.out.println("--- New active Session ---");
+			MainFX.setCurrentSession(ManageSession.getCurrentSession());
 			
 			this.btn_newSession.setDisable(true);
 			this.btn_newGame.setDisable(false);
@@ -388,11 +389,13 @@ public void closeSession (ActionEvent event) {
 	if(response.isPresent() && response.get().getButtonData() == ButtonData.OK_DONE) {
 		//topWerte auswerten
 		Session currentSession = MainFX.getSessionList().get(MainFX.getSessionList().size() -1);
-		currentSession.setTopScorer(currentSession.getTopScorer());
-		currentSession.setTopDefender(currentSession.getTopDefender());
-		currentSession.setTopWingman(currentSession.getTopWingman());
+		currentSession.setTopScorer(currentSession.topScorer());
+		currentSession.setTopDefender(currentSession.topDefender());
+		currentSession.setTopWingman(currentSession.topWingman());
 		
-		//session in DB abspeichern
+		//session-Werte in DB updaten
+		ManageSession.update(currentSession);
+		
 		
 		//Buttons aus- bzw. einblenden
 		btn_newGame.setDisable(true);
@@ -412,7 +415,6 @@ public void closeSession (ActionEvent event) {
 		this.lbl_BarGamesPlayed.setVisible(false);
 		this.lbl_gamesLimit_outOf.setVisible(false);
 		this.lbl_gamesMax.setVisible(false);
-
 	}
 	
 	System.out.println(" *** Session closed *** ");
@@ -449,7 +451,8 @@ public void openSessionStatsDialog (ActionEvent event) {
 public void logout (ActionEvent event) {
 		
 		primaryStage = MainFX.getStage();
-			
+		
+		//zurück zur Startmaske
 		try {
 			root = FXMLLoader.load(getClass().getResource("/view/Start.fxml"));
 			Scene scene = new Scene(root);
@@ -472,7 +475,7 @@ public void logout (ActionEvent event) {
 
 
 // ---- Methode für Initialize ----
-	private String getRecord() {
+	private String showRecord() {
 		
 		int wins = Integer.parseInt(lbl_wins.getText());
 		int defeats = Integer.parseInt(lbl_defeats.getText());

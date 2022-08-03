@@ -23,6 +23,8 @@ public class MainFX extends Application {
 	private static Stage stage;
 	private static Image icon = new Image("C:\\Users\\andre\\OneDrive\\Dokumente\\GitHub\\GitHubRpositories\\RocketLeagueTracker\\resources\\icon.png");
 	private static User mainUser;
+	private static User player2;
+	private static Session currentSession;
 	private static ArrayList<Session> sessionList;
 	private static ObservableList<Game> olGames = FXCollections.observableArrayList();
 
@@ -72,10 +74,26 @@ public class MainFX extends Application {
 		MainFX.olGames = olGames;
 	}
 	
+	public static User getPlayer2() {
+		return player2;
+	}
 	
+	public static void setPlayer2(User player2) {
+		MainFX.player2 = player2;
+	}
+	
+	public static Session getCurrentSession() {
+		return currentSession;
+	}
+	
+	public static void setCurrentSession(Session currentSession) {
+		MainFX.currentSession = currentSession;
 	
 	// ----------- METHODEN -----------
 
+
+
+	}
 
 	@Override
 	public void start(Stage primaryStage) {

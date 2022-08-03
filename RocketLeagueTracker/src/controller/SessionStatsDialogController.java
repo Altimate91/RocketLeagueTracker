@@ -61,6 +61,15 @@ public class SessionStatsDialogController implements Initializable {
 		lbl_player1_name.setText(currentSession.getPlayer1().getName());
 		lbl_player2_name.setText(currentSession.getPlayer2().getName());
 		
+		//Werte eintragen
+		lbl_goals_p1.setText(Integer.toString(currentSession.goalsByPlayer1()));
+		lbl_goals_p2.setText(Integer.toString(currentSession.goalsByPlayer2()));
+		
+		lbl_saves_p1.setText(Integer.toString(currentSession.savesByPlayer1()));
+		lbl_saves_p2.setText(Integer.toString(currentSession.savesByPlayer2()));
+		
+		lbl_assists_p1.setText(Integer.toString(currentSession.assistsByPlayer1()));
+		lbl_assists_p2.setText(Integer.toString(currentSession.assistsByPlayer2()));
 		
 		//topWerte eintragen
 		lbl_topScorer.setText(currentSession.getTopScorer());

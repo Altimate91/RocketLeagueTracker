@@ -1,11 +1,15 @@
 package database;
 
+import java.util.List;
+
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
+
+import classes.User;
 
 public class ManageSession {
 	
@@ -33,6 +37,7 @@ public class ManageSession {
 				
 		}
 		
+		// Session anhand von SessionID auslesen
 		public static classes.Session loadSession(int id) {
 			Session session = factory.openSession();
 			classes.Session gameSession = null;
@@ -50,6 +55,66 @@ public class ManageSession {
 			
 			return gameSession;
 		}
+		
+		//*Session updaten
+		public static <T> void update(classes.Session gameSession) {
+			Session session = factory.openSession();
+			
+			try {
+				session.beginTransaction();
+				session.update(gameSession);
+				session.getTransaction().commit();
+			} catch (HibernateException e) {
+				if (session.getTransaction() != null) session.getTransaction().rollback();
+				e.printStackTrace();
+			} finally {
+				session.close(); // Session schlieﬂen
+			}
+		}
+		
+		
+		
+		
+		
+		// Aktuelle Session ausheben
+				public static classes.Session getCurrentSession() {
+					Session session = factory.openSession();
+					
+					classes.Session gameSession = null;
+					List<classes.Session> sessionList= null;
+					
+					try {
+						session.beginTransaction();
+						sessionList = session.createQuery("FROM Session ORDER BY idSession DESC ").setMaxResults(1).getResultList();
+						session.getTransaction().commit();
+					} catch (HibernateException e) {
+						if (session.getTransaction() != null) session.getTransaction().rollback();
+						e.printStackTrace();
+					} finally {
+						session.close(); // Session schlieﬂen
+					}
+					
+					return sessionList.get(0);
+				}
+				
+		// SessionList 
+				public static List<classes.Session> getSessionList() {
+					Session session = factory.openSession();
+					List<classes.Session> sessionList = null;
+					
+					try {
+						session.beginTransaction();
+						sessionList = session.createSQLQuery("SELECT * FROM Session ORDER BY idSession").list();
+						session.getTransaction().commit();
+					} catch (HibernateException e) {
+						if (session.getTransaction() != null) session.getTransaction().rollback();
+						e.printStackTrace();
+					} finally {
+						session.close(); // Session schlieﬂen
+					}
+					
+					return sessionList;
+				}
 		
 		
 		

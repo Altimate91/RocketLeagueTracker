@@ -20,12 +20,11 @@
         
         <property name="hibernate.id.new_generator_mappings">false</property>
         
-        <mapping class ="classes.User"/>
-        <mapping class ="classes.Game"/>
-        <mapping class ="classes.Session"/>
-        <mapping class = "classes.UserStatistic"/>
-           
-       
+        <mapping class= "classes.User"></mapping>
+        <mapping class= "classes.Session"></mapping>
+        <mapping class= "classes.Game"></mapping>
+        <mapping class= "classes.PlayerStatistic"></mapping>
+          
     </session-factory>
 
 </hibernate-configuration>
