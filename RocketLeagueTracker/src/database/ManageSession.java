@@ -1,7 +1,13 @@
 package database;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
+import javax.persistence.TypedQuery;
+
+import org.hibernate.SQLQuery;
+import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -79,8 +85,6 @@ public class ManageSession {
 		// Aktuelle Session ausheben
 				public static classes.Session getCurrentSession() {
 					Session session = factory.openSession();
-					
-					classes.Session gameSession = null;
 					List<classes.Session> sessionList= null;
 					
 					try {
@@ -98,13 +102,15 @@ public class ManageSession {
 				}
 				
 		// SessionList 
-				public static List<classes.Session> getSessionList() {
+				public static List<classes.Session> getSessionList(int userID) {
 					Session session = factory.openSession();
-					List<classes.Session> sessionList = null;
+					List<classes.Session> sessionList = new ArrayList<>();
 					
 					try {
 						session.beginTransaction();
-						sessionList = session.createSQLQuery("SELECT * FROM Session ORDER BY idSession").list();
+						SQLQuery query = session.createSQLQuery("SELECT * FROM Session WHERE player1 = " + userID + " ORDER BY idSession");
+						query.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
+						sessionList = query.list();
 						session.getTransaction().commit();
 					} catch (HibernateException e) {
 						if (session.getTransaction() != null) session.getTransaction().rollback();
@@ -112,6 +118,7 @@ public class ManageSession {
 					} finally {
 						session.close(); // Session schlieﬂen
 					}
+					
 					
 					return sessionList;
 				}

@@ -161,6 +161,27 @@ public class NewGameDialogController implements Initializable {
 				
 		game.setPlayer2Statistic(new PlayerStatistic(currentSession.getPlayer2(),goals_p2,saves_p2,assists_p2));
 		
+		
+		//top-Werte übergeben
+		if(goals_p1 > goals_p2) {
+			game.setTopScorer(currentSession.getPlayer1());
+		} else if (goals_p1 < goals_p2) {
+			game.setTopScorer(currentSession.getPlayer2());
+		} else { game.setTopScorer(null); };
+		
+		if(assists_p1 > assists_p2) {
+			game.setTopWingman(currentSession.getPlayer1());
+		} else if (assists_p1 < assists_p2) {
+			game.setTopWingman(currentSession.getPlayer2());
+		} else { game.setTopWingman(null); };
+		
+		if(saves_p1 > saves_p2) {
+			game.setTopDefender(currentSession.getPlayer1());
+		} else if (saves_p1 < saves_p2) {
+			game.setTopDefender(currentSession.getPlayer2());
+		} else { game.setTopDefender(null); };
+		
+		
 		//Stats dem MainUser Profil übergeben
 		MainFX.getMainUser().setGoals(MainFX.getMainUser().getGoals() + goals_p1);
 		MainFX.getMainUser().setSaves(MainFX.getMainUser().getSaves() + saves_p1);

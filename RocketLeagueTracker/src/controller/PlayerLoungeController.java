@@ -16,6 +16,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -128,7 +129,7 @@ public class PlayerLoungeController implements Initializable{
 		this.lbl_League.setText(user.getLeague().toString());
 		this.lbl_PlayerName.setText(user.getName());
 		this.lbl_clan.setText(user.getClan());
-		this.imv_leagueLogo.setImage(user.getLeagueLogo());
+		this.getLeagueLogo();
 		} catch(Exception e) {
 			System.out.println(e.getMessage());
 		}
@@ -157,6 +158,7 @@ public class PlayerLoungeController implements Initializable{
 		//GAMELIMIT BAR
 		//wenn ein Game Limit eingegeben wurde wird BarLeiste angezeigt & aktualisiert	
 		if(currentSession != null) {
+			 System.out.println(currentSession.toString());
 			//Bar & Labels werden sichtbar
 			this.bar_gamesLimit.setVisible(true);
 			this.lbl_gamesLimit_game.setVisible(true);
@@ -167,6 +169,13 @@ public class PlayerLoungeController implements Initializable{
 			this.lbl_gamesMax.setText(Integer.toString(currentSession.getGameLimit()));
 			this.lbl_BarGamesPlayed.setText(Integer.toString(currentSession.getGamesPlayed()));
 		}
+		
+		//wenn GameLimit erreicht ist soll dem User eine Meldung ausgegeben werden
+		if(currentSession != null && currentSession.getGamesPlayed() == currentSession.getGameLimit()) {
+			new Alert(Alert.AlertType.INFORMATION, "Your reached your GameLimit of " + Integer.toString(currentSession.getGameLimit())).showAndWait();
+		}
+		
+		
 		
 		//TableView befüllen
 		if(currentSession != null) {
@@ -222,6 +231,7 @@ public void openMyStatsDialog (ActionEvent event) {
 		Dialog<ButtonType> dialog = new Dialog<>();
 		dialog.getDialogPane().setContent(root);
 		dialog.getDialogPane().getStylesheets().add(css);
+		dialog.setTitle(MainFX.getMainUser().getName() + " Statistic");
 		dialog.showAndWait();
 		
 		System.out.println("--- Opened User Stats Dialog ---");
@@ -247,13 +257,16 @@ public void openArchiveDialog (ActionEvent event) {
 		Dialog<ButtonType> dialog = new Dialog<>();
 		dialog.getDialogPane().setContent(root);
 		dialog.getDialogPane().getStylesheets().add(css);
-		dialog.showAndWait();
+		dialog.setTitle("Session Archive");
 		
 		System.out.println("--- Opened Archive Dialog ---");
+				
+		dialog.getDialogPane().getButtonTypes().addAll(ButtonType.CLOSE);
+		Node btnClose = dialog.getDialogPane().lookupButton(ButtonType.CLOSE);
+		btnClose.managedProperty().bind(btnClose.visibleProperty());
+		btnClose.setVisible(false);
 		
-		ButtonType btnClose = new ButtonType("Close", ButtonData.CANCEL_CLOSE);
-		
-		dialog.getDialogPane().getButtonTypes().addAll(btnClose);
+		dialog.showAndWait();
 		
 	
 	} catch (IOException e) {
@@ -387,11 +400,15 @@ public void closeSession (ActionEvent event) {
 	
 	Optional<ButtonType> response = alert.showAndWait();
 	if(response.isPresent() && response.get().getButtonData() == ButtonData.OK_DONE) {
-		//topWerte auswerten
-		Session currentSession = MainFX.getSessionList().get(MainFX.getSessionList().size() -1);
-		currentSession.setTopScorer(currentSession.topScorer());
-		currentSession.setTopDefender(currentSession.topDefender());
-		currentSession.setTopWingman(currentSession.topWingman());
+		Session currentSession = ManageSession.getCurrentSession();
+		//Werte updaten
+		currentSession.setGamesPlayed(currentSession.gamesPlayed());
+		currentSession.setGoalsScored(currentSession.goals());
+		currentSession.setGoalsReceived(currentSession.received());
+		//topWerte auswerten & updaten
+		currentSession.setTopScorer(currentSession.sessionTopScorer().getPlayer_ID());
+		currentSession.setTopDefender(currentSession.sessionTopDefender().getPlayer_ID());
+		currentSession.setTopWingman(currentSession.sessionTopWingman().getPlayer_ID());
 		
 		//session-Werte in DB updaten
 		ManageSession.update(currentSession);
@@ -426,7 +443,6 @@ public void closeSession (ActionEvent event) {
 @FXML
 public void openSessionStatsDialog (ActionEvent event) {
 	
-	
 	try {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/SessionStatsDialog.fxml"));
 		root = loader.load();
@@ -440,6 +456,7 @@ public void openSessionStatsDialog (ActionEvent event) {
 		ButtonType btnClose = new ButtonType("Close", ButtonData.CANCEL_CLOSE);
 		
 		dialog.getDialogPane().getButtonTypes().addAll(btnClose);
+		dialog.showAndWait();
 		
 	} catch (IOException e) {
 		e.printStackTrace();
@@ -498,6 +515,53 @@ public void logout (ActionEvent event) {
 		sb.append((Integer) Math.abs(wins - defeats));
 		
 	return sb.toString();
+	}
+	
+	private void getLeagueLogo() { // Add: Methode zu Static ändern und gleich das Logo in imageView eintragen und die Schriftart von lbl_Leaggue ändern
+
+		switch(MainFX.getMainUser().getLeague()) {
+		case "UNRANKED" : imv_leagueLogo.setImage(new Image("C:\\Users\\andre\\OneDrive\\Dokumente\\GitHub\\GitHubRpositories\\RocketLeagueTracker\\resources\\unranked.PNG")); this.lbl_League.setTextFill(Color.LIGHTGREY);
+			break;
+		case "BRONZE_I" : imv_leagueLogo.setImage(new Image("C:\\Users\\andre\\OneDrive\\Dokumente\\GitHub\\GitHubRpositories\\RocketLeagueTracker\\resources\\BronzeI.PNG")); this.lbl_League.setTextFill(Color.PERU);
+			break;
+		case "BRONZE_II" : imv_leagueLogo.setImage(new Image("C:\\Users\\andre\\OneDrive\\Dokumente\\GitHub\\GitHubRpositories\\RocketLeagueTracker\\resources\\BronzeII.PNG")); this.lbl_League.setTextFill(Color.PERU);
+			break;
+		case "BRONZE_III" : imv_leagueLogo.setImage(new Image("C:\\Users\\andre\\OneDrive\\Dokumente\\GitHub\\GitHubRpositories\\RocketLeagueTracker\\resources\\BronzeIII.PNG")); this.lbl_League.setTextFill(Color.PERU);
+			break;
+		case "SILVER_I" : imv_leagueLogo.setImage(new Image("C:\\Users\\andre\\OneDrive\\Dokumente\\GitHub\\GitHubRpositories\\RocketLeagueTracker\\resources\\SilverI.PNG"));
+			break;
+		case "SILVER_II" : imv_leagueLogo.setImage(new Image("C:\\Users\\andre\\OneDrive\\Dokumente\\GitHub\\GitHubRpositories\\RocketLeagueTracker\\resources\\SilverII.PNG"));
+			break;
+		case "SILVER_III" : imv_leagueLogo.setImage(new Image("C:\\Users\\andre\\OneDrive\\Dokumente\\GitHub\\GitHubRpositories\\RocketLeagueTracker\\resources\\SilverIII.PNG"));
+			break;
+		case "GOLD_I" : imv_leagueLogo.setImage(new Image("C:\\Users\\andre\\OneDrive\\Dokumente\\GitHub\\GitHubRpositories\\RocketLeagueTracker\\resources\\GoldI.PNG"));
+			break;
+		case "GOLD_II" : imv_leagueLogo.setImage(new Image("C:\\Users\\andre\\OneDrive\\Dokumente\\GitHub\\GitHubRpositories\\RocketLeagueTracker\\resources\\GoldII.PNG"));
+			break;
+		case "GOLD_III" : imv_leagueLogo.setImage(new Image("C:\\Users\\andre\\OneDrive\\Dokumente\\GitHub\\GitHubRpositories\\RocketLeagueTracker\\resources\\GoldIII.PNG"));
+			break;
+		case "PLATIN_I" : imv_leagueLogo.setImage(new Image("C:\\Users\\andre\\OneDrive\\Dokumente\\GitHub\\GitHubRpositories\\RocketLeagueTracker\\resources\\PlatinI.PNG"));
+			break;
+		case "PLATIN_II" : imv_leagueLogo.setImage(new Image("C:\\Users\\andre\\OneDrive\\Dokumente\\GitHub\\GitHubRpositories\\RocketLeagueTracker\\resources\\PlatinII.PNG"));
+			break;
+		case "PLATIN_III" : imv_leagueLogo.setImage(new Image("C:\\Users\\andre\\OneDrive\\Dokumente\\GitHub\\GitHubRpositories\\RocketLeagueTracker\\resources\\PlatinIII.PNG"));
+			break;
+		case "DIAMOND_I" : imv_leagueLogo.setImage(new Image("C:\\Users\\andre\\OneDrive\\Dokumente\\GitHub\\GitHubRpositories\\RocketLeagueTracker\\resources\\DiamondI.PNG"));
+			break;
+		case "DIAMOND_II" : imv_leagueLogo.setImage(new Image("C:\\Users\\andre\\OneDrive\\Dokumente\\GitHub\\GitHubRpositories\\RocketLeagueTracker\\resources\\DiamondII.PNG"));
+			break;
+		case "DIAMOND_III" : imv_leagueLogo.setImage(new Image("C:\\Users\\andre\\OneDrive\\Dokumente\\GitHub\\GitHubRpositories\\RocketLeagueTracker\\resources\\DiamondIII.PNG"));
+			break;
+		case "CHAMMPION_I" : imv_leagueLogo.setImage(new Image("C:\\Users\\andre\\OneDrive\\Dokumente\\GitHub\\GitHubRpositories\\RocketLeagueTracker\\resources\\ChampionI.PNG"));
+			break;
+		case "CHAMPION_II" : imv_leagueLogo.setImage(new Image("C:\\Users\\andre\\OneDrive\\Dokumente\\GitHub\\GitHubRpositories\\RocketLeagueTracker\\resources\\ChampionII.PNG"));
+			break;
+		case "CHAMPION_III" : imv_leagueLogo.setImage(new Image("C:\\Users\\andre\\OneDrive\\Dokumente\\GitHub\\GitHubRpositories\\RocketLeagueTracker\\resources\\ChampionIII.PNG"));
+			break;
+		case "GRANDCHAMPION" : imv_leagueLogo.setImage(new Image("C:\\Users\\andre\\OneDrive\\Dokumente\\GitHub\\GitHubRpositories\\RocketLeagueTracker\\resources\\GrandChampion.PNG"));
+			break;	
+		}
+		
 	}
 
 

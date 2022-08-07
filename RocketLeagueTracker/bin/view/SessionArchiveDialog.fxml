@@ -3,8 +3,6 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.Separator?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -24,37 +22,37 @@
          </font>
       </Label>
       <Separator layoutX="56.0" layoutY="350.0" prefHeight="15.0" prefWidth="288.0" />
-      <Label alignment="CENTER" layoutX="60.0" layoutY="408.0" text="Goals">
+      <Label alignment="CENTER" layoutX="63.0" layoutY="408.0" text="Goals">
          <font>
             <Font size="16.0" />
          </font>
       </Label>
-      <Label layoutX="140.0" layoutY="408.0" text="Saves">
+      <Label layoutX="139.0" layoutY="408.0" text="Saves">
          <font>
             <Font size="16.0" />
          </font>
       </Label>
-      <Label layoutX="218.0" layoutY="408.0" text="Assists">
+      <Label layoutX="217.0" layoutY="408.0" text="Assists">
          <font>
             <Font size="16.0" />
          </font>
       </Label>
-      <Label layoutX="291.0" layoutY="408.0" text="Received">
+      <Label layoutX="287.0" layoutY="408.0" text="Received">
          <font>
             <Font size="16.0" />
          </font>
       </Label>
-      <Label layoutX="56.0" layoutY="358.0" text="Games">
+      <Label layoutX="58.0" layoutY="358.0" text="Games">
          <font>
             <Font size="16.0" />
          </font>
       </Label>
-      <Label layoutX="138.0" layoutY="358.0" text="Wins">
+      <Label layoutX="141.0" layoutY="358.0" text="Wins">
          <font>
             <Font size="16.0" />
          </font>
       </Label>
-      <Label layoutX="210.0" layoutY="358.0" text="Defeats">
+      <Label layoutX="213.0" layoutY="358.0" text="Defeats">
          <font>
             <Font size="16.0" />
          </font>
@@ -65,22 +63,22 @@
          </font>
       </Label>
       <Separator layoutX="56.0" layoutY="575.0" prefHeight="15.0" prefWidth="288.0" />
-      <Label fx:id="lbl_goals" alignment="CENTER" layoutX="78.0" layoutY="433.0" text="1">
+      <Label fx:id="lbl_goals" alignment="CENTER" layoutX="79.0" layoutY="433.0" text="1">
          <font>
             <Font size="16.0" />
          </font>
       </Label>
-      <Label fx:id="lbl_saves" alignment="CENTER" layoutX="156.0" layoutY="433.0" text="1">
+      <Label fx:id="lbl_saves" alignment="CENTER" layoutX="154.0" layoutY="433.0" text="1">
          <font>
             <Font size="16.0" />
          </font>
       </Label>
-      <Label fx:id="lbl_assists" alignment="CENTER" layoutX="237.0" layoutY="433.0" text="1">
+      <Label fx:id="lbl_assists" alignment="CENTER" layoutX="235.0" layoutY="433.0" text="1">
          <font>
             <Font size="16.0" />
          </font>
       </Label>
-      <Label fx:id="lbl_received" alignment="CENTER" layoutX="319.0" layoutY="433.0" prefHeight="25.0" prefWidth="0.0" text="1">
+      <Label fx:id="lbl_received" alignment="CENTER" layoutX="315.0" layoutY="433.0" prefHeight="25.0" prefWidth="0.0" text="1">
          <font>
             <Font size="16.0" />
          </font>
@@ -105,14 +103,6 @@
             <Font size="16.0" />
          </font>
       </Label>
-      <TableView fx:id="tbl_table" layoutX="56.0" layoutY="467.0" prefHeight="102.0" prefWidth="288.0">
-        <columns>
-          <TableColumn fx:id="col_player" prefWidth="108.0" text="Player" />
-            <TableColumn fx:id="col_goal" prefWidth="53.0" text="Goals" />
-            <TableColumn fx:id="col_saves" prefWidth="64.0" text="Saves" />
-          <TableColumn fx:id="col_assists" prefWidth="62.0" text="Assists" />
-        </columns>
-      </TableView>
       <Label layoutX="129.0" layoutY="582.0" text="Session MVP">
          <font>
             <Font size="26.0" />
@@ -128,5 +118,37 @@
             <Font size="24.0" />
          </font>
       </Label>
+      <Label fx:id="lbl_player1" layoutX="58.0" layoutY="515.0" prefHeight="30.0" prefWidth="78.0" text="lbl_player1">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Separator layoutX="59.0" layoutY="466.0" prefHeight="15.0" prefWidth="288.0" />
+      <ImageView fitHeight="38.0" fitWidth="35.0" layoutX="222.0" layoutY="479.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../resources/shield.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="38.0" fitWidth="35.0" layoutX="141.0" layoutY="479.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../resources/ball.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="46.0" fitWidth="40.0" layoutX="296.0" layoutY="474.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../resources/assist.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="lbl_player2" layoutX="58.0" layoutY="545.0" prefHeight="30.0" prefWidth="78.0" text="lbl_player2">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Label fx:id="lbl_goalsP1" alignment="CENTER" layoutX="139.0" layoutY="517.0" prefHeight="25.0" prefWidth="40.0" text="lbl_goalsP1" />
+      <Label fx:id="lbl_goalsP2" alignment="CENTER" layoutX="139.0" layoutY="547.0" prefHeight="25.0" prefWidth="40.0" text="Label" />
+      <Label fx:id="lbl_savesP1" alignment="CENTER" layoutX="221.0" layoutY="517.0" prefHeight="25.0" prefWidth="40.0" text="Label" />
+      <Label fx:id="lbl_savesP2" alignment="CENTER" layoutX="220.0" layoutY="547.0" prefHeight="25.0" prefWidth="40.0" text="Label" />
+      <Label fx:id="lbl_assistsP1" alignment="CENTER" layoutX="296.0" layoutY="517.0" prefHeight="25.0" prefWidth="40.0" text="Label" />
+      <Label fx:id="lbl_assistsP2" alignment="CENTER" layoutX="295.0" layoutY="547.0" prefHeight="25.0" prefWidth="40.0" text="Label" />
    </children>
 </AnchorPane>

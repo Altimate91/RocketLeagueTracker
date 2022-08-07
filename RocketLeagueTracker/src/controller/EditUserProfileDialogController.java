@@ -8,6 +8,7 @@ import java.util.ResourceBundle;
 
 import classes.League;
 import classes.User;
+import database.ManageUser;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -126,15 +127,13 @@ public class EditUserProfileDialogController implements Initializable {
 		
 		//trägt Dateipfad aus Imageview in das User-Objekt ein
 		MainFX.getMainUser().setProfilepicture(profilepicture);
-		System.out.println("*** neuer User: " + MainFX.getMainUser().getName() + " wurde angelegt ***");
 		System.out.println(MainFX.getMainUser().toString());
 
-		
-		
-		/*
-		 * User wird in Datenbank angelegt
-		 * 
-		 */
+			
+		 //User wird in Datenbank angelegt
+		 ManageUser.update(MainFX.getMainUser());
+		 
+		 System.out.println("*** User: " + MainFX.getMainUser().getName() + " wurde bearbeitet ***");
 	}
 
 }

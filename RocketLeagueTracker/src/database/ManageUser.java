@@ -38,6 +38,22 @@ public class ManageUser {
 			
 	}
 	
+	//*User updaten
+	public static <T> void update(classes.User user) {
+		Session session = factory.openSession();
+		
+		try {
+			session.beginTransaction();
+			session.update(user);
+			session.getTransaction().commit();
+		} catch (HibernateException e) {
+			if (session.getTransaction() != null) session.getTransaction().rollback();
+			e.printStackTrace();
+		} finally {
+			session.close(); // Session schlieﬂen
+		}
+	}
+	
 	
 	//*User mit PlayerID auslesen
 		public static User getUserByPlayerID(String player_ID) {

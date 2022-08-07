@@ -4,6 +4,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import classes.Session;
+import database.ManageSession;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -15,8 +16,8 @@ import main.MainFX;
 public class SessionStatsDialogController implements Initializable {
 	
 // ----------- INSTANZVARIABLEN -----------	
-	
-	private Stage dialogStage;	
+
+	private Session currentSession;
 	
 	@FXML
 	private Label lbl_player1_name;
@@ -45,17 +46,17 @@ public class SessionStatsDialogController implements Initializable {
 	@FXML
 	private Label lbl_topWingman;
 	
+	
 
 	
 // ----------- METHODEN -----------	
 	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		Session currentSession = null;
 		
-		if(MainFX.getSessionList() != null) {
-			//aktuelle Session wird ausgelesen		
-			currentSession = MainFX.getSessionList().get(MainFX.getSessionList().size() -1);
+		if(MainFX.getCurrentSession() != null) {
+			//aktuelle Session wird ausgelesen
+			currentSession = ManageSession.getCurrentSession();
 		}
 		
 		lbl_player1_name.setText(currentSession.getPlayer1().getName());
@@ -72,17 +73,11 @@ public class SessionStatsDialogController implements Initializable {
 		lbl_assists_p2.setText(Integer.toString(currentSession.assistsByPlayer2()));
 		
 		//topWerte eintragen
-		lbl_topScorer.setText(currentSession.getTopScorer());
-		lbl_topDefender.setText(currentSession.getTopDefender());
-		lbl_topWingman.setText(currentSession.getTopWingman());
+		if(currentSession.sessionTopScorer().getName() != null) lbl_topScorer.setText(currentSession.sessionTopScorer().getName()); else lbl_topScorer.setText("none");
+		if(currentSession.sessionTopDefender().getName() != null) lbl_topDefender.setText(currentSession.sessionTopDefender().getName()); else lbl_topDefender.setText("none");
+		if(currentSession.sessionTopWingman().getName() != null) lbl_topWingman.setText(currentSession.sessionTopWingman().getName()); else lbl_topWingman.setText("none");
 		
 	}
 	
-	
-	public void close (ActionEvent event) {
-		dialogStage = (Stage) ((Node)event.getSource()).getScene().getWindow();
-		dialogStage.close();
-	}
-		
 
 }

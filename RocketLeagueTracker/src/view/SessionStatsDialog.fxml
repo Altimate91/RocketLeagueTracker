@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.image.Image?>
@@ -35,27 +34,27 @@
             <Font size="26.0" />
          </font>
       </Label>
-      <Label fx:id="lbl_topScorer" layoutX="41.0" layoutY="409.0" text="Player">
+      <Label fx:id="lbl_topScorer" alignment="CENTER" layoutX="41.0" layoutY="409.0" text="Player">
          <font>
             <Font size="26.0" />
          </font>
       </Label>
-      <Label fx:id="lbl_topDefender" layoutX="168.0" layoutY="409.0" text="Player">
+      <Label fx:id="lbl_topDefender" alignment="CENTER" layoutX="161.0" layoutY="409.0" text="Player">
          <font>
             <Font size="26.0" />
          </font>
       </Label>
-      <Label fx:id="lbl_topWingman" layoutX="281.0" layoutY="409.0" text="Player">
+      <Label fx:id="lbl_topWingman" alignment="CENTER" layoutX="281.0" layoutY="409.0" text="Player">
          <font>
             <Font size="26.0" />
          </font>
       </Label>
-      <Label fx:id="lbl_player1_name" layoutX="158.0" layoutY="100.0" text="Player1">
+      <Label fx:id="lbl_player1_name" alignment="CENTER" layoutX="158.0" layoutY="100.0" text="Player1">
          <font>
             <Font size="26.0" />
          </font>
       </Label>
-      <Label fx:id="lbl_player2_name" layoutX="281.0" layoutY="100.0" text="Player2">
+      <Label fx:id="lbl_player2_name" alignment="CENTER" layoutX="281.0" layoutY="100.0" text="Player2">
          <font>
             <Font size="26.0" />
          </font>
@@ -64,42 +63,42 @@
       <Separator layoutX="22.0" layoutY="186.0" prefHeight="0.0" prefWidth="348.0" />
       <Separator layoutX="22.0" layoutY="223.0" prefHeight="0.0" prefWidth="348.0" />
       <Separator layoutX="22.0" layoutY="260.0" prefHeight="0.0" prefWidth="348.0" />
-      <Label fx:id="lbl_goals_p1" layoutX="193.0" layoutY="150.0" text="1">
+      <Label fx:id="lbl_goals_p1" alignment="CENTER" layoutX="193.0" layoutY="150.0" text="1">
          <font>
             <Font size="26.0" />
          </font>
       </Label>
-      <Label fx:id="lbl_goals_p2" layoutX="316.0" layoutY="150.0" text="1">
+      <Label fx:id="lbl_goals_p2" alignment="CENTER" layoutX="316.0" layoutY="150.0" text="1">
          <font>
             <Font size="26.0" />
          </font>
       </Label>
-      <Label fx:id="lbl_saves_p2" layoutX="316.0" layoutY="186.0" text="1">
+      <Label fx:id="lbl_saves_p2" alignment="CENTER" layoutX="316.0" layoutY="186.0" text="1">
          <font>
             <Font size="26.0" />
          </font>
       </Label>
-      <Label fx:id="lbl_assists_p2" layoutX="316.0" layoutY="223.0" text="1">
+      <Label fx:id="lbl_assists_p2" alignment="CENTER" layoutX="316.0" layoutY="223.0" text="1">
          <font>
             <Font size="26.0" />
          </font>
       </Label>
-      <Label fx:id="lbl_saves_p1" layoutX="193.0" layoutY="189.0" text="1">
+      <Label fx:id="lbl_saves_p1" alignment="CENTER" layoutX="193.0" layoutY="189.0" text="1">
          <font>
             <Font size="26.0" />
          </font>
       </Label>
-      <Label fx:id="lbl_assist_p1" layoutX="193.0" layoutY="223.0" text="1">
+      <Label fx:id="lbl_assists_p1" alignment="CENTER" layoutX="193.0" layoutY="223.0" text="1">
          <font>
             <Font size="26.0" />
          </font>
       </Label>
-      <Label fx:id="lbl_mvp_p1" layoutX="193.0" layoutY="261.0" text="1">
+      <Label fx:id="lbl_mvp_p1" alignment="CENTER" layoutX="193.0" layoutY="261.0" text="1">
          <font>
             <Font size="26.0" />
          </font>
       </Label>
-      <Label fx:id="lbl_mvp_p2" layoutX="316.0" layoutY="261.0" text="1">
+      <Label fx:id="lbl_mvp_p2" alignment="CENTER" layoutX="316.0" layoutY="261.0" text="1">
          <font>
             <Font size="26.0" />
          </font>
@@ -109,16 +108,20 @@
             <Image url="@../../resources/topScorer.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="93.0" fitWidth="93.0" layoutX="154.0" layoutY="442.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="93.0" fitWidth="93.0" layoutX="150.0" layoutY="447.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../resources/topDefender.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="84.0" fitWidth="77.0" layoutX="278.0" layoutY="451.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="84.0" fitWidth="77.0" layoutX="278.0" layoutY="455.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../resources/topWingman.png" />
          </image>
       </ImageView>
-      <Button layoutX="162.0" layoutY="552.0" mnemonicParsing="false" onAction="#close" prefHeight="27.0" prefWidth="77.0" text="close" />
+      <Label alignment="CENTER" layoutX="104.0" layoutY="341.0" prefHeight="68.0" prefWidth="194.0" text="Awards" textFill="GOLD">
+         <font>
+            <Font size="39.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

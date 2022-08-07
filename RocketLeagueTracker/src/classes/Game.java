@@ -37,6 +37,15 @@ public class Game {
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "gameMVP", referencedColumnName = "idUser")
 	private User gameMVP;
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "topScorer", referencedColumnName = "idUser")
+	private User topScorer;
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "topDefender", referencedColumnName = "idUser")
+	private User topDefender;
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "topWingman", referencedColumnName = "idUser")
+	private User topWingman;
 	@ManyToOne
 	@JoinColumn(name = "sessionID", nullable = false)
 	private Session sessionID;
@@ -47,7 +56,7 @@ public class Game {
 	@JoinColumn(name = "player2Statistic", referencedColumnName = "idPlayerStatistic")
 	private PlayerStatistic player2Statistic;
 	
-	
+	@Transient
 	private String mvpName; //für TableView
 
 	
@@ -66,7 +75,7 @@ public class Game {
 		this.sessionID = sessionID;
 		
 		//für TableView
-		setMvpName(gameMVP.getName());
+		if(gameMVP != null) setMvpName(gameMVP.getName());
 	}
 
 	
@@ -185,6 +194,36 @@ public class Game {
 
 	public void setMvpName(String mvpName) {
 		this.mvpName = mvpName;
+	}
+
+
+	public User getTopScorer() {
+		return topScorer;
+	}
+
+
+	public User getTopDefender() {
+		return topDefender;
+	}
+
+
+	public User getTopWingman() {
+		return topWingman;
+	}
+
+
+	public void setTopScorer(User topScorer) {
+		this.topScorer = topScorer;
+	}
+
+
+	public void setTopDefender(User topDefender) {
+		this.topDefender = topDefender;
+	}
+
+
+	public void setTopWingman(User topWingman) {
+		this.topWingman = topWingman;
 	}
 
 

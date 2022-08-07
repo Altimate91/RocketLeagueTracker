@@ -8,6 +8,7 @@ import java.util.ResourceBundle;
 
 import classes.Session;
 import classes.User;
+import database.ManageSession;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -77,7 +78,7 @@ public class UserStatsDialogController implements Initializable {
 	
 	public int getUserTopScorer() {
 		int topScorer = 0;
-		for(Session aSession : MainFX.getSessionList()) {
+		for(Session aSession : ManageSession.getSessionList(MainFX.getMainUser().getIdUser())) {
 			if(aSession.getTopScorer().equals(user.getName())) {
 				topScorer += 1;
 			}
@@ -87,7 +88,7 @@ public class UserStatsDialogController implements Initializable {
 	
 	public int getUserTopDefender() {
 		int topDefender = 0;
-		for(Session aSession : MainFX.getSessionList()) {
+		for(Session aSession : ManageSession.getSessionList(MainFX.getMainUser().getIdUser())) {
 			if(aSession.getTopDefender().equals(user.getName())) {
 				topDefender += 1;
 			}
@@ -97,7 +98,7 @@ public class UserStatsDialogController implements Initializable {
 	
 	public int getUserTopWingman() {
 		int topWingman = 0;
-		for(Session aSession : MainFX.getSessionList()) {
+		for(Session aSession : ManageSession.getSessionList(MainFX.getMainUser().getIdUser())) {
 			if(aSession.getTopWingman().equals(user.getName())) {
 				topWingman += 1;
 			}

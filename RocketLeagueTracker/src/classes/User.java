@@ -57,10 +57,7 @@ public class User {
 	@Column(name = "mvp")
 	private int mvp;
 	
-	@Transient	//wird nicht gemapped
-	private List<Session> sessionList = new ArrayList<>();
-	@Transient //wird nicht gemapped
-	private static Image leagueLogo;
+
 	
 	
 // ------------ KONSTRUKTOREN -----------
@@ -72,51 +69,7 @@ public class User {
 		this.clan = clan;
 		this.league = league;
 		this.password = password;
-	
-				
-		switch(league.toString()) {
-		case "UNRANKED" : setLeagueLogo(new Image("C:\\Users\\andre\\OneDrive\\Dokumente\\GitHub\\GitHubRpositories\\RocketLeagueTracker\\resources\\unranked.PNG"));
-			break;
-		case "BRONZE_I" : setLeagueLogo(new Image("C:\\Users\\andre\\OneDrive\\Dokumente\\GitHub\\GitHubRpositories\\RocketLeagueTracker\\resources\\BronzeI.PNG"));
-			break;
-		case "BRONZE_II" : setLeagueLogo(new Image("C:\\Users\\andre\\OneDrive\\Dokumente\\GitHub\\GitHubRpositories\\RocketLeagueTracker\\resources\\BronzeII.PNG"));
-			break;
-		case "BRONZE_III" : setLeagueLogo(new Image("C:\\Users\\andre\\OneDrive\\Dokumente\\GitHub\\GitHubRpositories\\RocketLeagueTracker\\resources\\BronzeIII.PNG"));
-			break;
-		case "SILVER_I" : setLeagueLogo(new Image("C:\\Users\\andre\\OneDrive\\Dokumente\\GitHub\\GitHubRpositories\\RocketLeagueTracker\\resources\\SilverI.PNG"));
-			break;
-		case "SILVER_II" : setLeagueLogo(new Image("C:\\Users\\andre\\OneDrive\\Dokumente\\GitHub\\GitHubRpositories\\RocketLeagueTracker\\resources\\SilverII.PNG"));
-			break;
-		case "SILVER_III" : setLeagueLogo(new Image("C:\\Users\\andre\\OneDrive\\Dokumente\\GitHub\\GitHubRpositories\\RocketLeagueTracker\\resources\\SilverIII.PNG"));
-			break;
-		case "GOLD_I" : setLeagueLogo(new Image("C:\\Users\\andre\\OneDrive\\Dokumente\\GitHub\\GitHubRpositories\\RocketLeagueTracker\\resources\\GoldI.PNG"));
-			break;
-		case "GOLD_II" : setLeagueLogo(new Image("C:\\Users\\andre\\OneDrive\\Dokumente\\GitHub\\GitHubRpositories\\RocketLeagueTracker\\resources\\GoldII.PNG"));
-			break;
-		case "GOLD_III" : setLeagueLogo(new Image("C:\\Users\\andre\\OneDrive\\Dokumente\\GitHub\\GitHubRpositories\\RocketLeagueTracker\\resources\\GoldIII.PNG"));
-			break;
-		case "PLATIN_I" : setLeagueLogo(new Image("C:\\Users\\andre\\OneDrive\\Dokumente\\GitHub\\GitHubRpositories\\RocketLeagueTracker\\resources\\PlatinI.PNG"));
-			break;
-		case "PLATIN_II" : setLeagueLogo(new Image("C:\\Users\\andre\\OneDrive\\Dokumente\\GitHub\\GitHubRpositories\\RocketLeagueTracker\\resources\\PlatinII.PNG"));
-			break;
-		case "PLATIN_III" : setLeagueLogo(new Image("C:\\Users\\andre\\OneDrive\\Dokumente\\GitHub\\GitHubRpositories\\RocketLeagueTracker\\resources\\PlatinIII.PNG"));
-			break;
-		case "DIAMOND_I" : setLeagueLogo(new Image("C:\\Users\\andre\\OneDrive\\Dokumente\\GitHub\\GitHubRpositories\\RocketLeagueTracker\\resources\\DiamondI.PNG"));
-			break;
-		case "DIAMOND_II" : setLeagueLogo(new Image("C:\\Users\\andre\\OneDrive\\Dokumente\\GitHub\\GitHubRpositories\\RocketLeagueTracker\\resources\\DiamondII.PNG"));
-			break;
-		case "DIAMOND_III" : setLeagueLogo(new Image("C:\\Users\\andre\\OneDrive\\Dokumente\\GitHub\\GitHubRpositories\\RocketLeagueTracker\\resources\\DiamondIII.PNG"));
-			break;
-		case "CHAMMPION_I" : setLeagueLogo(new Image("C:\\Users\\andre\\OneDrive\\Dokumente\\GitHub\\GitHubRpositories\\RocketLeagueTracker\\resources\\ChampionI.PNG"));
-			break;
-		case "CHAMPION_II" : setLeagueLogo(new Image("C:\\Users\\andre\\OneDrive\\Dokumente\\GitHub\\GitHubRpositories\\RocketLeagueTracker\\resources\\ChampionII.PNG"));
-			break;
-		case "CHAMPION_III" : setLeagueLogo(new Image("C:\\Users\\andre\\OneDrive\\Dokumente\\GitHub\\GitHubRpositories\\RocketLeagueTracker\\resources\\ChampionIII.PNG"));
-			break;
-		case "GRANDCHAMPION" : setLeagueLogo(new Image("C:\\Users\\andre\\OneDrive\\Dokumente\\GitHub\\GitHubRpositories\\RocketLeagueTracker\\resources\\GrandChampion.PNG"));
-			break;	
-		
-		}
+
 	}
 	
 	//Defaultkonstruktor
@@ -236,23 +189,7 @@ public class User {
 	public void setMvp(int mvp) {
 		this.mvp = mvp;
 	}
-	
-	public Image getLeagueLogo() {
-		return leagueLogo;
-	}
 
-	public void setLeagueLogo(Image leagueLogo) {
-		this.leagueLogo = leagueLogo;
-	}
-	
-	public List<Session> getSessionList() {
-		return sessionList;
-	}
-	
-	public void setSessionList(List<Session> sessionList) {
-		this.sessionList = sessionList;
-	}
-	
 
 
 		

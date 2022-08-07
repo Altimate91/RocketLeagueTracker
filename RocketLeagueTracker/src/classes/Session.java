@@ -64,11 +64,9 @@ public class Session {
 	private String topWingman;
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "sessionMVP", referencedColumnName = "idUser")
-	private User sessionMVP; //kann ich ein User Objekt überhaupt mappen?!
+	private User sessionMVP;
 	@OneToMany(mappedBy="sessionID", fetch = FetchType.EAGER)
 	private Set<Game> gamelist;
-
-	@Transient
 	private int gameLimit; //Limit welches sich User in "NewSessionDialog" setzt
 
 	
@@ -131,18 +129,6 @@ public class Session {
 		return gamelist;
 	}
 
-	public String getTopScorer() {
-		return topScorer;
-	}
-
-	public String getTopDefender() {
-		return topDefender;
-	}
-
-	public String getTopWingman() {
-		return topWingman;
-	}
-
 	public void setDate(LocalDateTime date) {
 		this.date = date;
 	}
@@ -190,18 +176,7 @@ public class Session {
 	public void setGamelist(Set<Game> gamelist) {
 		this.gamelist = gamelist;
 	}
-	
-	public void setTopScorer(String topScorer) {
-		this.topScorer = topScorer;
-	}
 
-	public void setTopDefender(String topDefender) {
-		this.topDefender = topDefender;
-	}
-
-	public void setTopWingman(String topWingman) {
-		this.topWingman = topWingman;
-	}
 	
 	public int getIdSession() {
 		return idSession;
@@ -225,6 +200,30 @@ public class Session {
 	
 	public void setAssists(int assists) {
 		this.assists = assists;
+	}
+	
+	public String getTopScorer() {
+		return topScorer;
+	}
+
+	public String getTopDefender() {
+		return topDefender;
+	}
+
+	public String getTopWingman() {
+		return topWingman;
+	}
+
+	public void setTopScorer(String topScorer) {
+		this.topScorer = topScorer;
+	}
+
+	public void setTopDefender(String topDefender) {
+		this.topDefender = topDefender;
+	}
+
+	public void setTopWingman(String topWingman) {
+		this.topWingman = topWingman;
 	}
 
 // ------------ METHODEN -----------
@@ -274,55 +273,6 @@ public class Session {
 		return received;
 		
 	}
-	
-	public String topScorer() {
-		User topScorer = null;
-		for(Game aGame : gamelist) {
-			if(aGame.getPlayer1Statistic().getGoals() > aGame.getPlayer2Statistic().getGoals()) {
-				topScorer = aGame.getPlayer1Statistic().getPlayer();
-			}
-			else if(aGame.getPlayer2Statistic().getGoals() > aGame.getPlayer1Statistic().getGoals()) {
-				topScorer = aGame.getPlayer2Statistic().getPlayer();
-			}
-			else if(aGame.getPlayer1Statistic().getGoals() == aGame.getPlayer2Statistic().getGoals()) {
-				return "even";
-			}
-		}
-	return topScorer.getName();	
-	}
-	
-	public String topDefender() {
-		User topDefender = null;
-		for(Game aGame : gamelist) {
-			if(aGame.getPlayer1Statistic().getSaves() > aGame.getPlayer2Statistic().getSaves()) {
-				topDefender = aGame.getPlayer1Statistic().getPlayer();
-			}
-			else if(aGame.getPlayer2Statistic().getSaves() > aGame.getPlayer1Statistic().getSaves()) {
-				topDefender = aGame.getPlayer2Statistic().getPlayer();
-			}
-			else if(aGame.getPlayer1Statistic().getSaves() == aGame.getPlayer2Statistic().getSaves()) {
-				return "even";
-			}
-		}
-	return topDefender.toString();	
-	}
-	
-	public String topWingman() {
-		User topWingman = null;
-		for(Game aGame : gamelist) {
-			if(aGame.getPlayer1Statistic().getSaves() > aGame.getPlayer2Statistic().getSaves()) {
-				topWingman = aGame.getPlayer1Statistic().getPlayer();
-			}
-			else if(aGame.getPlayer2Statistic().getSaves() > aGame.getPlayer1Statistic().getSaves()) {
-				topWingman = aGame.getPlayer2Statistic().getPlayer();
-			}
-			else if(aGame.getPlayer1Statistic().getSaves() == aGame.getPlayer2Statistic().getSaves()) {
-				return "even";
-			}
-		}
-	return topWingman.toString();	
-	}
-	
 	
 	public int goalsByPlayer1() {
 		int goals = 0;
@@ -403,6 +353,51 @@ public class Session {
 		else return null;
 	}
 	
+	public User sessionTopScorer() {
+		int p1 = 0;
+		int p2 = 0;
+		User topScorer = null;
+		for(Game aGame : gamelist) {
+			if(aGame.getTopScorer().equals(player1)) p1 += 1;
+			else if(aGame.getTopScorer().equals(player2)) p2 += 1;
+		}
+		
+		if(p1 > p2) topScorer = player1;
+		if(p2 > p1) topScorer = player2;
+		
+		return topScorer;
+	}
+
+	public User sessionTopWingman() {
+		int p1 = 0;
+		int p2 = 0;
+		User topWingman = null;
+		for(Game aGame : gamelist) {
+			if(aGame.getTopWingman().equals(player1)) p1 += 1;
+			else if(aGame.getTopWingman().equals(player2)) p2 += 1;
+		}
+		
+		if(p1 > p2) topWingman = player1;
+		if(p2 > p1) topWingman = player2;
+		
+		return topWingman;
+	}
+	
+	public User sessionTopDefender() {
+		int p1 = 0;
+		int p2 = 0;
+		User topDefender = null;
+		for(Game aGame : gamelist) {
+			if(aGame.getTopDefender().equals(player1)) p1 += 1;
+			else if(aGame.getTopDefender().equals(player2)) p2 += 1;
+		}
+		
+		if(p1 > p2) topDefender = player1;
+		if(p2 > p1) topDefender = player2;
+		
+		return topDefender;
+	}
+	
 	public List<PlayerStatistic> getPlayerStatisticList() {
 		
 		ArrayList<PlayerStatistic> sessionStatisticList = new ArrayList<>();
@@ -415,12 +410,10 @@ public class Session {
 
 	@Override
 	public String toString() {
-		return date + " Record: " + record ;
+		return "Session [idSession=" + idSession + ", date=" + date + ", record=" + record + ", player1=" + player1
+				+ ", player2=" + player2 + ", gamesPlayed=" + gamesPlayed + "]";
 	}
-	
-	
-	
-	
+
 	
 	
 } // END OF SESSION-CLASS

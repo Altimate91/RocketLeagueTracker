@@ -50,11 +50,6 @@
       <ProgressBar fx:id="bar_pwDifficulty" layoutX="173.0" layoutY="470.0" prefHeight="10.0" prefWidth="176.0" progress="0.0" />
       <Label fx:id="lbl_pwDifficulty" alignment="CENTER" layoutX="173.0" layoutY="480.0" prefHeight="17.0" prefWidth="176.0" text="PW Stärke" />
       <PasswordField fx:id="pwf_password" layoutX="173.0" layoutY="444.0" onKeyPressed="#increaseProgress" prefHeight="25.0" prefWidth="176.0" />
-      <Button layoutX="111.0" layoutY="524.0" mnemonicParsing="false" onAction="#submitEditedPlayer" text="Submit">
-         <font>
-            <Font size="17.0" />
-         </font>
-      </Button>
       <Label fx:id="lbl_playerID" layoutX="173.0" layoutY="343.0" prefHeight="27.0" prefWidth="176.0" text="Name">
          <font>
             <Font size="18.0" />
