@@ -10,7 +10,7 @@
 
 <AnchorPane prefHeight="300.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.NewSessionDialogController">
    <children>
-      <Label layoutX="89.0" text="New Session">
+      <Label fx:id="headline" layoutX="89.0" text="New Session">
          <font>
             <Font size="42.0" />
          </font>

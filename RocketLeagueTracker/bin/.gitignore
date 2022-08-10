@@ -1,3 +1,5 @@
-/controller/
 /classes/
+/controller/
+/database/
 /view/
+/hibernate.cfg.out.xml

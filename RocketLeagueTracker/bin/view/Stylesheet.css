@@ -7,15 +7,26 @@
 
 /* eine Gruppe stylen zb. Alle Lable's */
 .label {
+	-fx-text-fill: rgb(192, 192, 192);
+}
 
-	-fx-text-fill: grey;
+.button {
+	
+-fx-background-color: linear-gradient(to bottom left, #bfe9f5,  #1d1d66);
+-fx-font-weight: bold;
+	
+}
 
+#headline {
+-fx-text-fill: linear-gradient(to bottom left, #96b5e4, #244175);
+}
+
+#lbl_gameNo {
+	-fx-text-fill: linear-gradient(to bottom left, #96b5e4, #244175);
 }
 
 
-#fancytext {
-    -fx-font: 100px Tahoma;
-    -fx-fill: linear-gradient(from 0% 0% to 100% 200%, repeat, aqua 0%, red 50%);
-    -fx-stroke: black;
-    -fx-stroke-width: 1;
+#startButtons {
+	-fx-font-size: 20px;
 }
+

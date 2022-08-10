@@ -12,6 +12,7 @@ import classes.Game;
 import classes.Session;
 import classes.User;
 import database.ManageSession;
+import database.ManageUser;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -47,6 +48,8 @@ public class PlayerLoungeController implements Initializable{
 	private Session currentSession;
 	
 	//--- User Daten ---
+	@FXML
+	private Label headline;
 	@FXML
 	private Label userID;
 	@FXML
@@ -232,14 +235,15 @@ public void openMyStatsDialog (ActionEvent event) {
 		dialog.getDialogPane().setContent(root);
 		dialog.getDialogPane().getStylesheets().add(css);
 		dialog.setTitle(MainFX.getMainUser().getName() + " Statistic");
-		dialog.showAndWait();
 		
 		System.out.println("--- Opened User Stats Dialog ---");
 		
-		ButtonType btnClose = new ButtonType("Close", ButtonData.CANCEL_CLOSE);
+		dialog.getDialogPane().getButtonTypes().addAll(ButtonType.CLOSE);
+		Node btnClose = dialog.getDialogPane().lookupButton(ButtonType.CLOSE);
+		btnClose.managedProperty().bind(btnClose.visibleProperty());
+		btnClose.setVisible(false);
 		
-		dialog.getDialogPane().getButtonTypes().addAll(btnClose);
-		
+		dialog.showAndWait();
 	
 	} catch (IOException e) {
 		e.printStackTrace();
@@ -400,20 +404,36 @@ public void closeSession (ActionEvent event) {
 	
 	Optional<ButtonType> response = alert.showAndWait();
 	if(response.isPresent() && response.get().getButtonData() == ButtonData.OK_DONE) {
-		Session currentSession = ManageSession.getCurrentSession();
+
 		//Werte updaten
 		currentSession.setGamesPlayed(currentSession.gamesPlayed());
 		currentSession.setGoalsScored(currentSession.goals());
 		currentSession.setGoalsReceived(currentSession.received());
+		currentSession.setWins(currentSession.wins());
+		currentSession.setDefeats(currentSession.defeats());
+		currentSession.setSaves(currentSession.savesByPlayer1() + currentSession.savesByPlayer2());
+		currentSession.setAssists(currentSession.assistsByPlayer1() + currentSession.assistsByPlayer2());
+		currentSession.setRecord(this.showRecord());
 		//topWerte auswerten & updaten
 		currentSession.setTopScorer(currentSession.sessionTopScorer().getPlayer_ID());
 		currentSession.setTopDefender(currentSession.sessionTopDefender().getPlayer_ID());
 		currentSession.setTopWingman(currentSession.sessionTopWingman().getPlayer_ID());
+		currentSession.setSessionMVP(currentSession.sessionMVP());
+			//Session-MVP Werte an User Table in DB übergeben
+			if(currentSession.getSessionMVP().equals(currentSession.getPlayer1())) {
+				currentSession.getPlayer1().setSessionMVP(currentSession.getPlayer1().getSessionMVP() +1);
+				ManageUser.update(currentSession.getPlayer1());
+			}
+			else if (currentSession.getSessionMVP().equals(currentSession.getPlayer2())) {
+				currentSession.getPlayer2().setSessionMVP(currentSession.getPlayer2().getSessionMVP() +1);
+				ManageUser.update(currentSession.getPlayer2());
+			}
 		
 		//session-Werte in DB updaten
 		ManageSession.update(currentSession);
+			
 		
-		
+	//Werte auf Standard zurück setzen
 		//Buttons aus- bzw. einblenden
 		btn_newGame.setDisable(true);
 		btn_closeSession.setDisable(true);
@@ -432,6 +452,8 @@ public void closeSession (ActionEvent event) {
 		this.lbl_BarGamesPlayed.setVisible(false);
 		this.lbl_gamesLimit_outOf.setVisible(false);
 		this.lbl_gamesMax.setVisible(false);
+		//tableView leeren
+		MainFX.getOlGames().clear();
 	}
 	
 	System.out.println(" *** Session closed *** ");
@@ -546,11 +568,11 @@ public void logout (ActionEvent event) {
 			break;
 		case "PLATIN_III" : imv_leagueLogo.setImage(new Image("C:\\Users\\andre\\OneDrive\\Dokumente\\GitHub\\GitHubRpositories\\RocketLeagueTracker\\resources\\PlatinIII.PNG"));
 			break;
-		case "DIAMOND_I" : imv_leagueLogo.setImage(new Image("C:\\Users\\andre\\OneDrive\\Dokumente\\GitHub\\GitHubRpositories\\RocketLeagueTracker\\resources\\DiamondI.PNG"));
+		case "DIAMOND_I" : imv_leagueLogo.setImage(new Image("C:\\Users\\andre\\OneDrive\\Dokumente\\GitHub\\GitHubRpositories\\RocketLeagueTracker\\resources\\DiamantI.PNG"));
 			break;
-		case "DIAMOND_II" : imv_leagueLogo.setImage(new Image("C:\\Users\\andre\\OneDrive\\Dokumente\\GitHub\\GitHubRpositories\\RocketLeagueTracker\\resources\\DiamondII.PNG"));
+		case "DIAMOND_II" : imv_leagueLogo.setImage(new Image("C:\\Users\\andre\\OneDrive\\Dokumente\\GitHub\\GitHubRpositories\\RocketLeagueTracker\\resources\\DiamantII.PNG"));
 			break;
-		case "DIAMOND_III" : imv_leagueLogo.setImage(new Image("C:\\Users\\andre\\OneDrive\\Dokumente\\GitHub\\GitHubRpositories\\RocketLeagueTracker\\resources\\DiamondIII.PNG"));
+		case "DIAMOND_III" : imv_leagueLogo.setImage(new Image("C:\\Users\\andre\\OneDrive\\Dokumente\\GitHub\\GitHubRpositories\\RocketLeagueTracker\\resources\\DiamantIII.PNG"));
 			break;
 		case "CHAMMPION_I" : imv_leagueLogo.setImage(new Image("C:\\Users\\andre\\OneDrive\\Dokumente\\GitHub\\GitHubRpositories\\RocketLeagueTracker\\resources\\ChampionI.PNG"));
 			break;

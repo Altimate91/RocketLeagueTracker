@@ -3,6 +3,7 @@ package classes;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
@@ -33,7 +34,7 @@ public class Session {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int idSession;
 	@Column(name = "date")
-	private LocalDateTime date = LocalDateTime.now();
+	private Date date = new Date();
 	@Column(name = "record")
 	private String record;
 	@OneToOne(cascade = CascadeType.ALL)
@@ -46,7 +47,7 @@ public class Session {
 	private int gamesPlayed;
 	@Column(name = "goalsScored")
 	private int goalsScored;
-	@Column(name = "gaolsReceived")
+	@Column(name = "goalsReceived")
 	private int goalsReceived;
 	@Column(name = "saves")
 	private int saves;
@@ -74,14 +75,13 @@ public class Session {
 // ------------ KONSTRUKTOREN -----------
 	
 	public Session() {
-		date.format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm"));
 	}
 
 // ------------ GETTER & SETTER -----------
 		
 
 	
-	public LocalDateTime getDate() {
+	public Date getDate() {
 		return date;
 	}
 
@@ -129,7 +129,7 @@ public class Session {
 		return gamelist;
 	}
 
-	public void setDate(LocalDateTime date) {
+	public void setDate(Date date) {
 		this.date = date;
 	}
 
@@ -337,20 +337,41 @@ public class Session {
 		return assists;
 	}
 	
-	public User SessionMVP() {
+	public int mvpByPlayer1() {
+		int mvp = 0;
+		
+		for(Game aGame : gamelist) {
+			if(aGame.getPlayer1Statistic().isGameMVP() == true) mvp += 1;
+		}
+		
+		return mvp;
+	}
+	
+	public int mvpByPlayer2() {
+		int mvp = 0;
+		
+		for(Game aGame : gamelist) {
+			if(aGame.getPlayer2Statistic().isGameMVP() == true) mvp += 1;
+		}
+		
+		return mvp;
+	}
+	
+	public User sessionMVP() {
 		int mvpP1 = 0;
 		int mvpP2 = 0;
 		
 		User mvp = null;
 		
 		for(Game aGame : gamelist) {
-			if(aGame.getPlayer1Statistic().isGameMVP() == true) mvpP2 += 1;
+			if(aGame.getPlayer1Statistic().isGameMVP() == true) mvpP1 += 1;
 			if(aGame.getPlayer2Statistic().isGameMVP() == true) mvpP2 += 1;
 		}
 		
-		if(mvpP1 > mvpP2) return player1;
-		if(mvpP2 < mvpP2) return player2;
-		else return null;
+		if(mvpP1 > mvpP2) mvp = player1;
+		if(mvpP2 < mvpP2) mvp = player2;
+		
+		return mvp;
 	}
 	
 	public User sessionTopScorer() {

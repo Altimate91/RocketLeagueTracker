@@ -22,7 +22,8 @@ public class LoginDialogController implements Initializable{
 
 //----------- METHODEN -----------
 	
-
+@FXML
+private Label headline;
 @FXML
 private TextField txf_playerID_login;
 @FXML
@@ -47,13 +48,11 @@ public void login (ActionEvent event) throws IOException, InterruptedException {
 		MainFX.setMainUser(user);
 		System.out.println("*** Login successfull ***");
 		new PlayerLoungeController().openPlayerLounge(event);
-		//StartController.loginLabel("valid");
 		
 	}
 	else if(user.getPassword() != pwf_password_login.getText()) {
 		System.out.println("*** ERROR: incorrect Passwort! ***");
 		new Alert(Alert.AlertType.ERROR, "Wrong Password!").showAndWait();
-		//StartController.loginLabel("invalid");
 	}
 
 }

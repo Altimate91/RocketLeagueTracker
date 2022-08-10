@@ -30,12 +30,22 @@ public class StartController implements Initializable {
 	private String css = this.getClass().getResource("/view/Stylesheet.css").toExternalForm();
 	
 	@FXML
-	private static Label lbl_loginStatus;
+	private Label lbl_loginStatus;
 	
 //----------- METHODEN -----------
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
+		
+		System.out.println("*** Initialize-Method is called ***");
+		
+		
+//		switch(loginStatus) {
+//		case "valid" : lbl_loginStatus.setText("Login successful!");  lbl_loginStatus.setTextFill(Color.GREEN); lbl_loginStatus.setVisible(true);
+//		break;
+//		case "invalid" : lbl_loginStatus.setText("Password invalid!");  lbl_loginStatus.setTextFill(Color.RED); lbl_loginStatus.setVisible(true);
+//		break;
+//	}
 		
 	}
 	
@@ -64,6 +74,7 @@ public class StartController implements Initializable {
 			if(response.isPresent() && response.get().getButtonData() == ButtonData.OK_DONE) {
 				
 				LoginDialogController loginController = loader.getController();
+				
 				try {
 					loginController.login(event);
 				} catch (InterruptedException e) {
@@ -107,20 +118,6 @@ public class StartController implements Initializable {
 			e.printStackTrace();
 		}		
 	}
-
-	@FXML
-	public static void loginLabel(String status) {
-		
-		System.out.println("login Methode called");
-		
-		switch(status) {
-			case "valid" : lbl_loginStatus.setText("Login successful!");  lbl_loginStatus.setTextFill(Color.GREEN); lbl_loginStatus.setVisible(true);
-		break;
-			case "invalid" : lbl_loginStatus.setText("Password invalid!");  lbl_loginStatus.setTextFill(Color.RED); lbl_loginStatus.setVisible(true);
-		break;
-		}
-	}
-
 
 
 }

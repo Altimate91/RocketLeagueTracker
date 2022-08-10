@@ -12,6 +12,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.RadialGradient?>
 <?import javafx.scene.paint.Stop?>
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.shape.Rectangle?>
@@ -19,15 +20,31 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="773.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.PlayerLoungeController">
    <children>
-      <Label layoutX="178.0" layoutY="32.0" text="Player Lounge">
+      <Label fx:id="headline" alignment="CENTER" layoutX="94.0" layoutY="37.0" text="Player Lounge">
          <font>
-            <Font size="55.0" />
+            <Font name="Stencil" size="70.0" />
          </font>
+         <textFill>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="0.1411764770746231" green="0.2549019753932953" blue="0.4588235318660736" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="0.5882353186607361" green="0.7098039388656616" blue="0.8941176533699036" />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </textFill>
       </Label>
-      <ImageView fx:id="imv_profilepic" fitHeight="173.0" fitWidth="188.0" layoutX="29.0" layoutY="138.0" pickOnBounds="true" />
+      <ImageView fx:id="imv_profilepic" fitHeight="177.0" fitWidth="195.0" layoutX="15.0" layoutY="140.0" pickOnBounds="true" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" height="544.0" layoutX="234.0" layoutY="229.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="15.0">
          <fill>
-            <LinearGradient endX="0.976303317535545" endY="0.9715639810426541" startX="0.7061611374407581" startY="0.7488151658767773">
+            <LinearGradient endX="1.0" endY="1.0" startX="0.5687203791469193" startY="0.6161137440758294">
                <stops>
                   <Stop>
                      <color>
@@ -94,22 +111,22 @@
             <Font size="20.0" />
          </font>
       </Label>
-      <Button layoutX="51.0" layoutY="371.0" mnemonicParsing="false" onAction="#openMyStatsDialog" prefHeight="39.0" prefWidth="129.0" text="My Stats">
+      <Button layoutX="35.0" layoutY="371.0" mnemonicParsing="false" onAction="#openMyStatsDialog" prefHeight="39.0" prefWidth="155.0" text="My Stats">
          <font>
             <Font size="18.0" />
          </font>
       </Button>
-      <Button layoutX="51.0" layoutY="427.0" mnemonicParsing="false" onAction="#openArchiveDialog" prefHeight="39.0" prefWidth="129.0" text="Archive">
+      <Button layoutX="35.0" layoutY="428.0" mnemonicParsing="false" onAction="#openArchiveDialog" prefHeight="39.0" prefWidth="155.0" text="Archive">
          <font>
             <Font size="18.0" />
          </font>
       </Button>
-      <Button layoutX="51.0" layoutY="477.0" mnemonicParsing="false" onAction="#openEditProfileDialog" prefHeight="39.0" prefWidth="129.0" text="Edit Profile">
+      <Button layoutX="35.0" layoutY="482.0" mnemonicParsing="false" onAction="#openEditProfileDialog" prefHeight="39.0" prefWidth="155.0" text="Edit Profile">
          <font>
             <Font size="18.0" />
          </font>
       </Button>
-      <Button layoutX="51.0" layoutY="717.0" mnemonicParsing="false" onAction="#logout" prefHeight="39.0" prefWidth="129.0" text="Logout" textFill="RED">
+      <Button layoutX="48.0" layoutY="720.0" mnemonicParsing="false" onAction="#logout" prefHeight="39.0" prefWidth="129.0" text="Logout" textFill="RED">
          <font>
             <Font size="18.0" />
          </font>
@@ -205,17 +222,17 @@
          </font>
       </Label>
       <Separator layoutX="275.0" layoutY="422.0" prefHeight="2.0" prefWidth="173.0" />
-      <Button fx:id="btn_newSession" layoutX="51.0" layoutY="545.0" mnemonicParsing="false" onAction="#openNewSessionDialog" prefHeight="39.0" prefWidth="129.0" text="New Session">
+      <Button fx:id="btn_newSession" layoutX="35.0" layoutY="546.0" mnemonicParsing="false" onAction="#openNewSessionDialog" prefHeight="39.0" prefWidth="155.0" text="New Session">
          <font>
             <Font size="18.0" />
          </font>
       </Button>
-      <Button fx:id="btn_closeSession" disable="true" layoutX="51.0" layoutY="639.0" mnemonicParsing="false" onAction="#closeSession" prefHeight="39.0" prefWidth="129.0" text="Close Session">
+      <Button fx:id="btn_closeSession" disable="true" layoutX="35.0" layoutY="639.0" mnemonicParsing="false" onAction="#closeSession" prefHeight="39.0" prefWidth="155.0" text="Close Session">
          <font>
             <Font size="18.0" />
          </font>
       </Button>
-      <Button fx:id="btn_newGame" disable="true" layoutX="51.0" layoutY="593.0" mnemonicParsing="false" onAction="#openNewGameDialog" prefHeight="39.0" prefWidth="129.0" text="New Game">
+      <Button fx:id="btn_newGame" disable="true" layoutX="35.0" layoutY="593.0" mnemonicParsing="false" onAction="#openNewGameDialog" prefHeight="39.0" prefWidth="155.0" text="New Game">
          <font>
             <Font size="18.0" />
          </font>
@@ -241,11 +258,29 @@
             <TableColumn fx:id="col_mvp" prefWidth="183.0" text="MVP" />
         </columns>
       </TableView>
-      <ImageView fx:id="imv_leagueLogo" fitHeight="93.0" fitWidth="100.0" layoutX="566.0" layoutY="105.0" pickOnBounds="true" preserveRatio="true" />
-      <Label fx:id="lbl_clan" layoutX="234.0" layoutY="198.0" prefHeight="30.0" prefWidth="313.0">
+      <ImageView fx:id="imv_leagueLogo" fitHeight="62.0" fitWidth="72.0" layoutX="581.0" layoutY="138.0" pickOnBounds="true" preserveRatio="true" />
+      <Label fx:id="lbl_clan" layoutX="235.0" layoutY="192.0" prefHeight="36.0" prefWidth="285.0">
          <font>
             <Font size="20.0" />
          </font>
       </Label>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" height="14.0" layoutY="115.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="700.0">
+         <fill>
+            <RadialGradient centerX="0.5055248618784531" centerY="0.5284360189573459" radius="0.6091954022988506">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="0.7490196228027344" green="0.7490196228027344" blue="0.7490196228027344" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color />
+                     </color>
+                  </Stop>
+               </stops>
+            </RadialGradient>
+         </fill>
+      </Rectangle>
    </children>
 </AnchorPane>

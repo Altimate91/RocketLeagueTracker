@@ -78,9 +78,11 @@ public class UserStatsDialogController implements Initializable {
 	
 	public int getUserTopScorer() {
 		int topScorer = 0;
-		for(Session aSession : ManageSession.getSessionList(MainFX.getMainUser().getIdUser())) {
-			if(aSession.getTopScorer().equals(user.getName())) {
-				topScorer += 1;
+		for(Session aSession : ManageSession.getSessionList(user.getIdUser())) {
+			if(aSession.getTopScorer() != null)  {
+				if(aSession.getTopScorer().equals(user.getPlayer_ID())) {
+					topScorer += 1;
+				}
 			}
 		}
 	return topScorer;
@@ -88,19 +90,23 @@ public class UserStatsDialogController implements Initializable {
 	
 	public int getUserTopDefender() {
 		int topDefender = 0;
-		for(Session aSession : ManageSession.getSessionList(MainFX.getMainUser().getIdUser())) {
-			if(aSession.getTopDefender().equals(user.getName())) {
-				topDefender += 1;
-			}
+		for(Session aSession : ManageSession.getSessionList(user.getIdUser())) {
+			if(aSession.getTopDefender() != null)  {
+				if(aSession.getTopDefender().equals(user.getPlayer_ID())) {
+					topDefender += 1;
+				}
+			}	
 		}
 	return topDefender;
 	}
 	
 	public int getUserTopWingman() {
 		int topWingman = 0;
-		for(Session aSession : ManageSession.getSessionList(MainFX.getMainUser().getIdUser())) {
-			if(aSession.getTopWingman().equals(user.getName())) {
-				topWingman += 1;
+		for(Session aSession : ManageSession.getSessionList(user.getIdUser())) {
+			if(aSession.getTopWingman() != null)  {
+				if(aSession.getTopWingman().equals(user.getPlayer_ID())) {
+					topWingman += 1;
+				}
 			}
 		}
 	return topWingman;

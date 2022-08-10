@@ -10,7 +10,7 @@
 
 <AnchorPane prefHeight="700.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.SessionArchiveDialogController">
    <children>
-      <Label alignment="CENTER" layoutX="56.0" layoutY="22.0" text="Session Archive">
+      <Label fx:id="headline" alignment="CENTER" layoutX="56.0" layoutY="22.0" text="Session Archive">
          <font>
             <Font size="42.0" />
          </font>

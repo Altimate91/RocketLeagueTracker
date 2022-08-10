@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
 import org.hibernate.SQLQuery;
@@ -108,9 +109,8 @@ public class ManageSession {
 					
 					try {
 						session.beginTransaction();
-						SQLQuery query = session.createSQLQuery("SELECT * FROM Session WHERE player1 = " + userID + " ORDER BY idSession");
-						query.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
-						sessionList = query.list();
+						Query query = session.createQuery("FROM Session WHERE player1 = " + userID + " ORDER BY idSession");
+						sessionList = query.getResultList();
 						session.getTransaction().commit();
 					} catch (HibernateException e) {
 						if (session.getTransaction() != null) session.getTransaction().rollback();

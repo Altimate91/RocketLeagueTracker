@@ -55,10 +55,10 @@ public class User {
 	@Column(name = "assists")
 	private int assists;
 	@Column(name = "mvp")
-	private int mvp;
-	
+	private int mvp; //MVP pro Game
+	@Column(name = "sessionMVP")
+	private int sessionMVP;
 
-	
 	
 // ------------ KONSTRUKTOREN -----------
 		
@@ -190,11 +190,16 @@ public class User {
 		this.mvp = mvp;
 	}
 
-
-
-		
-// ------------ METHODEN -----------
+	public int getSessionMVP() {
+		return sessionMVP;
+	}
 	
+	public void setSessionMVP(int sessionMVP) {
+		this.sessionMVP = sessionMVP;
+	}
+
+	
+// ------------ METHODEN -----------
 
 	@Override
 	public String toString() {

@@ -9,7 +9,7 @@
 
 <AnchorPane prefHeight="600.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.SessionStatsDialogController">
    <children>
-      <Label layoutX="83.0" layoutY="35.0" text="Session Stats">
+      <Label fx:id="headline" layoutX="83.0" layoutY="35.0" text="Session Stats">
          <font>
             <Font size="42.0" />
          </font>
@@ -34,17 +34,17 @@
             <Font size="26.0" />
          </font>
       </Label>
-      <Label fx:id="lbl_topScorer" alignment="CENTER" layoutX="41.0" layoutY="409.0" text="Player">
+      <Label fx:id="lbl_topScorer" alignment="CENTER" layoutX="11.0" layoutY="409.0" prefHeight="38.0" prefWidth="130.0" text="Player">
          <font>
             <Font size="26.0" />
          </font>
       </Label>
-      <Label fx:id="lbl_topDefender" alignment="CENTER" layoutX="161.0" layoutY="409.0" text="Player">
+      <Label fx:id="lbl_topDefender" alignment="CENTER" layoutX="142.0" layoutY="409.0" prefHeight="38.0" prefWidth="115.0" text="Player">
          <font>
             <Font size="26.0" />
          </font>
       </Label>
-      <Label fx:id="lbl_topWingman" alignment="CENTER" layoutX="281.0" layoutY="409.0" text="Player">
+      <Label fx:id="lbl_topWingman" alignment="CENTER" layoutX="259.0" layoutY="409.0" prefHeight="38.0" prefWidth="115.0" text="Player">
          <font>
             <Font size="26.0" />
          </font>

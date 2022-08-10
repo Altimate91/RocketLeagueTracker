@@ -37,6 +37,8 @@ public class Game {
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "gameMVP", referencedColumnName = "idUser")
 	private User gameMVP;
+	@Column(name = "mvpName")
+	private String mvpName; //für TableView
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "topScorer", referencedColumnName = "idUser")
 	private User topScorer;
@@ -56,26 +58,21 @@ public class Game {
 	@JoinColumn(name = "player2Statistic", referencedColumnName = "idPlayerStatistic")
 	private PlayerStatistic player2Statistic;
 	
-	@Transient
-	private String mvpName; //für TableView
 
 	
 
 // ----------- KONSTRUKTOREN -----------
 	
 	public Game(Session sessionID, int gameNo, String result, String score, int goalsScored,
-			int goalsReceived, User gameMVP) {
+			int goalsReceived) {
 		super();
 		this.gameNo = gameNo;
 		this.result = result;
 		this.score = score;
 		this.goalsScored = goalsScored;
 		this.goalsReceived = goalsReceived;
-		this.gameMVP = gameMVP;
 		this.sessionID = sessionID;
 		
-		//für TableView
-		if(gameMVP != null) setMvpName(gameMVP.getName());
 	}
 
 	
@@ -153,6 +150,8 @@ public class Game {
 	
 	
 	public void setGameMVP(User gameMVP) {
+		//für TableView
+		if(gameMVP != null) setMvpName(gameMVP.getName());
 		this.gameMVP = gameMVP;
 	}
 
