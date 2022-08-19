@@ -20,7 +20,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="773.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.PlayerLoungeController">
    <children>
-      <Label fx:id="headline" alignment="CENTER" layoutX="94.0" layoutY="37.0" text="Player Lounge">
+      <Label fx:id="headline" alignment="CENTER" layoutX="94.0" layoutY="37.0" prefHeight="92.0" prefWidth="536.0" text="Player Lounge">
          <font>
             <Font name="Stencil" size="70.0" />
          </font>
@@ -170,7 +170,7 @@
       <Separator layoutX="275.0" layoutY="333.0" prefHeight="3.0" prefWidth="173.0" />
       <Separator layoutX="275.0" layoutY="362.0" prefHeight="3.0" prefWidth="173.0" />
       <Separator layoutX="275.0" layoutY="392.0" prefHeight="2.0" prefWidth="173.0" />
-      <Label fx:id="lbl_record" alignment="CENTER" contentDisplay="CENTER" layoutX="516.0" layoutY="321.0" prefHeight="54.0" prefWidth="100.0" text="even" textFill="#bda900">
+      <Label fx:id="lbl_record" alignment="CENTER" contentDisplay="CENTER" layoutX="516.0" layoutY="321.0" prefHeight="54.0" prefWidth="100.0" textFill="#bda900">
          <font>
             <Font size="37.0" />
          </font>
@@ -237,7 +237,7 @@
             <Font size="18.0" />
          </font>
       </Button>
-      <Button layoutX="443.0" layoutY="697.0" mnemonicParsing="false" onAction="#openSessionStatsDialog" prefHeight="58.0" prefWidth="72.0">
+      <Button fx:id="btn_sessionStatistic" disable="true" layoutX="443.0" layoutY="697.0" mnemonicParsing="false" onAction="#openSessionStatsDialog" prefHeight="58.0" prefWidth="72.0">
          <graphic>
             <ImageView fitHeight="68.0" fitWidth="54.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -245,7 +245,7 @@
                </image>
             </ImageView>
          </graphic></Button>
-      <Label layoutX="420.0" layoutY="230.0" text="Session Board">
+      <Label fx:id="headline" layoutX="420.0" layoutY="230.0" text="Session Board">
          <font>
             <Font size="25.0" />
          </font>
@@ -264,13 +264,13 @@
             <Font size="20.0" />
          </font>
       </Label>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" height="14.0" layoutY="115.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="700.0">
+      <Rectangle arcHeight="5.0" arcWidth="5.0" height="20.0" layoutX="23.0" layoutY="112.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="655.0">
          <fill>
-            <RadialGradient centerX="0.5055248618784531" centerY="0.5284360189573459" radius="0.6091954022988506">
+            <RadialGradient centerX="0.5055248618784531" centerY="0.49999999999999994" focusDistance="0.04597701149425282" radius="0.48275862068965514">
                <stops>
                   <Stop>
                      <color>
-                        <Color red="0.7490196228027344" green="0.7490196228027344" blue="0.7490196228027344" />
+                        <Color red="0.5526315569877625" green="0.5398392081260681" blue="0.5398392081260681" />
                      </color>
                   </Stop>
                   <Stop offset="1.0">

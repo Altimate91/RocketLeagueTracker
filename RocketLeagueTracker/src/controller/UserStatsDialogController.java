@@ -9,6 +9,7 @@ import java.util.ResourceBundle;
 import classes.Session;
 import classes.User;
 import database.ManageSession;
+import database.ManageUser;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -24,7 +25,7 @@ public class UserStatsDialogController implements Initializable {
 	// ----------- INSTANZVARIABLEN -----------	
 	
 	private Stage dialogStage;
-	private User user = MainFX.getMainUser();
+	private User user;
 	
 	@FXML
 	private ImageView img_profilepic;
@@ -49,6 +50,7 @@ public class UserStatsDialogController implements Initializable {
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
+		user = ManageUser.getUserByPlayerID(MainFX.getMainUser().getPlayer_ID());
 
 		try {
 			img_profilepic.setImage(new Image(new FileInputStream(new File(user.getProfilepicture()))));
@@ -63,9 +65,9 @@ public class UserStatsDialogController implements Initializable {
 		lbl_saves.setText(Integer.toString(user.getSaves()));
 		
 		//TopWerte in Labels befüllen
-		lbl_topScorer.setText(Integer.toString(this.getUserTopScorer()));
-		lbl_topDefender.setText(Integer.toString(this.getUserTopDefender()));
-		lbl_topWingman.setText(Integer.toString(this.getUserTopWingman()));
+		lbl_topScorer.setText(Integer.toString(user.getTopScorer()));
+		lbl_topDefender.setText(Integer.toString(user.getTopDefender()));
+		lbl_topWingman.setText(Integer.toString(user.getTopWingman()));
 		
 	}
 	
@@ -75,42 +77,42 @@ public class UserStatsDialogController implements Initializable {
 		dialogStage.close();
 	}
 	
-	
-	public int getUserTopScorer() {
-		int topScorer = 0;
-		for(Session aSession : ManageSession.getSessionList(user.getIdUser())) {
-			if(aSession.getTopScorer() != null)  {
-				if(aSession.getTopScorer().equals(user.getPlayer_ID())) {
-					topScorer += 1;
-				}
-			}
-		}
-	return topScorer;
-	}
-	
-	public int getUserTopDefender() {
-		int topDefender = 0;
-		for(Session aSession : ManageSession.getSessionList(user.getIdUser())) {
-			if(aSession.getTopDefender() != null)  {
-				if(aSession.getTopDefender().equals(user.getPlayer_ID())) {
-					topDefender += 1;
-				}
-			}	
-		}
-	return topDefender;
-	}
-	
-	public int getUserTopWingman() {
-		int topWingman = 0;
-		for(Session aSession : ManageSession.getSessionList(user.getIdUser())) {
-			if(aSession.getTopWingman() != null)  {
-				if(aSession.getTopWingman().equals(user.getPlayer_ID())) {
-					topWingman += 1;
-				}
-			}
-		}
-	return topWingman;
-	}
+//	
+//	public int getUserTopScorer() {
+//		int topScorer = 0;
+//		for(Session aSession : ManageSession.getSessionList(user.getIdUser())) {
+//			if(aSession.getTopScorer() != null)  {
+//				if(aSession.getTopScorer().equals(user.getPlayer_ID())) {
+//					topScorer += 1;
+//				}
+//			}
+//		}
+//	return topScorer;
+//	}
+//	
+//	public int getUserTopDefender() {
+//		int topDefender = 0;
+//		for(Session aSession : ManageSession.getSessionList(user.getIdUser())) {
+//			if(aSession.getTopDefender() != null)  {
+//				if(aSession.getTopDefender().equals(user.getPlayer_ID())) {
+//					topDefender += 1;
+//				}
+//			}	
+//		}
+//	return topDefender;
+//	}
+//	
+//	public int getUserTopWingman() {
+//		int topWingman = 0;
+//		for(Session aSession : ManageSession.getSessionList(user.getIdUser())) {
+//			if(aSession.getTopWingman() != null)  {
+//				if(aSession.getTopWingman().equals(user.getPlayer_ID())) {
+//					topWingman += 1;
+//				}
+//			}
+//		}
+//	return topWingman;
+//	}
 	
 	
 

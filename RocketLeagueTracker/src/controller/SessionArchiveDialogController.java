@@ -135,20 +135,30 @@ public class SessionArchiveDialogController implements Initializable  {
 			}
     		
     	});
-    	
+    	//Verändert den angezeigten String in der List View (sonst würde er einfach den Hashcode der Datenbank ausgeben)
     	lv_sessionArchive.setCellFactory(param -> new ListCell<Session>() {
-            @Override            protected void updateItem(Session session, boolean empty) {
+            @Override
+            protected void updateItem(Session session, boolean empty) {
                 super.updateItem(session, empty);
 
-                if (empty || session == null || session.getPlayer1() == null) {
+                if (empty || session == null || session.getPlayer1() == null || session.getRecord() == null) {
                     setText(null);
                 } else {
                 	SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 
                 	String dateString = format.format(session.getDate());
                   	
-                	
-                    setText(dateString + " / " + session.getRecord());
+                    setText(dateString + "  |   " + session.getRecord() + "   |    " + session.getGamesPlayed() + " Games");
+                    
+                   if(session.getRecord().contains("W")) {
+                	   setStyle("-fx-background-color: green");
+                   }
+                   else if(session.getRecord().contains("L")) {
+                	   setStyle("-fx-background-color: red");
+                   }
+                   else if(session.getRecord().equals("even")) {
+                	   setStyle("-fx-background-color: yellow");
+                   }
                 }
             }
         });

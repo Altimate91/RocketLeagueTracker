@@ -61,7 +61,10 @@ public class StartController implements Initializable {
 			Dialog<ButtonType> dialog = new Dialog<>();
 			dialog.getDialogPane().setContent(root);
 			dialog.getDialogPane().getStylesheets().add(css);
-			dialog.setTitle("Create New Member");
+			dialog.setTitle("User Login");
+			Stage stage = (Stage) dialog.getDialogPane().getScene().getWindow();
+			stage.getIcons().add(MainFX.getIcon()); //Icon für Dialog-Window einfügen
+			
 			System.out.println("--- Opened Login Dialog ---");
 			
 			
@@ -100,6 +103,9 @@ public class StartController implements Initializable {
 			dialog.getDialogPane().setContent(root);
 			dialog.getDialogPane().getStylesheets().add(css);
 			dialog.setTitle("User Login");
+			Stage stage = (Stage) dialog.getDialogPane().getScene().getWindow();
+			stage.getIcons().add(MainFX.getIcon()); //Icon für Dialog-Window einfügen
+			
 			System.out.println("--- Opened New Member Dialog ---");
 			
 			ButtonType btnSubmit = new ButtonType("Submit", ButtonData.OK_DONE);

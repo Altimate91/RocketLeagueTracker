@@ -7,12 +7,10 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import classes.League;
-import classes.User;
 import database.ManageUser;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
@@ -22,7 +20,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.FileChooser;
-import javafx.stage.Stage;
 import main.MainFX;
 
 public class EditUserProfileDialogController implements Initializable {
@@ -60,14 +57,11 @@ public class EditUserProfileDialogController implements Initializable {
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
-		
-		
-		
-		//Befüllt ChoiceBox mit Enum-Items
+
+		//Befüllt ChoiceBox mit LeagueEnum-Items
 		 cb_league.getItems().setAll(League.values());
 		 
-		 
-		 //Userdaten als PromptText in TextFields setzen
+		 //momentane Userdaten als PromptText in TextFields setzen
 		 txf_name.setPromptText(MainFX.getMainUser().getName());
 		 lbl_playerID.setText(MainFX.getMainUser().getPlayer_ID());
 		 txf_clan.setPromptText(MainFX.getMainUser().getClan());
@@ -112,23 +106,22 @@ public class EditUserProfileDialogController implements Initializable {
 	
 	public void submitEditedPlayer(ActionEvent event) {
 		
-		if(txf_name.getText() != null) {
+		//Felder die vom User mit neuen Werten befüllt wurden sollen im User aktualisiert werden. Wenn Empty -> alter Wert bleibt
+		if(!txf_name.getText().isEmpty()) {
 		MainFX.getMainUser().setName(txf_name.getText());
 		}
-		if(txf_clan.getText() != null) {
+		if(!txf_clan.getText().isEmpty()) {
 		MainFX.getMainUser().setClan(txf_clan.getText());
 		}
 		if(cb_league.getValue() != null) {
 		MainFX.getMainUser().setLeague(cb_league.getValue().toString());
 		}
-		if(pwf_password.getText() != null) {
+		if(!pwf_password.getText().isEmpty()) {
 		MainFX.getMainUser().setPassword(pwf_password.getText());
 		}
 		
-		//trägt Dateipfad aus Imageview in das User-Objekt ein
-		MainFX.getMainUser().setProfilepicture(profilepicture);
-		System.out.println(MainFX.getMainUser().toString());
-
+		//trägt neuen Dateipfad aus Imageview in das User-Objekt ein
+		if(profilepicture != null) MainFX.getMainUser().setProfilepicture(profilepicture);
 			
 		 //User wird in Datenbank angelegt
 		 ManageUser.update(MainFX.getMainUser());

@@ -379,8 +379,10 @@ public class Session {
 		int p2 = 0;
 		User topScorer = null;
 		for(Game aGame : gamelist) {
+			if(aGame.getTopScorer() != null) {
 			if(aGame.getTopScorer().equals(player1)) p1 += 1;
 			else if(aGame.getTopScorer().equals(player2)) p2 += 1;
+			}
 		}
 		
 		if(p1 > p2) topScorer = player1;
@@ -394,8 +396,10 @@ public class Session {
 		int p2 = 0;
 		User topWingman = null;
 		for(Game aGame : gamelist) {
-			if(aGame.getTopWingman().equals(player1)) p1 += 1;
-			else if(aGame.getTopWingman().equals(player2)) p2 += 1;
+			if (aGame.getTopWingman() != null) {
+				if(aGame.getTopWingman().equals(player1)) p1 += 1;
+				else if(aGame.getTopWingman().equals(player2)) p2 += 1;
+			}
 		}
 		
 		if(p1 > p2) topWingman = player1;
@@ -409,8 +413,10 @@ public class Session {
 		int p2 = 0;
 		User topDefender = null;
 		for(Game aGame : gamelist) {
-			if(aGame.getTopDefender().equals(player1)) p1 += 1;
-			else if(aGame.getTopDefender().equals(player2)) p2 += 1;
+			if(aGame.getTopDefender() != null) {
+				if(aGame.getTopDefender().equals(player1)) p1 += 1;
+				else if(aGame.getTopDefender().equals(player2)) p2 += 1;
+			}
 		}
 		
 		if(p1 > p2) topDefender = player1;

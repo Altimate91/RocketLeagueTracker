@@ -6,6 +6,10 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.paint.RadialGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="700.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.SessionArchiveDialogController">
@@ -16,7 +20,7 @@
          </font>
       </Label>
       <ListView fx:id="lv_sessionArchive" layoutX="56.0" layoutY="90.0" prefHeight="219.0" prefWidth="288.0" />
-      <Label alignment="CENTER" layoutX="150.0" layoutY="318.0" text="Statistics">
+      <Label fx:id="headline" alignment="CENTER" layoutX="150.0" layoutY="318.0" text="Statistics">
          <font>
             <Font size="26.0" />
          </font>
@@ -63,47 +67,47 @@
          </font>
       </Label>
       <Separator layoutX="56.0" layoutY="575.0" prefHeight="15.0" prefWidth="288.0" />
-      <Label fx:id="lbl_goals" alignment="CENTER" layoutX="79.0" layoutY="433.0" text="1">
+      <Label fx:id="lbl_goals" alignment="CENTER" layoutX="63.0" layoutY="433.0" prefHeight="25.0" prefWidth="40.0">
          <font>
             <Font size="16.0" />
          </font>
       </Label>
-      <Label fx:id="lbl_saves" alignment="CENTER" layoutX="154.0" layoutY="433.0" text="1">
+      <Label fx:id="lbl_saves" alignment="CENTER" layoutX="137.0" layoutY="433.0" prefHeight="25.0" prefWidth="40.0">
          <font>
             <Font size="16.0" />
          </font>
       </Label>
-      <Label fx:id="lbl_assists" alignment="CENTER" layoutX="235.0" layoutY="433.0" text="1">
+      <Label fx:id="lbl_assists" alignment="CENTER" layoutX="221.0" layoutY="433.0" prefHeight="25.0" prefWidth="40.0">
          <font>
             <Font size="16.0" />
          </font>
       </Label>
-      <Label fx:id="lbl_received" alignment="CENTER" layoutX="315.0" layoutY="433.0" prefHeight="25.0" prefWidth="0.0" text="1">
+      <Label fx:id="lbl_received" alignment="CENTER" layoutX="300.0" layoutY="433.0" prefHeight="25.0" prefWidth="40.0">
          <font>
             <Font size="16.0" />
          </font>
       </Label>
-      <Label fx:id="lbl_record" alignment="CENTER" layoutX="315.0" layoutY="383.0" prefHeight="25.0" prefWidth="0.0" text="1">
+      <Label fx:id="lbl_record" alignment="CENTER" layoutX="296.0" layoutY="383.0" prefHeight="25.0" prefWidth="47.0">
          <font>
             <Font size="16.0" />
          </font>
       </Label>
-      <Label fx:id="lbl_gamesPlayed" alignment="CENTER" layoutX="78.0" layoutY="383.0" text="1">
+      <Label fx:id="lbl_gamesPlayed" alignment="CENTER" layoutX="62.0" layoutY="383.0" prefHeight="25.0" prefWidth="35.0">
          <font>
             <Font size="16.0" />
          </font>
       </Label>
-      <Label fx:id="lbl_wins" alignment="CENTER" layoutX="154.0" layoutY="383.0" text="1">
+      <Label fx:id="lbl_wins" alignment="CENTER" layoutX="141.0" layoutY="383.0" prefHeight="25.0" prefWidth="35.0">
          <font>
             <Font size="16.0" />
          </font>
       </Label>
-      <Label fx:id="lbl_defeats" alignment="CENTER" layoutX="235.0" layoutY="383.0" text="1">
+      <Label fx:id="lbl_defeats" alignment="CENTER" layoutX="222.0" layoutY="383.0" prefHeight="25.0" prefWidth="35.0">
          <font>
             <Font size="16.0" />
          </font>
       </Label>
-      <Label layoutX="129.0" layoutY="582.0" text="Session MVP">
+      <Label fx:id="headline" layoutX="129.0" layoutY="582.0" text="Session MVP">
          <font>
             <Font size="26.0" />
          </font>
@@ -113,23 +117,23 @@
             <Image url="@../../resources/star.png" />
          </image>
       </ImageView>
-      <Label fx:id="lbl_sessionMVP" layoutX="136.0" layoutY="609.0" prefHeight="46.0" prefWidth="134.0" text="Player Name" textFill="#cdd31a">
+      <Label fx:id="lbl_sessionMVP" alignment="CENTER" layoutX="118.0" layoutY="609.0" prefHeight="46.0" prefWidth="171.0" textFill="#cdd31a">
          <font>
             <Font size="24.0" />
          </font>
       </Label>
-      <Label fx:id="lbl_player1" layoutX="58.0" layoutY="515.0" prefHeight="30.0" prefWidth="78.0" text="lbl_player1">
+      <Label fx:id="lbl_player1" layoutX="58.0" layoutY="515.0" prefHeight="30.0" prefWidth="110.0" text="Player 1">
          <font>
             <Font size="16.0" />
          </font>
       </Label>
-      <Separator layoutX="59.0" layoutY="466.0" prefHeight="15.0" prefWidth="288.0" />
-      <ImageView fitHeight="38.0" fitWidth="35.0" layoutX="222.0" layoutY="479.0" pickOnBounds="true" preserveRatio="true">
+      <Separator layoutX="60.0" layoutY="458.0" prefHeight="15.0" prefWidth="288.0" />
+      <ImageView fitHeight="38.0" fitWidth="35.0" layoutX="240.0" layoutY="479.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../resources/shield.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="38.0" fitWidth="35.0" layoutX="141.0" layoutY="479.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="38.0" fitWidth="35.0" layoutX="176.0" layoutY="479.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../resources/ball.png" />
          </image>
@@ -139,16 +143,34 @@
             <Image url="@../../resources/assist.png" />
          </image>
       </ImageView>
-      <Label fx:id="lbl_player2" layoutX="58.0" layoutY="545.0" prefHeight="30.0" prefWidth="78.0" text="lbl_player2">
+      <Label fx:id="lbl_player2" layoutX="58.0" layoutY="545.0" prefHeight="30.0" prefWidth="110.0" text="Player 2">
          <font>
             <Font size="16.0" />
          </font>
       </Label>
-      <Label fx:id="lbl_goalsP1" alignment="CENTER" layoutX="139.0" layoutY="517.0" prefHeight="25.0" prefWidth="40.0" text="lbl_goalsP1" />
-      <Label fx:id="lbl_goalsP2" alignment="CENTER" layoutX="139.0" layoutY="547.0" prefHeight="25.0" prefWidth="40.0" text="Label" />
-      <Label fx:id="lbl_savesP1" alignment="CENTER" layoutX="221.0" layoutY="517.0" prefHeight="25.0" prefWidth="40.0" text="Label" />
-      <Label fx:id="lbl_savesP2" alignment="CENTER" layoutX="220.0" layoutY="547.0" prefHeight="25.0" prefWidth="40.0" text="Label" />
-      <Label fx:id="lbl_assistsP1" alignment="CENTER" layoutX="296.0" layoutY="517.0" prefHeight="25.0" prefWidth="40.0" text="Label" />
-      <Label fx:id="lbl_assistsP2" alignment="CENTER" layoutX="295.0" layoutY="547.0" prefHeight="25.0" prefWidth="40.0" text="Label" />
+      <Label fx:id="lbl_goalsP1" alignment="CENTER" layoutX="174.0" layoutY="517.0" prefHeight="25.0" prefWidth="40.0" />
+      <Label fx:id="lbl_goalsP2" alignment="CENTER" layoutX="174.0" layoutY="547.0" prefHeight="25.0" prefWidth="40.0" />
+      <Label fx:id="lbl_savesP1" alignment="CENTER" layoutX="237.0" layoutY="518.0" prefHeight="25.0" prefWidth="40.0" />
+      <Label fx:id="lbl_savesP2" alignment="CENTER" layoutX="237.0" layoutY="547.0" prefHeight="25.0" prefWidth="40.0" />
+      <Label fx:id="lbl_assistsP1" alignment="CENTER" layoutX="295.0" layoutY="518.0" prefHeight="25.0" prefWidth="40.0" />
+      <Label fx:id="lbl_assistsP2" alignment="CENTER" layoutX="295.0" layoutY="547.0" prefHeight="25.0" prefWidth="40.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" height="14.0" layoutX="50.0" layoutY="70.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="300.0">
+         <fill>
+            <RadialGradient centerX="0.5055248618784531" centerY="0.49999999999999994" focusDistance="0.04597701149425282" radius="0.48275862068965514">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="0.5526315569877625" green="0.5398392081260681" blue="0.5398392081260681" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color />
+                     </color>
+                  </Stop>
+               </stops>
+            </RadialGradient>
+         </fill>
+      </Rectangle>
    </children>
 </AnchorPane>

@@ -42,6 +42,8 @@ public class SessionStatsDialogController implements Initializable {
 	@FXML
 	private Label lbl_mvp_p2;
 	@FXML
+	private Label lbl_sessionMVP;
+	@FXML
 	private Label lbl_topScorer;
 	@FXML
 	private Label lbl_topDefender;
@@ -78,9 +80,10 @@ public class SessionStatsDialogController implements Initializable {
 		lbl_mvp_p2.setText(Integer.toString(currentSession.mvpByPlayer2()));
 		
 		//topWerte eintragen
-		if(currentSession.sessionTopScorer() != null) lbl_topScorer.setText(currentSession.sessionTopScorer().getName()); else lbl_topScorer.setText("none");
-		if(currentSession.sessionTopDefender() != null) lbl_topDefender.setText(currentSession.sessionTopDefender().getName()); else lbl_topDefender.setText("none");
-		if(currentSession.sessionTopWingman() != null) lbl_topWingman.setText(currentSession.sessionTopWingman().getName()); else lbl_topWingman.setText("none");
+		if(currentSession.sessionTopScorer() != null) lbl_topScorer.setText(currentSession.sessionTopScorer().getName()); else lbl_topScorer.setText("equal");
+		if(currentSession.sessionTopDefender() != null) lbl_topDefender.setText(currentSession.sessionTopDefender().getName()); else lbl_topDefender.setText("equal");
+		if(currentSession.sessionTopWingman() != null) lbl_topWingman.setText(currentSession.sessionTopWingman().getName()); else lbl_topWingman.setText("equal");
+		if(currentSession.getSessionMVP() != null) lbl_sessionMVP.setText(currentSession.sessionMVP().getName()); else lbl_sessionMVP.setText("no SessionMVP");
 		
 	}
 	

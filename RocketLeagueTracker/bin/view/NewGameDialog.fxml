@@ -6,6 +6,10 @@
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.paint.RadialGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="600.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.NewGameDialogController">
@@ -82,6 +86,24 @@
             <Font size="42.0" />
          </font>
       </Label>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" height="14.0" layoutX="72.0" layoutY="84.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="241.0">
+         <fill>
+            <RadialGradient centerX="0.5055248618784531" centerY="0.49999999999999994" focusDistance="0.04597701149425282" radius="0.48275862068965514">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="0.5526315569877625" green="0.5398392081260681" blue="0.5398392081260681" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color />
+                     </color>
+                  </Stop>
+               </stops>
+            </RadialGradient>
+         </fill>
+      </Rectangle>
 
    </children>
 </AnchorPane>

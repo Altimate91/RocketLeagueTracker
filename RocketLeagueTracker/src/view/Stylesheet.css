@@ -2,7 +2,7 @@
 
 /*ganze Klasse Stylen*/
 .root {
-	-fx-background-color: #111111;
+	-fx-background-color: #000000;
 }
 
 /* eine Gruppe stylen zb. Alle Lable's */
@@ -17,6 +17,10 @@
 	
 }
 
+#cb_goals_player1 {
+	-fx-text-fill: #000000;
+}
+
 #headline {
 -fx-text-fill: linear-gradient(to bottom left, #96b5e4, #244175);
 }
@@ -28,5 +32,13 @@
 
 #startButtons {
 	-fx-font-size: 20px;
+}
+
+#awards {
+		-fx-text-fill: #ffd700;
+}
+
+#lbl_sessionMVP {
+	-fx-text-fill: #ffd700;
 }
 
