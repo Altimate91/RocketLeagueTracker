@@ -23,7 +23,7 @@ public class ManageGame {
 	// ----------- METHODEN -----------	
 			
 
-
+		//Methode zur Speichern eines Game-Objekts in der Datenbank
 		public static void saveGame(Game game) {
 			Session session = factory.openSession(); //open Session
 				

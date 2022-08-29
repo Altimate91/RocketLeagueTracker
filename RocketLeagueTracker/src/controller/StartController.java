@@ -22,7 +22,12 @@ import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import main.MainFX;
 
-public class StartController implements Initializable {
+public class StartController {
+	
+	/*
+	 * Controller der Startseite.
+	 * User-Login oder User anlegen kann ausgewählt werden.
+	 */
 	
 // ----------- INSTANZVARIABLEN -----------
 		
@@ -34,29 +39,14 @@ public class StartController implements Initializable {
 	
 //----------- METHODEN -----------
 
-	@Override
-	public void initialize(URL arg0, ResourceBundle arg1) {
-		
-		System.out.println("*** Initialize-Method is called ***");
-		
-		
-//		switch(loginStatus) {
-//		case "valid" : lbl_loginStatus.setText("Login successful!");  lbl_loginStatus.setTextFill(Color.GREEN); lbl_loginStatus.setVisible(true);
-//		break;
-//		case "invalid" : lbl_loginStatus.setText("Password invalid!");  lbl_loginStatus.setTextFill(Color.RED); lbl_loginStatus.setVisible(true);
-//		break;
-//	}
-		
-	}
-	
-
-
+	//Login Dialog wird aufgerufen nach drücken des Login-Buttons
 	@FXML
 	public void openLoginDialog (ActionEvent event) {
 		
 		try {	
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/LoginDialog.fxml"));
 			root = loader.load();
+			LoginDialogController loginController = loader.getController();
 			
 			Dialog<ButtonType> dialog = new Dialog<>();
 			dialog.getDialogPane().setContent(root);
@@ -76,22 +66,29 @@ public class StartController implements Initializable {
 			Optional<ButtonType> response = dialog.showAndWait();
 			if(response.isPresent() && response.get().getButtonData() == ButtonData.OK_DONE) {
 				
-				LoginDialogController loginController = loader.getController();
 				
 				try {
-					loginController.login(event);
+					loginController.login(event); //Login-Methode aus loginController wird aufgerufen um Eingabe mit DB abzugleichen
+				
+					switch(loginController.getLoginStatus()) {
+					case 1 : lbl_loginStatus.setText("User not found!");  lbl_loginStatus.setTextFill(Color.RED); lbl_loginStatus.setVisible(true); //UserDaten nicht vorhanden
+					break;
+					case 2 : lbl_loginStatus.setText("Password invalid!");  lbl_loginStatus.setTextFill(Color.RED); lbl_loginStatus.setVisible(true); //User Passwort nicht richtig
+					break;
+					}
+		
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}			
 
-		
 		} catch (IOException e) {
 			e.printStackTrace();
 		}			
 	}
 
+	//Funktion wird aufgerufen bei Register-Button um neuen User anzulegen
 	@FXML
 	public void openNewUserDialog (ActionEvent event) {
 
@@ -124,6 +121,5 @@ public class StartController implements Initializable {
 			e.printStackTrace();
 		}		
 	}
-
 
 }

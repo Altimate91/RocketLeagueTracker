@@ -31,6 +31,10 @@ import main.MainFX;
 
 public class NewUserDialogController implements Initializable{
 	
+	/*
+	 * Neuer User wird angelegt und in DB abgespeichert.
+	 */
+	
 // ----------- INSTANZVARIABLEN -----------
 	
 	@FXML
@@ -67,7 +71,8 @@ public class NewUserDialogController implements Initializable{
 	}
 	
 	
-	
+	//Funktion zeigt dem User den Sicherheitsgrad des eingegeben Passworts an -> je länger desto sicherer
+	//Ein eingefärbter Balken wird bei Eingabe rot,gelb,grün mit Text verändert
 	@FXML
 	public void increaseProgress (KeyEvent event) {	
 		
@@ -91,6 +96,7 @@ public class NewUserDialogController implements Initializable{
 		}
 	}
 	
+	//Funktion wird bei Drücken des "Add Buttons" ausgeführt und öffnet den Explorer zum auswählen eines Bildpfads
 	@FXML
 	public void addProfilePicture(ActionEvent event) throws FileNotFoundException {
 		FileChooser fc = new FileChooser();
@@ -103,7 +109,7 @@ public class NewUserDialogController implements Initializable{
 	}
 	
 	
-	
+	//Wird beim betätigen des Submit Buttons ausgeführt und speichert die eingegeben Textfelder in der DB
 	public void submitNewPlayer(ActionEvent event) throws FileNotFoundException {
 		
 		user =	new User(txf_playerID.getText(), txf_name.getText(), txf_clan.getText(), cb_league.getValue().toString(), pwf_password.getText());	

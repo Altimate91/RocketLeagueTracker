@@ -97,17 +97,15 @@ public class NewGameDialogController implements Initializable {
 	//Game speichern und Stats übergeben
 	@FXML
 	public void submitStats(ActionEvent event) {
-		
+	//--- Localvariablen ---
 		String result;
 		String score;
 		User mvp = null;
-		
 		int goalsscored = Integer.parseInt(txf_score1.getText());
 		int goalsreceived = Integer.parseInt(txf_score2.getText());
-		
 		Game game;
 		
-		
+	//Statistic auslesen	
 		//Result ausheben
 		if (Integer.parseInt(this.txf_score1.getText()) > Integer.parseInt(this.txf_score2.getText())) {
 			result = "Win";
@@ -117,14 +115,11 @@ public class NewGameDialogController implements Initializable {
 		
 		//Score ausheben
 		StringBuilder sb = new StringBuilder();
-		
+
 		sb.append(txf_score1.getText());
 		sb.append(":");
 		sb.append(txf_score2.getText());
 		score = sb.toString();
-		
-		
-		
 		
 		//neues Game-Objekt erstellen
 		game = new Game(currentSession, gameNo, result, sb.toString(), goalsscored, goalsreceived);
@@ -140,35 +135,31 @@ public class NewGameDialogController implements Initializable {
 		}
 		
 		//Game in Session/GameList eintragen
-		if(currentSession.getGamelist()!= null) {
 		currentSession.getGamelist().add(game);
-		} else {
-		currentSession.setGamelist(new HashSet<Game> ());
-		currentSession.getGamelist().add(game);
-		}
+		
 		//Game in ObservableList für TableView eintragen
 		MainFX.getOlGames().add(game);
 		
 		System.out.println("*** Game No." + Integer.toString(game.getGameNo()) + " (Result: " + result + ", Score:" + score + ", Goals: " + Integer.toString(goalsscored) + ", Received: " + Integer.toString(goalsreceived) + ", MVP: " + game.getGameMVP() + ") was saved.");
 
-		//GameStats hinzufügen
-		//User1
-		int goals_p1 = Integer.parseInt(cb_goals_player1.getValue());
-		int saves_p1 = Integer.parseInt(cb_saves_player1.getValue());;
-		int assists_p1 = Integer.parseInt(cb_assists_player1.getValue());;
+	//GameStats hinzufügen
+		//PlayerStatistic Player 1
+		int goals_p1 = cb_goals_player1.getSelectionModel().isEmpty() ? 0 : Integer.parseInt(cb_goals_player1.getValue()); //Wenn nichts ausgewählt wurde soll der Wert 0 übergeben werden
+		int saves_p1 = cb_saves_player1.getSelectionModel().isEmpty() ? 0 : Integer.parseInt(cb_saves_player1.getValue());
+		int assists_p1 = cb_assists_player1.getSelectionModel().isEmpty() ? 0 : Integer.parseInt(cb_assists_player1.getValue());
 		
 		game.setPlayer1Statistic(new PlayerStatistic(currentSession.getPlayer1(),goals_p1,saves_p1,assists_p1));
 		if(cb_MVP_player1.isSelected()) game.getPlayer1Statistic().setGameMVP(true);
 		
-		//User1
-		int goals_p2 = Integer.parseInt(cb_goals_player2.getValue());
-		int saves_p2 = Integer.parseInt(cb_saves_player2.getValue());;
-		int assists_p2 = Integer.parseInt(cb_assists_player2.getValue());;
+		//PlayerStatistic Player 2
+		int goals_p2 = cb_goals_player2.getSelectionModel().isEmpty() ? 0 : Integer.parseInt(cb_goals_player2.getValue());
+		int saves_p2 = cb_saves_player2.getSelectionModel().isEmpty() ? 0 :Integer.parseInt(cb_saves_player2.getValue());;
+		int assists_p2 = cb_assists_player2.getSelectionModel().isEmpty() ? 0 : Integer.parseInt(cb_assists_player2.getValue());;
 				
 		game.setPlayer2Statistic(new PlayerStatistic(currentSession.getPlayer2(),goals_p2,saves_p2,assists_p2));
 		if(cb_MVP_player2.isSelected()) game.getPlayer2Statistic().setGameMVP(true);
 		
-		//top-Werte übergeben
+		//Top-Werte übergeben
 		if(goals_p1 > goals_p2) {
 			game.setTopScorer(currentSession.getPlayer1());
 		} else if (goals_p1 < goals_p2) {
@@ -188,26 +179,22 @@ public class NewGameDialogController implements Initializable {
 		} else { game.setTopDefender(null); };
 		
 		
-		//Stats dem User- Profilen übergeben
+	//Stats dem User- Profilen übergeben
 		currentSession.getPlayer1().setGoals(goals_p1 + currentSession.getPlayer1().getGoals());
 		currentSession.getPlayer2().setGoals(goals_p2 + currentSession.getPlayer2().getGoals());
 		currentSession.getPlayer1().setSaves(saves_p1 + currentSession.getPlayer1().getSaves());
 		currentSession.getPlayer2().setSaves(saves_p2 + currentSession.getPlayer2().getSaves());
 		currentSession.getPlayer1().setAssists(assists_p1 + currentSession.getPlayer1().getAssists());
 		currentSession.getPlayer2().setAssists(assists_p2 + currentSession.getPlayer2().getAssists());
-		if(mvp != null) {
+		if(mvp != null) { //Wenn ein MVP vorhanden und ausgewählt ist wird der Statistikwert beim User um 1 erhöht.
 			if(mvp.equals(currentSession.getPlayer1())) currentSession.getPlayer1().setMvp(currentSession.getPlayer1().getMvp() +1);
 			if(mvp.equals(currentSession.getPlayer2())) currentSession.getPlayer2().setMvp(currentSession.getPlayer2().getMvp() +1);
 		}
-//		MainFX.getMainUser().setGoals(MainFX.getMainUser().getGoals() + goals_p1);
-//		MainFX.getMainUser().setSaves(MainFX.getMainUser().getSaves() + saves_p1);
-//		MainFX.getMainUser().setAssists(MainFX.getMainUser().getAssists() + assists_p1);
-		
 		
 		System.out.println("* Player 1 Stats: " + cb_goals_player1.getValue().toString() + " Goals, " + cb_assists_player1.getValue().toString() + " Assists, " + cb_saves_player1.getValue().toString() + " Saves.");
 		System.out.println("* Player 2 Stats: " + cb_goals_player2.getValue().toString() + " Goals, " + cb_assists_player2.getValue().toString() + " Assists, " + cb_saves_player2.getValue().toString() + " Saves.");
 		
-		//Werte an DB übergeben
+	//Werte an DB übergeben
 		
 		//Player 1 Statistic
 		ManagePlayerStatistic.saveStatistic(game.getPlayer1Statistic());

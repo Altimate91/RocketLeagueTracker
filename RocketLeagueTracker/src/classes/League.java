@@ -2,6 +2,12 @@ package classes;
 
 public enum League {
 	
+	/*
+	 * Ranking-Auflistung der offiziellen Rocketleague Liegen.
+	 * Durch Siege/Niederlagen kann der Spieler in den u.a. Rankings auf oder ggf. Absteigen
+	 * Anfangs beginnt jeder Spieler in einer Saison als Unranked.
+	 */
+	
 	UNRANKED,
 	BRONZE_I,
 	BRONZE_II,

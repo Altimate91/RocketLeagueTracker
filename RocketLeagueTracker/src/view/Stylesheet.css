@@ -7,7 +7,7 @@
 
 /* eine Gruppe stylen zb. Alle Lable's */
 .label {
-	-fx-text-fill: rgb(192, 192, 192);
+	-fx-text-fill: rgb(128, 128, 128);
 }
 
 .button {
@@ -15,10 +15,6 @@
 -fx-background-color: linear-gradient(to bottom left, #bfe9f5,  #1d1d66);
 -fx-font-weight: bold;
 	
-}
-
-#cb_goals_player1 {
-	-fx-text-fill: #000000;
 }
 
 #headline {

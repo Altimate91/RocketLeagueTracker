@@ -27,6 +27,7 @@ public class ManageSession {
 			
 	// ----------- METHODEN -----------	
 		
+		//Methode zum Speichern eines Session Objekts
 		public static void saveSession(classes.Session gameSession) {
 			Session session = factory.openSession(); //open Session
 				
@@ -63,7 +64,7 @@ public class ManageSession {
 			return gameSession;
 		}
 		
-		//*Session updaten
+		// Session updaten
 		public static <T> void update(classes.Session gameSession) {
 			Session session = factory.openSession();
 			
@@ -102,7 +103,8 @@ public class ManageSession {
 					return sessionList.get(0);
 				}
 				
-		// SessionList 
+		// SessionList
+				//gibt eine Liste aller gespielten Sessions des angemeldeten Spielers zurück welche nach SessionID und somit auch chronologisch geordnet sind
 				public static List<classes.Session> getSessionList(int userID) {
 					Session session = factory.openSession();
 					List<classes.Session> sessionList = new ArrayList<>();

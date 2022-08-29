@@ -22,6 +22,10 @@ import main.MainFX;
 
 public class UserStatsDialogController implements Initializable {
 	
+	/*
+	 * Zeigt eine Gesamtübersicht der Statistiken des angemeldeten Users.
+	 */
+	
 	// ----------- INSTANZVARIABLEN -----------	
 	
 	private Stage dialogStage;
@@ -76,44 +80,6 @@ public class UserStatsDialogController implements Initializable {
 		dialogStage = (Stage) ((Node)event.getSource()).getScene().getWindow();
 		dialogStage.close();
 	}
-	
-//	
-//	public int getUserTopScorer() {
-//		int topScorer = 0;
-//		for(Session aSession : ManageSession.getSessionList(user.getIdUser())) {
-//			if(aSession.getTopScorer() != null)  {
-//				if(aSession.getTopScorer().equals(user.getPlayer_ID())) {
-//					topScorer += 1;
-//				}
-//			}
-//		}
-//	return topScorer;
-//	}
-//	
-//	public int getUserTopDefender() {
-//		int topDefender = 0;
-//		for(Session aSession : ManageSession.getSessionList(user.getIdUser())) {
-//			if(aSession.getTopDefender() != null)  {
-//				if(aSession.getTopDefender().equals(user.getPlayer_ID())) {
-//					topDefender += 1;
-//				}
-//			}	
-//		}
-//	return topDefender;
-//	}
-//	
-//	public int getUserTopWingman() {
-//		int topWingman = 0;
-//		for(Session aSession : ManageSession.getSessionList(user.getIdUser())) {
-//			if(aSession.getTopWingman() != null)  {
-//				if(aSession.getTopWingman().equals(user.getPlayer_ID())) {
-//					topWingman += 1;
-//				}
-//			}
-//		}
-//	return topWingman;
-//	}
-	
-	
+
 
 }

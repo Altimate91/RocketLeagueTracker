@@ -19,6 +19,12 @@ import javafx.beans.property.SimpleStringProperty;
 @Table(name = "game")
 public class Game {
 	
+	/*
+	 * Die Klasse "Game" verkörpert ein gespieltes Spiel innerhalb einer Session.
+	 * Eine Session ist eine Ansammlung aus Games. Somit ergeben die Statistiken aus den Games eine Gesamtstatistik einer Session.
+	 * Im Game werden Tore, Assists, Paraden sowie der mögliche MVP (bester Spieler) des gespielten Spiels bekannt gegeben.
+	 */
+	
 // ----------- INSTANZVARIABLEN -----------
 	@Column
 	@Id

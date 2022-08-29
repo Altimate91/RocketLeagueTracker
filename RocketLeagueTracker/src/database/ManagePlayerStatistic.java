@@ -20,7 +20,7 @@ public class ManagePlayerStatistic {
 	// ----------- METHODEN -----------	
 			
 
-
+		//Methode zur Speichern eines PlayerStatistic Objekts
 		public static void saveStatistic(PlayerStatistic statistic) {
 			Session session = factory.openSession(); //open Session
 				

@@ -11,6 +11,11 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+
+/*
+ * Die PlayerStatistik ist die Spielstatistik eines Spielers in einem einzelnen Game.
+ */
+
 @Entity
 @Table(name = "playerstatistic")
 public class PlayerStatistic {
@@ -34,7 +39,7 @@ public class PlayerStatistic {
 	private boolean gameMVP;
 	
 	
-	private String playerName; //
+	private String playerName;
 	
 // ----------- KONSTRUKTOREN -----------	
 	

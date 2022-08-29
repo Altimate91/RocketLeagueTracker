@@ -201,6 +201,8 @@ public class PlayerLoungeController implements Initializable{
 		
 	} //ENDE INITIALIZE METHODE
 
+//PLAYER LOUNGE
+	//Hauptübersicht der Applikation mit Zugriff auf alle weiteren Funktionen
 	@FXML
 	public void openPlayerLounge(ActionEvent event) throws FileNotFoundException {
 		
@@ -224,7 +226,8 @@ public class PlayerLoungeController implements Initializable{
 	}
 
 
-
+//USER STATISTIC DIALOG
+	//Zeigt alle gespeicherten Statistiken des angemeldeten Spielers
 	@FXML
 	public void openMyStatsDialog (ActionEvent event) {
 		
@@ -252,7 +255,8 @@ public class PlayerLoungeController implements Initializable{
 		}			
 	}
 
-
+//SESSION ARCHIVE
+	//Alle vom User bereits gespielten SpielSessions können aufgerufen und dazugehörige Statistiken angezeigt werden
 	@FXML
 	public void openArchiveDialog (ActionEvent event) {
 		
@@ -282,7 +286,8 @@ public class PlayerLoungeController implements Initializable{
 		}			
 	}
 
-
+//USER PROFIL BEARBEITEN
+	//Der User kann hier seinen Namen,Liga,Profilbild und Passwort ändern
 	@FXML
 	public void openEditProfileDialog (ActionEvent event) {
 		
@@ -363,6 +368,7 @@ public class PlayerLoungeController implements Initializable{
 		}
 	}
 
+	//Dialogfenster zum Erstellen eines neuen Games wird geöffnet.
 	@FXML
 	public void openNewGameDialog (ActionEvent event) {
 		
@@ -400,7 +406,7 @@ public class PlayerLoungeController implements Initializable{
 		}			
 	}
 
-
+	//Die Session wird geschlossen und alle Daten werden in der DB upgedatet sowie Endstatistik ausgegeben
 	@FXML
 	public void closeSession (ActionEvent event) {
 		
@@ -411,7 +417,6 @@ public class PlayerLoungeController implements Initializable{
 		alert.setContentText("Do you really want to close this Session?");
 		
 		ButtonType btnNo = new ButtonType("No", ButtonData.CANCEL_CLOSE);
-		
 		alert.getDialogPane().getButtonTypes().addAll(btnNo);
 		
 		Optional<ButtonType> response = alert.showAndWait();
@@ -511,7 +516,8 @@ public class PlayerLoungeController implements Initializable{
 	}
 
 
-
+	//Während einer Session kann Einblick auf die laufende Statistik der Session genommen werden.
+	//Die Funktion wird durch klick auf den Button mit Statistik-Symbol aufgerufen.
 	@FXML
 	public void openSessionStatsDialog (ActionEvent event) {
 		
@@ -538,7 +544,7 @@ public class PlayerLoungeController implements Initializable{
 		}
 	}
 
-
+	//User logt sich aus und ein neuer Spieler kann die Spielerlounge betreten
 	@FXML
 	public void logout (ActionEvent event) {
 		//Alert-Box fragt User ob er wirklich die Sitzung verlassen will

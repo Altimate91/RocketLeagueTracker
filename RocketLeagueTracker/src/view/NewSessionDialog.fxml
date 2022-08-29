@@ -35,7 +35,6 @@
          </font>
       </Label>
       <Button fx:id="btn_registerUser" layoutX="282.0" layoutY="148.0" mnemonicParsing="false" onAction="#registerPlayer" text="Register" />
-      <TextField fx:id="txf_playerID" layoutX="193.0" layoutY="113.0" />
       <Button fx:id="btn_addUser" layoutX="193.0" layoutY="148.0" mnemonicParsing="false" onAction="#addPlayer" prefHeight="25.0" prefWidth="60.0" text="Add" />
       <Label layoutX="77.0" layoutY="221.0" prefHeight="25.0" prefWidth="101.0" text="Game-Limit?">
          <font>
@@ -74,5 +73,6 @@
             </RadialGradient>
          </fill>
       </Rectangle>
+      <ComboBox fx:id="cb_teammates" layoutX="193.0" layoutY="113.0" prefHeight="25.0" prefWidth="149.0" />
    </children>
 </AnchorPane>

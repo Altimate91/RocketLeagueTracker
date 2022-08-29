@@ -61,7 +61,8 @@ public class EditUserProfileDialogController implements Initializable {
 		//Befüllt ChoiceBox mit LeagueEnum-Items
 		 cb_league.getItems().setAll(League.values());
 		 
-		 //momentane Userdaten als PromptText in TextFields setzen
+		 //momentane Userdaten als PromptText in TextFields setzen.
+		 //Damit der Spieler auch weiß welche Daten überschrieben werden.
 		 txf_name.setPromptText(MainFX.getMainUser().getName());
 		 lbl_playerID.setText(MainFX.getMainUser().getPlayer_ID());
 		 txf_clan.setPromptText(MainFX.getMainUser().getClan());
@@ -69,6 +70,7 @@ public class EditUserProfileDialogController implements Initializable {
 		
 	}
 	
+	//Funktion wird bei Drücken des "Add Buttons" ausgeführt und öffnet den Explorer zum auswählen eines Bildpfads
 	@FXML
 	public void addProfilePicture(ActionEvent event) throws FileNotFoundException {
 		FileChooser fc = new FileChooser();
@@ -80,21 +82,23 @@ public class EditUserProfileDialogController implements Initializable {
 
 	}
 	
+	//Funktion zeigt dem User den Sicherheitsgrad des eingegeben Passworts an -> je länger desto sicherer
+	//Ein eingefärbter Balken wird bei Eingabe rot,gelb,grün mit Text verändert
 	@FXML
 	public void increaseProgress (KeyEvent event) {	
-		
+		// Unsicher
 		if (pwf_password.getLength() < 5) {
 			bar_pwDifficulty.setProgress(0.2);
 			bar_pwDifficulty.setStyle("-fx-accent: red;");
 			lbl_pwDifficulty.setText("weak");
 			lbl_pwDifficulty.setStyle("-fx-text-fill: red;");
-		}
+		} // Mittel
 		else if (pwf_password.getLength() >= 5 && pwf_password.getLength() < 10) {
 			bar_pwDifficulty.setProgress(0.5);
 			bar_pwDifficulty.setStyle("-fx-accent: yellow;");
 			lbl_pwDifficulty.setText("medium");
 			lbl_pwDifficulty.setStyle("-fx-text-fill: yellow;");
-		}
+		} // Sicher
 		else if (pwf_password.getLength() >= 10) {
 			bar_pwDifficulty.setProgress(1);
 			bar_pwDifficulty.setStyle("-fx-accent: green;");
@@ -103,7 +107,7 @@ public class EditUserProfileDialogController implements Initializable {
 		}
 	}
 	
-	
+	//Wird beim betätigen des Submit Buttons ausgeführt und speichert die eingegeben Textfelder in der DB
 	public void submitEditedPlayer(ActionEvent event) {
 		
 		//Felder die vom User mit neuen Werten befüllt wurden sollen im User aktualisiert werden. Wenn Empty -> alter Wert bleibt

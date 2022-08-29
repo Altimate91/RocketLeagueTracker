@@ -94,7 +94,7 @@ public class MainFX extends Application {
 
 
 	}
-
+	//Startseite wird geladen
 	@Override
 	public void start(Stage primaryStage) {
 		

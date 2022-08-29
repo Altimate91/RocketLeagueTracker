@@ -15,53 +15,60 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import main.MainFX;
 
-public class LoginDialogController implements Initializable{
+public class LoginDialogController{
 	
 // ----------- INSTANZVARIABLEN -----------
 	
+	@FXML
+	private Label headline;
+	@FXML
+	private TextField txf_playerID_login;
+	@FXML
+	private PasswordField pwf_password_login;
+	@FXML
+	private Label lbl_pwCheck;
+	
+	private int loginStatus;
+	
+//----------- GETTER & SETTER -----------
+	
+
+	public int getLoginStatus() {
+		return loginStatus;
+	}
+
+	public void setLoginStatus(int loginStatus) {
+		this.loginStatus = loginStatus;
+	}
+
 
 //----------- METHODEN -----------
 	
-@FXML
-private Label headline;
-@FXML
-private TextField txf_playerID_login;
-@FXML
-private PasswordField pwf_password_login;
-@FXML
-private Label lbl_pwCheck;
-
-
-@FXML
-public void login (ActionEvent event) throws IOException, InterruptedException {
-	
-			
-	User user = ManageUser.getUserByPlayerID(txf_playerID_login.getText());
-	
-	
-	if(user == null) {
-		new Alert(Alert.AlertType.ERROR, "No User registered under this Player ID!").showAndWait();
-		System.out.println("*** Userdata is not availaible in database ***");
-	}
-	
-	if(user.getPassword().equals(pwf_password_login.getText())) {
-		MainFX.setMainUser(user);
-		System.out.println("*** Login successfull ***");
-		new PlayerLoungeController().openPlayerLounge(event);
+	//Funktion gleicht eingegebene Userdaten mit Daten aus der DB ab. 
+	@FXML
+	public void login (ActionEvent event) throws IOException, InterruptedException {
+		// user Objekt wird erstellt. DB wird auf eingegebene PlayerID durchsucht	
+		User user = ManageUser.getUserByPlayerID(txf_playerID_login.getText());
 		
-	}
-	else if(user.getPassword() != pwf_password_login.getText()) {
-		System.out.println("*** ERROR: incorrect Passwort! ***");
-		new Alert(Alert.AlertType.ERROR, "Wrong Password!").showAndWait();
-	}
-
-}
+		//wenn Userobjekt leer, weil UserID nicht gefunden
+		if(user == null) {
+			System.out.println("*** Userdata is not availaible in database ***");
+			loginStatus = 1;
+			return;
+		}
+		// wenn UserID gefunden aber Passwort gleicht nicht dem Textfeld Password
+		else if(!user.getPassword().equals(pwf_password_login.getText())) {
+			loginStatus = 2;
+			System.out.println("*** ERROR: incorrect Passwort! ***");
+		}
+		// wenn UserID gefunden und Passwordfeld ist nicht ungültig -> Zutritt zu PlayerLounge
+		else {
+			MainFX.setMainUser(user);
+			System.out.println("*** Login successfull ***");
+			new PlayerLoungeController().openPlayerLounge(event);	
+		}
 	
-
-	@Override
-	public void initialize(URL arg0, ResourceBundle arg1) {
-		// TODO Auto-generated method stub
-		
 	}
+
 
 }

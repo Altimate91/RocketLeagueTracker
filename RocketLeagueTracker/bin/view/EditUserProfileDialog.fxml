@@ -49,8 +49,8 @@
       <TextField fx:id="txf_name" layoutX="173.0" layoutY="309.0" prefHeight="25.0" prefWidth="176.0" />
       <TextField fx:id="txf_clan" layoutX="173.0" layoutY="379.0" prefHeight="25.0" prefWidth="176.0" />
       <ComboBox fx:id="cb_league" layoutX="173.0" layoutY="411.0" prefHeight="25.0" prefWidth="176.0" />
-      <ImageView fx:id="img_profilepic" fitHeight="162.0" fitWidth="211.0" layoutX="96.0" layoutY="99.0" pickOnBounds="true" preserveRatio="true" />
-      <Button fx:id="btn_AddProfilepic" layoutX="177.0" layoutY="269.0" mnemonicParsing="false" onAction="#addProfilePicture" prefHeight="25.0" prefWidth="48.0" text="Add" />
+      <ImageView fx:id="img_profilepic" fitHeight="162.0" fitWidth="125.0" layoutX="139.0" layoutY="100.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" />
+      <Button layoutX="177.0" layoutY="269.0" mnemonicParsing="false" onAction="#addProfilePicture" prefHeight="25.0" prefWidth="48.0" text="Add" />
       <ProgressBar fx:id="bar_pwDifficulty" layoutX="173.0" layoutY="470.0" prefHeight="10.0" prefWidth="176.0" progress="0.0" />
       <Label fx:id="lbl_pwDifficulty" alignment="CENTER" layoutX="173.0" layoutY="480.0" prefHeight="17.0" prefWidth="176.0" text="PW Stärke" />
       <PasswordField fx:id="pwf_password" layoutX="173.0" layoutY="444.0" onKeyPressed="#increaseProgress" prefHeight="25.0" prefWidth="176.0" />

@@ -8,6 +8,13 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+/*
+ * Die Klasse "User" speichert alle Informationen zu einem Spieler.
+ * Ein User kann sich in der Applikation anmelden und erh‰lt anschlieﬂend alle abgespeicherten Daten in einer Spielerlounge.
+ * Es gibt einen Main-User welcher sich anfangs in der Applikation anmeldet und einen Teamkameraden welcher bei der Erstellung einer Session zus‰tlich ausgew‰hlt wird.
+ * Somit werden alle gespeicherten Statistiken auch dem Spielerprofil des Mitspielers zugeschrieben.
+ */
+
 @Entity 
 @Table(name = "user")
 public class User {
@@ -193,8 +200,7 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "User [player_ID: " + player_ID + ", Name: " + name + ", Clan: " + clan + ", League:" + league.toString()
-				+ ", Password: " + password + ", Pfad Profilepicture: " + profilepicture + "]";
+		return player_ID;
 	}
 	
 }

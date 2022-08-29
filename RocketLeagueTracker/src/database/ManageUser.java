@@ -20,7 +20,7 @@ public class ManageUser {
 // ----------- METHODEN -----------	
 		
 
-
+	//Methode zum Speichern eines User-Objekts
 	public static void saveUser(User user) {
 		Session session = factory.openSession(); //open Session
 			
@@ -38,7 +38,7 @@ public class ManageUser {
 			
 	}
 	
-	//*User updaten
+	//User updaten
 	public static <T> void update(classes.User user) {
 		Session session = factory.openSession();
 		
@@ -55,7 +55,7 @@ public class ManageUser {
 	}
 	
 	
-	//*User mit PlayerID auslesen
+	//User mit PlayerID auslesen
 		public static User getUserByPlayerID(String player_ID) {
 			Session session = factory.openSession();
 			
@@ -84,6 +84,58 @@ public class ManageUser {
 			return user;
 		}
 		
+	//User mit PlayerID auslesen
+		public static User getUserByUserID(int userID) {
+			Session session = factory.openSession();
+			
+			User user = null;
+			List<User> userList= null;
+			
+			try {
+				session.beginTransaction();
+				userList = session.createQuery("FROM User u WHERE idUser = '" + userID + "'").getResultList();
+				session.getTransaction().commit();
+			} catch (HibernateException e) {
+				if (session.getTransaction() != null) session.getTransaction().rollback();
+				e.printStackTrace();
+			} finally {
+				session.close(); // Session schließen
+			}
+			
+			if(userList != null) {
+				for(User aUser : userList) {
+					if(aUser.getPlayer_ID().equals(userID)) {
+						user = aUser;
+					}
+				}
+			}
+			
+			return user;
+		}
+		
+		
+		
+		//*Liest eine List mit möglichen Teammates aus der DB aus ohne den angemeldeten Spieler auszugeben
+				public static List<classes.User> getTeammateList(int currentUserID) {
+					Session session = factory.openSession();
+					
+					User user = null;
+					List<User> userList= null;
+					
+					try {
+						session.beginTransaction();
+						userList = session.createQuery("FROM User u WHERE u.idUser NOT LIKE '" + currentUserID + "' ORDER BY u.player_ID" ).getResultList();
+						session.getTransaction().commit();
+					} catch (HibernateException e) {
+						if (session.getTransaction() != null) session.getTransaction().rollback();
+						e.printStackTrace();
+					} finally {
+						session.close(); // Session schließen
+					}
+					
+					return userList;
+				}
+				
 		
 	
 		

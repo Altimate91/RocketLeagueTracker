@@ -21,6 +21,11 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+/*
+ * Die Klasse "Session" verkörpert eine Ansammlung aus Games welche mit einem Teamkammeraden an einem Spielabend gespielt werden.
+ * Somit ergeben die Statistiken aus einer Session eine Gesamtstatistik welcher dann im Session Archiv ausgelesen werden kann.
+ * Eine Session kann mit einem Spieltag in einem Turnier verglichen werden.
+ */
 
 
 @Entity
@@ -358,15 +363,10 @@ public class Session {
 	}
 	
 	public User sessionMVP() {
-		int mvpP1 = 0;
-		int mvpP2 = 0;
+		int mvpP1 = mvpByPlayer1();
+		int mvpP2 = mvpByPlayer2();
 		
 		User mvp = null;
-		
-		for(Game aGame : gamelist) {
-			if(aGame.getPlayer1Statistic().isGameMVP() == true) mvpP1 += 1;
-			if(aGame.getPlayer2Statistic().isGameMVP() == true) mvpP2 += 1;
-		}
 		
 		if(mvpP1 > mvpP2) mvp = player1;
 		if(mvpP2 < mvpP2) mvp = player2;

@@ -15,6 +15,11 @@ import main.MainFX;
 
 public class SessionStatsDialogController implements Initializable {
 	
+	/*
+	 * Übersichtsfenster dient zur Anzeige der laufenden Statistik einer Session.
+	 * Kann nur geöffnet werden wenn eine Session offen ist.
+	 */
+	
 // ----------- INSTANZVARIABLEN -----------	
 
 	private Session currentSession;
